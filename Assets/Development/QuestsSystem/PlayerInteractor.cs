@@ -27,12 +27,14 @@ public class PlayerInteractor : MonoBehaviour
         bool tickHasObj = false;
         // Detection
         Collider[] objectsInRange = Physics.OverlapSphere(Player.transform.position, radius); // PERF: This could use a NonAlloc method... But no need as of now I guess
+        Interactable detectedInteractable;
         foreach (var foundCollider in objectsInRange)
         {
-            if (foundCollider.gameObject.TryGetComponent<Interactable>(out _mCurrentInteractable))
+            if (foundCollider.gameObject.TryGetComponent<Interactable>(out detectedInteractable))
             {
-                ActionText.text = _mCurrentInteractable.DisplayText;
+                ActionText.text = detectedInteractable.DisplayText;
                 tickHasObj = true;
+                _mCurrentInteractable = detectedInteractable;
             }
         }
 

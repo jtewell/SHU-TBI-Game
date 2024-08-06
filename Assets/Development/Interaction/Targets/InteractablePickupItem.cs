@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class InteractablePickupItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // public Item item;
+    // Still need to implement connection with InventoryManager in order to store the item in
 
-    // Update is called once per frame
-    void Update()
+    public void onPickup()
     {
-        
+
+        Destroy(gameObject);
     }
 }

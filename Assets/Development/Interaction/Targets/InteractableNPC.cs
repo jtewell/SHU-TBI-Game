@@ -6,8 +6,8 @@ using Yarn.Unity;
 public class InteractableNPC : MonoBehaviour
 {
     private DialogueRunner dialogueRunner;
-    CameraController cameraController;
-    GameObject mainCamera;
+    private CameraController cameraController;
+    private GameObject mainCamera;
 
 
 

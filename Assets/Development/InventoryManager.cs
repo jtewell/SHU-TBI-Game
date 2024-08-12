@@ -17,6 +17,7 @@ public class InventoryManager : MonoSingleton<InventoryManager>
     // Update is called once per frame
     public int AddItem(Item item)
     {
-        return 0;
+        Items.Add(item);
+        return Items.Count;
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: 619e305f5165a9946b7f72464e44ca4a, type: 3}
   m_Sun: {fileID: 2114283754330233425}
-  m_IndirectSpecularColor: {r: 0.029152213, g: 0.064445764, b: 0.12695098, a: 1}
+  m_IndirectSpecularColor: {r: 0.029152164, g: 0.064445704, b: 0.12695073, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2464cdee6b74a378d39145ec00cfe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorNumber: 1
+  doorNumber: 0
   Target: SceneSwitchTest
 --- !u!114 &175721451
 MonoBehaviour:
@@ -2237,6 +2237,52 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1127734634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1127734635}
+  - component: {fileID: 1127734636}
+  m_Layer: 0
+  m_Name: QuestController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1127734635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127734634}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 85.62942, y: 0.6413126, z: 61.86122}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1576973155}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1127734636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127734634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e796fbec64de645a4aa85947c7d214ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentQuest: {fileID: 11400000, guid: 34357d5db8ee3421faf6ba87fdb39326, type: 2}
 --- !u!1 &1153646595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,8 +2297,9 @@ GameObject:
   - component: {fileID: 1153646597}
   - component: {fileID: 1153646596}
   - component: {fileID: 1153646601}
+  - component: {fileID: 1153646602}
   m_Layer: 0
-  m_Name: Door0
+  m_Name: CompleteQuest
   m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2274,16 +2321,16 @@ MonoBehaviour:
   m_InteractAction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1153646601}
-        m_TargetAssemblyTypeName: InteractableSwitchWorld, Assembly-CSharp
-        m_MethodName: SwitchScene
-        m_Mode: 1
+      - m_Target: {fileID: 1153646602}
+        m_TargetAssemblyTypeName: InteractableCompleteStep, Assembly-CSharp
+        m_MethodName: FinishStep
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: touch-grass
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!65 &1153646597
@@ -2385,7 +2432,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorNumber: 0
-  Target: SceneSwitchTest
+  Target: Town
+--- !u!114 &1153646602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153646595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01a255acbdfd4b7c8374bc8363fce5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questController: {fileID: 1127734636}
 --- !u!1 &1190916406
 GameObject:
   m_ObjectHideFlags: 0
@@ -3246,6 +3306,72 @@ Transform:
   - {fileID: 608569224}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1576973154
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1576973155}
+  - component: {fileID: 1576973157}
+  - component: {fileID: 1576973156}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1576973155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576973154}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1127734635}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1576973156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576973154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 777751b9a28a9472288e8a10a9863293, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 617a168d4d9c84843a54834d352d5ba3,
+    type: 3}
+  m_SortingOrder: 0
+--- !u!114 &1576973157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576973154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7398daf4a7f8e4ccdaa8798a48647859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questController: {fileID: 1127734636}
+  uiDocument: {fileID: 1576973156}
+  stepUITemplate: {fileID: 9197481963319205126, guid: 77a5680a57be3474d98033449bbfab25,
+    type: 3}
 --- !u!1 &1676699240
 GameObject:
   m_ObjectHideFlags: 0
@@ -5551,6 +5677,7 @@ SceneRoots:
   - {fileID: 1193915054}
   - {fileID: 1921309371}
   - {fileID: 1153646600}
+  - {fileID: 1127734635}
   - {fileID: 175721455}
   - {fileID: 1060995262}
   - {fileID: 357662473275840142}

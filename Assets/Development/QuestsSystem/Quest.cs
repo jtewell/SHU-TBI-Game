@@ -8,5 +8,6 @@ public class Quest : ScriptableObject
     public string questId;
     public string questDisplayName;
 
+    [SerializeField]
     public BaseStep[] steps;
 }

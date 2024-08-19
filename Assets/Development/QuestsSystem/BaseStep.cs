@@ -1,10 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public abstract class BaseStep : MonoBehaviour
+[Serializable]
+public class BaseStep
 {
-    public string stepId = "";
-    public bool isDone = false;
-    public string instructionText;
+    [field: SerializeField]
+    public string StepId { get; set; }
+    [field: SerializeField]
+    public string InstructionText { get; set; }
+    [field: SerializeField] //[ReadOnly] - needs Odin asset
+    public bool IsCompleted { get; set; }
+    
 }

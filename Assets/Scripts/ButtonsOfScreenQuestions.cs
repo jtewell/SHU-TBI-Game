@@ -14,6 +14,8 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
     private Button[] q3Buttons = new Button[2];
     private Button[] q4Buttons = new Button[2];
     private Button[] q7Buttons = new Button[2];
+    private Button selectedButton;
+
 
     void Start()
 
@@ -27,6 +29,7 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         for (int i = 0; i < genderButtons.Length; i++)
         {
             genderButtons[i] = root.Q<Button>(genderButtonNames[i]);
+            
             if (genderButtons[i] == null)
                 Debug.LogError($"{genderButtonNames[i]} not found.");
         }
@@ -57,55 +60,97 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         }
 
         // Assuming gender buttons have some specific methods
-        if (genderButtons[0] != null) genderButtons[0].clicked += () => OnGenderButtonClick("Male");
-        if (genderButtons[1] != null) genderButtons[1].clicked += () => OnGenderButtonClick("Female");
-        if (genderButtons[2] != null) genderButtons[2].clicked += () => OnGenderButtonClick("Others");
+
+        if (genderButtons[0] != null) genderButtons[0].clicked += () => OnGenderButtonClick(genderButtons[0],"Male");
+        if (genderButtons[1] != null) genderButtons[1].clicked += () => OnGenderButtonClick(genderButtons[1],"Female");
+        if (genderButtons[2] != null) genderButtons[2].clicked += () => OnGenderButtonClick(genderButtons[2],"Others");
 
         // Assuming Q3 buttons have some specific methods
-        if (q3Buttons[0] != null) q3Buttons[0].clicked += () => OnQ3ButtonClick("Yes");
-        if (q3Buttons[1] != null) q3Buttons[1].clicked += () => OnQ3ButtonClick("No");
+        if (q3Buttons[0] != null) q3Buttons[0].clicked += () => OnQ3ButtonClick(q3Buttons[0],"Yes");
+        if (q3Buttons[1] != null) q3Buttons[1].clicked += () => OnQ3ButtonClick(q3Buttons[1],"No");
 
         // Assuming Q4 buttons have some specific methods
-        if (q4Buttons[0] != null) q4Buttons[0].clicked += () => OnQ4ButtonClick("Yes");
-        if (q4Buttons[1] != null) q4Buttons[1].clicked += () => OnQ4ButtonClick("No");
+        if (q4Buttons[0] != null) q4Buttons[0].clicked += () => OnQ4ButtonClick(q4Buttons[0],"Yes");
+        if (q4Buttons[1] != null) q4Buttons[1].clicked += () => OnQ4ButtonClick(q4Buttons[1], "No");
 
         //Assuming Q7 buttons have some specific methods
-        if (q7Buttons[0] != null) q7Buttons[0].clicked += () => OnQ7ButtonClick("Yes");
-        if (q7Buttons[1] != null) q7Buttons[1].clicked += () => OnQ7ButtonClick("No");
+        if (q7Buttons[0] != null) q7Buttons[0].clicked += () => OnQ7ButtonClick(q7Buttons[0], "Yes");
+        if (q7Buttons[1] != null) q7Buttons[1].clicked += () => OnQ7ButtonClick(q7Buttons[1],"No");
 
 
 
 
     }
     // Method to handle gender button clicks
-    private void OnGenderButtonClick(string gender)
+    private void OnGenderButtonClick(Button clickedButton, string gender)
     {
-        // Set the selected gender in UserDataManager
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
+
+        // Update UserDataManager with the selected gender
         UserDataManager.Instance.SelectedGender = gender;
 
         
     }
 
     // Method to handle Q3 button clicks
-    private void OnQ3ButtonClick(string option)
+    private void OnQ3ButtonClick(Button clickedButton, string option)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
+
         // Set the selected option for Q3 in UserDataManager
         UserDataManager.Instance.Q3SelectedOption = option;
 
     }
     // Method to handle Q4 button clicks
-    private void OnQ4ButtonClick(string option)
+    private void OnQ4ButtonClick(Button clickedButton, string option)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
+
         // Set the selected option for Q4 in UserDataManager
         UserDataManager.Instance.Q4SelectedOption = option;
 
     }
     // Method to handle Q7 button clicks
-    private void OnQ7ButtonClick(string option)
+    private void OnQ7ButtonClick(Button clickedButton, string option)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
+
         // Set the selected option for Q7 in UserDataManager
         UserDataManager.Instance.Q7SelectedOption = option;
 
     }
+
 
 }

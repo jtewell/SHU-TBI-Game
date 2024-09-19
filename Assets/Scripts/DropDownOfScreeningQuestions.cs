@@ -39,13 +39,11 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
         if (monthDropDown != null)
         {
             // Define the choices for the dropdown
-            var choices = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            var choices = new List<string> { "Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 
             // Set the choices
             monthDropDown.choices = choices;
-
-            // Optionally, set a default value
-            monthDropDown.value = "January";
+            monthDropDown.value = "Month";
 
             // Register a callback for when the value changes 
             monthDropDown.RegisterValueChangedCallback(evt => {
@@ -65,7 +63,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             dayDropDown.choices = choices;
 
             // Optionally, set a default value
-            dayDropDown.value = "1";
+            dayDropDown.value = "0";
 
             // Register a callback for when the value changes
             dayDropDown.RegisterValueChangedCallback(evt =>
@@ -95,10 +93,16 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             });
 
         }
+        
+
+
+
+
+
         if (Q5DropdownField != null)
         {
             // Define the choices for the dropdown
-            var choices = new List<string> { "1", "2","3","4","5","5+"};
+            var choices = new List<string> { "1", "2","3","4","5+"};
 
             // Set the choices
             Q5DropdownField.choices = choices;
@@ -135,7 +139,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
         if (Q8DropdownField != null)
         {
             // Define the choices for the dropdown
-            var choices = new List<string> { "1", "2", "3", "4", "5", "5+" };
+            var choices = new List<string> { "1", "2", "3", "4", "5+" };
 
             // Set the choices
             Q8DropdownField.choices = choices;

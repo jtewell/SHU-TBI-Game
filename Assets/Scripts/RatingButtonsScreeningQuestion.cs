@@ -30,6 +30,7 @@ public class RatingButtonsScreeningQuestion : MonoBehaviour
     private Button[] q28RatingButtons = new Button[5];
     private Button[] q29RatingButtons = new Button[5];
     private Button[] q30RatingButtons = new Button[5];
+    private Button selectedButton;
 
 
 
@@ -43,6 +44,7 @@ public class RatingButtonsScreeningQuestion : MonoBehaviour
     // Initialize Q11 rating buttons
 
         string[] q11RatingButtonNames = { "Q11_1", "Q11_2", "Q11_3", "Q11_4", "Q11_5" };
+        q11RatingButtons = new Button[q11RatingButtonNames.Length]; // Initialize with the correct length
         for (int i = 0; i < q11RatingButtons.Length; i++)
         {
             q11RatingButtons[i] = root.Q<Button>(q11RatingButtonNames[i]);
@@ -199,194 +201,370 @@ public class RatingButtonsScreeningQuestion : MonoBehaviour
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q11RatingButtons[i] != null)
-                q11RatingButtons[i].clicked += () => OnQ11RatingButtonClick(index + 1);
+
+                q11RatingButtons[i].clicked += () =>
+                {
+                    OnQ11RatingButtonClick(q11RatingButtons[index], index + 1);
+                };
         }
         for (int i = 0; i < q12RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q12RatingButtons[i] != null)
-                q12RatingButtons[i].clicked += () => OnQ12RatingButtonClick(index + 1);
+                q12RatingButtons[i].clicked += () => OnQ12RatingButtonClick(q12RatingButtons[index],index + 1);
         }
         for (int i = 0; i < q13RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q13RatingButtons[i] != null)
-                q13RatingButtons[i].clicked += () => OnQ13RatingButtonClick(index + 1);
+                q13RatingButtons[i].clicked += () => OnQ13RatingButtonClick(q13RatingButtons[index],index + 1);
         }
         for (int i = 0; i < q14RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q14RatingButtons[i] != null)
-                q14RatingButtons[i].clicked += () => OnQ14RatingButtonClick(index + 1);
+                q14RatingButtons[i].clicked += () => OnQ14RatingButtonClick(q14RatingButtons[index],index + 1);
         }
         for (int i = 0; i < q15RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q15RatingButtons[i] != null)
-                q15RatingButtons[i].clicked += () => OnQ15RatingButtonClick(index + 1);
+                q15RatingButtons[i].clicked += () => OnQ15RatingButtonClick(q15RatingButtons[index],index + 1);
         }
         for (int i = 0; i < q16RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q16RatingButtons[i] != null)
-                q16RatingButtons[i].clicked += () => OnQ16RatingButtonClick(index + 1);
+                q16RatingButtons[i].clicked += () => OnQ16RatingButtonClick(q16RatingButtons[index],index + 1);
         }
         for (int i = 0; i < q17RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q17RatingButtons[i] != null)
-                q17RatingButtons[i].clicked += () => OnQ17RatingButtonClick(index + 1);
+                q17RatingButtons[i].clicked += () => OnQ17RatingButtonClick(q17RatingButtons[index],index + 1);
         }
         for (int i = 0; i < q18RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q18RatingButtons[i] != null)
-                q18RatingButtons[i].clicked += () => OnQ18RatingButtonClick(index + 1);
+                q18RatingButtons[i].clicked += () => OnQ18RatingButtonClick(q18RatingButtons[index],index + 1);
         }
         for (int i = 0; i < q19RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q19RatingButtons[i] != null)
-                q19RatingButtons[i].clicked += () => OnQ19RatingButtonClick(index + 1);
+                q19RatingButtons[i].clicked += () => OnQ19RatingButtonClick(q19RatingButtons[index], index + 1);
         }
         for (int i = 0; i < q20RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q20RatingButtons[i] != null)
-                q20RatingButtons[i].clicked += () => OnQ20RatingButtonClick(index + 1);
+                q20RatingButtons[i].clicked += () => OnQ20RatingButtonClick(q20RatingButtons[index],index + 1);
         }
         for (int i = 0; i < q21RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q21RatingButtons[i] != null)
-                q21RatingButtons[i].clicked += () => OnQ21RatingButtonClick(index + 1);
+                q21RatingButtons[i].clicked += () => OnQ21RatingButtonClick(q21RatingButtons[index],index + 1);
         }
         for (int i = 0; i < q22RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q22RatingButtons[i] != null)
-                q22RatingButtons[i].clicked += () => OnQ22RatingButtonClick(index + 1);
+                q22RatingButtons[i].clicked += () => OnQ22RatingButtonClick(q22RatingButtons[index], index + 1);
         }
         for (int i = 0; i < q23RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q23RatingButtons[i] != null)
-                q23RatingButtons[i].clicked += () => OnQ23RatingButtonClick(index + 1);
+                q23RatingButtons[i].clicked += () => OnQ23RatingButtonClick(q23RatingButtons[index], index + 1);
         }
         for (int i = 0; i < q24RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q24RatingButtons[i] != null)
-                q24RatingButtons[i].clicked += () => OnQ24RatingButtonClick(index + 1);
+                q24RatingButtons[i].clicked += () => OnQ24RatingButtonClick(q24RatingButtons[index], index + 1);
         }
         for (int i = 0; i < q25RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q25RatingButtons[i] != null)
-                q25RatingButtons[i].clicked += () => OnQ25RatingButtonClick(index + 1);
+                q25RatingButtons[i].clicked += () => OnQ25RatingButtonClick(q25RatingButtons[index], index + 1);
         }
         for (int i = 0; i < q26RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q26RatingButtons[i] != null)
-                q26RatingButtons[i].clicked += () => OnQ26RatingButtonClick(index + 1);
+                q26RatingButtons[i].clicked += () => OnQ26RatingButtonClick(q26RatingButtons[index], index + 1);
         }
         for (int i = 0; i < q27RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q27RatingButtons[i] != null)
-                q27RatingButtons[i].clicked += () => OnQ27RatingButtonClick(index + 1);
+                q27RatingButtons[i].clicked += () => OnQ27RatingButtonClick(q27RatingButtons[index], index + 1);
         }
         for (int i = 0; i < q28RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q28RatingButtons[i] != null)
-                q28RatingButtons[i].clicked += () => OnQ28RatingButtonClick(index + 1);
+                q28RatingButtons[i].clicked += () => OnQ28RatingButtonClick(q28RatingButtons[index], index + 1);
         }
 
         for (int i = 0; i < q29RatingButtons.Length; i++)
         {
             int index = i; // Local copy for the closure to avoid issues with lambda expressions
             if (q29RatingButtons[i] != null)
-                q29RatingButtons[i].clicked += () => OnQ29RatingButtonClick(index + 1);
+                q29RatingButtons[i].clicked += () => OnQ29RatingButtonClick(q29RatingButtons[index], index + 1);
         }
 
 
     }
-    private void OnQ11RatingButtonClick(int rating)
+    private void OnQ11RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
+
         UserDataManager.Instance.Q11SelectedOption = rating.ToString();
     }
-    private void OnQ12RatingButtonClick(int rating)
+    private void OnQ12RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q12SelectedOption = rating.ToString();
     }
-    private void OnQ13RatingButtonClick(int rating)
+    private void OnQ13RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q13SelectedOption = rating.ToString();
     }
-    private void OnQ14RatingButtonClick(int rating)
+    private void OnQ14RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q14SelectedOption = rating.ToString();
     }
-    private void OnQ15RatingButtonClick(int rating)
+    private void OnQ15RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q15SelectedOption = rating.ToString();
     }
-    private void OnQ16RatingButtonClick(int rating)
+    private void OnQ16RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q16SelectedOption = rating.ToString();
     }
-    private void OnQ17RatingButtonClick(int rating)
+    private void OnQ17RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q17SelectedOption = rating.ToString();
     }
-    private void OnQ18RatingButtonClick(int rating)
+    private void OnQ18RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q18SelectedOption = rating.ToString();
     }
-    private void OnQ19RatingButtonClick(int rating)
+    private void OnQ19RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q19SelectedOption = rating.ToString();
     }
-    private void OnQ20RatingButtonClick(int rating)
+    private void OnQ20RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q20SelectedOption = rating.ToString();
     }
-    private void OnQ21RatingButtonClick(int rating)
+    private void OnQ21RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q21SelectedOption = rating.ToString();
     }
-    private void OnQ22RatingButtonClick(int rating)
+    private void OnQ22RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q22SelectedOption = rating.ToString();
     }
-    private void OnQ23RatingButtonClick(int rating)
+    private void OnQ23RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q23SelectedOption = rating.ToString();
     }
-    private void OnQ24RatingButtonClick(int rating)
+    private void OnQ24RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q24SelectedOption = rating.ToString();
     }
-    private void OnQ25RatingButtonClick(int rating)
+    private void OnQ25RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q25SelectedOption = rating.ToString();
     }
-    private void OnQ26RatingButtonClick(int rating)
+    private void OnQ26RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q26SelectedOption = rating.ToString();
     }
-    private void OnQ27RatingButtonClick(int rating)
+    private void OnQ27RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q27SelectedOption = rating.ToString();
     }
-    private void OnQ28RatingButtonClick(int rating)
+    private void OnQ28RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q28SelectedOption = rating.ToString();
     }
-    private void OnQ29RatingButtonClick(int rating)
+    private void OnQ29RatingButtonClick(Button clickedButton, int rating)
     {
+        // Remove the 'selected' class from the previously selected button, if any
+        if (selectedButton != null)
+        {
+            selectedButton.RemoveFromClassList("selected");
+        }
+
+        // Set the clicked button as the selected button and apply the 'selected' class
+        selectedButton = clickedButton;
+        selectedButton.AddToClassList("selected");
         UserDataManager.Instance.Q29SelectedOption = rating.ToString();
     }
 

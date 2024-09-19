@@ -38,6 +38,18 @@
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     -unity-font-style: bold;
+    margin-top: 2px;
+    margin-right: 30px;
+    margin-bottom: 2px;
+    margin-left: 4px;
+    padding-top: 10px;
+    padding-right: 12px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+}
+
+.optionButtons.selected {
+    background-color: rgb(40, 167, 69);
 }
 
 .previousButton {
@@ -53,13 +65,54 @@
 .titleQuestion30px {
     -unity-font: url('project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&type=3#Inter_18pt-Bold');
     -unity-font-style: bold;
-    font-size: 30px;
+    font-size: 40px;
     -unity-text-align: middle-center;
     flex-wrap: wrap;
     text-overflow: clip;
+    -unity-font-definition: initial;
 }
 
 .dropdown {
-    width: 165px;
-    height: 75px;
+    width: auto;
+    height: auto;
+    font-size: 40px;
+    -unity-font: url('project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&type=3#Inter_18pt-Bold');
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    align-items: stretch;
+    justify-content: center;
+    align-self: auto;
+    margin-bottom: 0;
+    margin-right: 0;
+    padding-right: 0;
+    margin-top: 5%;
+}
+
+.errorMessageContainer {
+    background-color: rgb(159, 0, 0);
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    position: absolute;
+    flex-shrink: 0;
+}
+
+.errorMessage {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    -unity-font-style: bold;
+    -unity-font: url('project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&type=3#Inter_18pt-Bold');
+    -unity-font-definition: initial;
+    -unity-text-align: middle-center;
+    align-self: center;
+    flex-shrink: 0;
+    justify-content: flex-start;
+    align-items: auto;
+    flex-wrap: nowrap;
+    position: relative;
 }

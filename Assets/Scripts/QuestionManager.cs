@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +9,8 @@ public class QuestionManager : MonoBehaviour
     private VisualElement[] questions = new VisualElement[30];
     private Button[] previousButtons = new Button[30];
     private Button[] continueButtons = new Button[30];
-  
+    private VisualElement ErrorMessageContainer;
+
     // This method is called when the script is enabled
     private void OnEnable()
     {
@@ -27,6 +28,12 @@ public class QuestionManager : MonoBehaviour
         {
             Debug.LogError("Root VisualElement is not found.");
             return;
+        }
+        ErrorMessageContainer = root.Q<VisualElement>("ErrorMessageContainer");
+        ErrorMessageContainer.style.display = DisplayStyle.None;
+        if (ErrorMessageContainer == null)
+        {
+            Debug.LogError("ErrorMessageContainer element not found in the UXML.");
         }
 
         // Initialize the question VisualElements by finding them in the UI hierarchy
@@ -94,7 +101,17 @@ public class QuestionManager : MonoBehaviour
         switch(questionIndex)
         {
             case 1:
-                UserDataManager.Instance.LogData();
+                if (SelectedMonth != null && SelectedDay != null && SelectedYear != null)
+                {
+                    UserDataManager.Instance.LogData();
+                }
+                else
+                {
+                    Debug.Log("Please select Valid Option");
+                    ErrorMessageContainer.style.display = DisplayStyle.Flex;
+
+                }
+                *//*UserDataManager.Instance.LogData();*//*
                 break;
             case 2:
                 UserDataManager.Instance.LogDataQ2();
@@ -188,3 +205,4 @@ public class QuestionManager : MonoBehaviour
 }
 
 
+*/

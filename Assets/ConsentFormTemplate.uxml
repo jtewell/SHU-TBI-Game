@@ -1,15 +1,120 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/ConsentForm.uss?fileID=7433441132597879392&amp;guid=2ca2b414db9d3414cbc9930da8d37857&amp;type=3#ConsentForm" />
     <ui:VisualElement name="ConsentForm" style="flex-grow: 1;">
-        <ui:VisualElement name="TopLayerForm" style="flex-grow: 1; width: 100%; height: 70%; background-color: rgba(82, 255, 213, 0.86); margin-right: 0; padding-right: 0;">
-            <ui:VisualElement name="Title" class="titleBackground" style="flex-grow: 1; height: 70px; width: 740px; top: 25px; left: 130px;">
-                <ui:Label tabindex="-1" text="Consent Form" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TitleText" style="-unity-font-style: bold; -unity-font: url(&apos;project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&amp;guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&amp;type=3#Inter_18pt-Bold&apos;); font-size: 45px; -unity-text-align: middle-center; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; align-items: auto; justify-content: flex-start; height: 37px; width: 625px; -unity-font-definition: initial;" />
+        <ui:VisualElement name="TopLayerForm" style="flex-grow: 1; width: 100%; height: 70%; background-color: rgb(82, 255, 213); margin-right: 0; padding-right: 0;">
+            <ui:VisualElement name="ThankYouMessage_Container" style="flex-grow: 0; flex-direction: column; align-items: center; justify-content: center; align-self: center; display: none;">
+                <ui:Label tabindex="-1" text="Thank you for giving us your time. You Declince Consent Form. Would You like to go back again?" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ThankYouMessage" class="ThankyouMessageBox" style="-unity-text-align: upper-center; align-items: auto;" />
             </ui:VisualElement>
-            <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" style="position: relative; align-self: center; top: 30%; align-items: center; white-space: normal; flex-wrap: wrap; font-size: 35px; -unity-text-align: upper-center; padding-right: 10px; padding-left: 10px; padding-top: 0; margin-top: 0; -unity-font: url(&apos;project://database/Assets/Font/Inter/static/Inter_18pt-Medium.ttf?fileID=12800000&amp;guid=87779458ac44e4848a3f2eca3727d4e5&amp;type=3#Inter_18pt-Medium&apos;); -unity-font-definition: initial;" />
+            <ui:ScrollView name="consentForm_ScrollView" style="display: flex;">
+                <ui:VisualElement name="Title" class="titleBackground" style="flex-wrap: wrap;">
+                    <ui:Label tabindex="-1" text="RESEARCH PARTICIPANT CONSENT FORM" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TitleText" style="-unity-font-style: bold; -unity-font: url(&apos;project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&amp;guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&amp;type=3#Inter_18pt-Bold&apos;); font-size: 40px; -unity-text-align: middle-center; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; align-items: center; justify-content: center; height: auto; width: auto; -unity-font-definition: initial; align-self: center; white-space: normal; flex-wrap: wrap;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Logo" style="flex-grow: 0; position: relative; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center; align-self: center; top: 90px; background-image: url(&apos;project://database/Assets/images/Concentformlofo.jpg?fileID=2800000&amp;guid=632edec9057a08e46adb48e1a1f43848&amp;type=3#Concentformlofo&apos;); width: 200px; height: 100px; flex-direction: column;" />
+                <ui:VisualElement name="consentFormDataHead_Container" style="flex-grow: 1;">
+                    <ui:VisualElement name="consentFormTitle" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: row;">
+                        <ui:VisualElement style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: row;">
+                            <ui:Label tabindex="-1" text="Title:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="VisualElement" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="Computerized Navigation Task for the Assessment of Executive Dysfunction in the TBI Population" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="consentFormHeadName" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: row;">
+                        <ui:VisualElement style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: row; margin-right: 50px;">
+                            <ui:Label tabindex="-1" text="Principal Investigator:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="VisualElement" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="Nicole Cruse, Ph.D.&#10;Department of Communication Disorders&#10;Sacred Heart University&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="consentFormDataContainer" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: column; display: flex;">
+                        <ui:VisualElement name="consentFormdataTitle" style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: column; margin-right: 50px;">
+                            <ui:Label tabindex="-1" text="Purpose of Research" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="consentFormdataData" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="The purpose of this study is to better understand how technology can be used to aid individuals with brain injury. " parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="consentFormDataContainer2" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: column;">
+                        <ui:VisualElement name="consentFormdataTitle2" style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: column; margin-right: 50px;">
+                            <ui:Label tabindex="-1" text="Description of Procedures" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="consentFormdataData2" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="If you decide to participate in this study, you will be asked to answer a series of questions about yourself and will also play a computerized errand game where you can use an avitar to explore a virtual town and perform tasks that mirror real-life errands." parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="consentFormDataContainer3" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: column; display: flex;">
+                        <ui:VisualElement name="consentFormdataTitle3" style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: column; margin-right: 50px;">
+                            <ui:Label tabindex="-1" text="Duration of Participation" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="consentFormdataData3" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="Total participation time for you is approximately 30 minutes. " parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="consentFormDataContainer4" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: column; display: flex;">
+                        <ui:VisualElement name="consentFormdataTitle4" style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: column; margin-right: 50px;">
+                            <ui:Label tabindex="-1" text="Data collection" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="consentFormdataData4" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="You will complete the study via a website link provided to you by the research team. This link can be accessed via a desktop or laptop computer. " parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="consentFormDataContainer5" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: column; display: flex;">
+                        <ui:VisualElement name="consentFormdataTitle5" style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: column; margin-right: 50px;">
+                            <ui:Label tabindex="-1" text="What are the risks and how will you keep my toddler’s information safe?" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" style="white-space: normal;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="consentFormdataData5" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="While there are minimal physical risks associated with this study there is the possible risk of loss of confidentiality. Every effort will be made to keep your information confidential; however, this cannot be guaranteed. There is always a small risk that data transmitted over the internet may be intercepted or that the security of stored data may be compromised. It is important to note that the only place that your name will appear is in the signature line of this consent form." parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="consentFormDataContainer6" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: column; display: flex;">
+                        <ui:VisualElement name="consentFormdataTitle6" style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: column; margin-right: 50px;">
+                            <ui:Label tabindex="-1" text="How can the study possibly benefit me or others?" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="consentFormdataData6" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="There is no direct benefit to you for participating. The benefits to science and other people may include a better understanding of the general knowledge base of how brain injury impacts cognitive abilities in adults." parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="consentFormDataContainer7" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: column; display: flex;">
+                        <ui:VisualElement name="consentFormdataTitle7" style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: column; margin-right: 50px;">
+                            <ui:Label tabindex="-1" text="Is participation voluntary? " parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="consentFormdataData7" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="You are free to choose whether to be in this study. If you choose to participate, it&apos;s okay to stop at any point during the session. Please pause or stop the session if you become bored or simply no longer want to participate." parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="consentFormDataContainer8" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: column; display: flex;">
+                        <ui:VisualElement name="consentFormdataTitle8" style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: column; margin-right: 50px;">
+                            <ui:Label tabindex="-1" text="Will I be paid for participation?" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="consentFormdataData8" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="You will be entered into a raffle to receive a $10 gift card after participation in the study. The gift card code will be sent to the email address on file." parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="consentFormDataContainer9" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: column; display: flex;">
+                        <ui:VisualElement name="consentFormdataTitle9" style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: column; margin-right: 50px;">
+                            <ui:Label tabindex="-1" text="What if I have questions? " parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="consentFormdataData9" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="This study is run by Dr. Nicole Cruse of Sacred Heart University. If you have any questions or concerns about this study, or in the very unlikely event of a research-related issue, please contact Dr. Cruse at crusen2@sacredheart.edu  (203) 416-3947. If you have concerns about the treatment of research participants, you can also contact the Sacred Heart University Institutional Review Board, 5151 Park Ave., Fairfield, CT 06825. The phone number is (203) 396-8454. The email address is carlj@sacredheart.edu." parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="consentFormDataContainer10" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: column; display: flex;">
+                        <ui:VisualElement name="consentFormdataTitle10" style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: column; margin-right: 50px;">
+                            <ui:Label tabindex="-1" text="Documentation of consent:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="consentFormdataData10" style="flex-grow: 0;">
+                            <ui:Label tabindex="-1" text="I have read this form and decided that I will participate in the project described above. Its general purposes, the particulars of involvement and possible risks and inconveniences have been explained to my satisfaction. I understand that I can withdraw at any time." parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:ScrollView>
         </ui:VisualElement>
-        <ui:VisualElement name="BottomLayerForm" style="flex-grow: 1; background-color: rgba(57, 157, 249, 0.86); flex-direction: row; justify-content: space-around;">
+        <ui:VisualElement name="BottomLayerForm" style="flex-grow: 1; background-color: rgb(57, 157, 249); flex-direction: row; justify-content: space-around;">
             <ui:Button text="Accept" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AcceptButton" class="button" style="-unity-font-style: bold; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; align-items: center; height: 75px; width: 365px; font-size: 35px; justify-content: flex-start; align-self: flex-start; -unity-font: url(&apos;project://database/Assets/Font/Inter/static/Inter_18pt-Medium.ttf?fileID=12800000&amp;guid=87779458ac44e4848a3f2eca3727d4e5&amp;type=3#Inter_18pt-Medium&apos;); -unity-font-definition: initial;" />
             <ui:Button text="Decline" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeclineButton" class="button" style="-unity-font-style: bold; width: 365px; height: 75px; font-size: 35px; align-self: flex-start; -unity-font: url(&apos;project://database/Assets/Font/Inter/static/Inter_18pt-Medium.ttf?fileID=12800000&amp;guid=87779458ac44e4848a3f2eca3727d4e5&amp;type=3#Inter_18pt-Medium&apos;); -unity-font-definition: initial;" />
+            <ui:Button text="View" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ViewButton" class="button" style="-unity-font-style: bold; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; align-items: center; height: 75px; width: 365px; font-size: 35px; justify-content: flex-start; align-self: flex-start; -unity-font: url(&apos;project://database/Assets/Font/Inter/static/Inter_18pt-Medium.ttf?fileID=12800000&amp;guid=87779458ac44e4848a3f2eca3727d4e5&amp;type=3#Inter_18pt-Medium&apos;); -unity-font-definition: initial; display: none;" />
+            <ui:Button text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ExitButton" class="button" style="-unity-font-style: bold; width: 365px; height: 75px; font-size: 35px; align-self: flex-start; -unity-font: url(&apos;project://database/Assets/Font/Inter/static/Inter_18pt-Medium.ttf?fileID=12800000&amp;guid=87779458ac44e4848a3f2eca3727d4e5&amp;type=3#Inter_18pt-Medium&apos;); -unity-font-definition: initial; display: none;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

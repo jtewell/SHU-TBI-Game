@@ -12,6 +12,10 @@ public class AvatarScrolling : MonoBehaviour
     public ScrollView avatarSelectionScrollingView;
     public Button scrollLeft;
     public Button scrollRight;
+    public VisualElement selectAvatarConfirmationContainer; // Reference to the confirmation container
+    public Button yesButton;
+    public Button noButton;
+    public Label titleAvatarSelection;
     private float scrollAmount = 200f; // The amount to scroll per click
     private VisualElement selectedAvatar; // Store the currently selected avatar
 
@@ -22,15 +26,28 @@ public class AvatarScrolling : MonoBehaviour
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
 
+        // Get the visual elements from the UIDocument
         avatarSelectionContainer = root.Q<VisualElement>("avatarSelectionContainer");
         scrollingButtonsContainer = root.Q<VisualElement>("scrollingButtonsContainer");
         avatarSelectionScrollingView = root.Q<ScrollView>("avatarSelectionScrollingView");
+        selectAvatarConfirmationContainer = root.Q<VisualElement>("selectAvatarConfirmationContainer");
+
+        // Get the buttons and labels
+        yesButton = root.Q<Button>("yesButton");
+        noButton = root.Q<Button>("noButton");
         scrollLeft = root.Q<Button>("scrollLeft");
         scrollRight = root.Q<Button>("scrollRight");
+        titleAvatarSelection = root.Q<Label>("titleAvatarSelection");
 
         // Register Click Events
         scrollLeft.clicked += ScrollLeftButton;
         scrollRight.clicked += ScrollRightButton;
+
+        // Hide confirmation container initially
+        selectAvatarConfirmationContainer.style.display = DisplayStyle.None;
+        // Register button click events
+        yesButton.clicked += OnYesButtonClicked;
+        noButton.clicked += OnNoButtonClicked;
 
 
         // Get all avatar containers and register click events
@@ -73,6 +90,34 @@ public class AvatarScrolling : MonoBehaviour
         selectedAvatar.style.borderBottomLeftRadius = new Length(15); // Rounded corners
         selectedAvatar.style.borderBottomRightRadius = new Length(15); // Rounded corners
         selectedAvatar.transform.scale = new Vector3(1.2f, 1.2f, 1.2f);
+
+        // Show the confirmation container
+        selectAvatarConfirmationContainer.style.display = DisplayStyle.Flex;
+        //titleAvatarSelection.style.display = DisplayStyle.None;
+    }
+    // Handle "Yes" button click
+    private void OnYesButtonClicked()
+    {
+        Debug.Log("Avatar selection confirmed: " + selectedAvatar.name);
+        // Add your logic for confirming the avatar selection here
+
+        // Hide the confirmation container
+        selectAvatarConfirmationContainer.style.display = DisplayStyle.None;
+    }
+
+    // Handle "No" button click
+    private void OnNoButtonClicked()
+    {
+        Debug.Log("Avatar selection canceled.");
+        // Reset the selected avatar
+        if (selectedAvatar != null)
+        {
+            selectedAvatar.RemoveFromClassList("selected-avatar");
+            selectedAvatar = null;
+        }
+
+        // Hide the confirmation container
+        selectAvatarConfirmationContainer.style.display = DisplayStyle.None;
     }
 
 

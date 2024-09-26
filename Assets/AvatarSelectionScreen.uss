@@ -1,32 +1,68 @@
 .avatar {
-    width: 300px;      /* Fixed width for each avatar */
-    height: 300px;     /* Fixed height for each avatar */
-    margin-right: 10px; /* Space between avatars */
-    flex-shrink: 0;    /* Prevents avatars from shrinking */
-    background-size: contain; /* Ensures the background image covers the container */
-    position: relative; /* Keeps the position for any additional styles */
+    width: 300px;
+    height: 300px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    background-size: contain;
+    position: relative;
+    font-size: 40px;
+    -unity-font-definition: initial;
+    -unity-font: url('project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&type=3#Inter_18pt-Bold');
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
 }
+
 .unity-scroll-view__content-container {
     flex-direction: row;
     flex-wrap: wrap;
     overflow: auto;
 }
+
 .unity-scroll-view {
     height: 400px;
-    width: 100%; 
+    width: 100%;
     margin: 0;
 }
+
 .item {
-    width: 300px; /* Set to a width that allows 4 items to fit */
-    height: 500px; /* Set height as needed */
+    width: 300px;
+    height: 500px;
 }
+
 .selected-avatar {
-    border: 2px solid yellow; /* Change the border color to highlight */
-    background-color: rgba(0, 0, 139, 0.5); /* Optional: Add a semi-transparent yellow background */
-    transform: scale(1.2); /* Slightly enlarge the selected avatar */
-    border-radius: 15px; /* Rounded corners */
-    transition: transform 0.3s ease, background-color 0.3s ease, border 0.3s ease; /* Add a transition effect */
+    border: 2px solid yellow;
+    background-color: rgba(0, 0, 139, 0.5);
+    transform: ;
+    border-radius: 15px;
+    transition: transform 0.3s ease, background-color 0.3s ease, border 0.3s ease;
 }
 
+.heading {
+    -unity-font: url('project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&type=3#Inter_18pt-Bold');
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    font-size: 40px;
+    -unity-text-align: middle-center;
+}
 
-
+.button {
+    width: auto;
+    height: auto;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    -unity-font: url('project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&type=3#Inter_18pt-Bold');
+    -unity-font-definition: initial;
+    -unity-font-style: bold;
+    font-size: 30px;
+    margin-right: 20px;
+}

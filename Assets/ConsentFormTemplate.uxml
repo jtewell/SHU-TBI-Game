@@ -3,14 +3,13 @@
     <ui:VisualElement name="ConsentForm" style="flex-grow: 1;">
         <ui:VisualElement name="TopLayerForm" style="flex-grow: 1; width: 100%; height: 70%; background-color: rgb(82, 255, 213); margin-right: 0; padding-right: 0;">
             <ui:VisualElement name="ThankYouMessage_Container" style="flex-grow: 0; flex-direction: column; align-items: center; justify-content: center; align-self: center; display: none;">
-                <ui:Label tabindex="-1" text="Thank you for giving us your time. You Declince Consent Form. Would You like to go back again?" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ThankYouMessage" class="ThankyouMessageBox" style="-unity-text-align: upper-center; align-items: auto;" />
+                <ui:Label tabindex="-1" text="Thank you for giving us your time. You have opted to not participate in the study. If you would like to change this selection, please go back and select “I consent to participate." parse-escape-sequences="true" display-tooltip-when-elided="true" name="ThankYouMessage" class="ThankyouMessageBox" style="-unity-text-align: upper-center; align-items: auto;" />
             </ui:VisualElement>
             <ui:ScrollView name="consentForm_ScrollView" style="display: flex;">
                 <ui:VisualElement name="Title" class="titleBackground" style="flex-wrap: wrap;">
                     <ui:Label tabindex="-1" text="RESEARCH PARTICIPANT CONSENT FORM" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TitleText" style="-unity-font-style: bold; -unity-font: url(&apos;project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&amp;guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&amp;type=3#Inter_18pt-Bold&apos;); font-size: 40px; -unity-text-align: middle-center; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; align-items: center; justify-content: center; height: auto; width: auto; -unity-font-definition: initial; align-self: center; white-space: normal; flex-wrap: wrap;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="Logo" style="flex-grow: 0; position: relative; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center; align-self: center; top: 90px; background-image: url(&apos;project://database/Assets/images/Concentformlofo.jpg?fileID=2800000&amp;guid=632edec9057a08e46adb48e1a1f43848&amp;type=3#Concentformlofo&apos;); width: 200px; height: 100px; flex-direction: column;" />
-                <ui:VisualElement name="consentFormDataHead_Container" style="flex-grow: 1;">
+                <ui:VisualElement name="consentFormDataHead_Container" style="flex-grow: 1; padding-right: 30px; padding-left: 30px;">
                     <ui:VisualElement name="consentFormTitle" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: row;">
                         <ui:VisualElement style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: row;">
                             <ui:Label tabindex="-1" text="Title:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformTitle" />
@@ -61,7 +60,7 @@
                     </ui:VisualElement>
                     <ui:VisualElement name="consentFormDataContainer5" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: stretch; margin-top: 0; top: 98px; flex-direction: column; display: flex;">
                         <ui:VisualElement name="consentFormdataTitle5" style="flex-grow: 0; align-items: flex-start; align-self: flex-start; flex-direction: column; margin-right: 50px;">
-                            <ui:Label tabindex="-1" text="What are the risks and how will you keep my toddler’s information safe?" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" style="white-space: normal;" />
+                            <ui:Label tabindex="-1" text="What are the risks and how will you keep my information safe?" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" style="white-space: normal;" />
                         </ui:VisualElement>
                         <ui:VisualElement name="consentFormdataData5" style="flex-grow: 0;">
                             <ui:Label tabindex="-1" text="While there are minimal physical risks associated with this study there is the possible risk of loss of confidentiality. Every effort will be made to keep your information confidential; however, this cannot be guaranteed. There is always a small risk that data transmitted over the internet may be intercepted or that the security of stored data may be compromised. It is important to note that the only place that your name will appear is in the signature line of this consent form." parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
@@ -104,7 +103,8 @@
                             <ui:Label tabindex="-1" text="Documentation of consent:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformDataTitle" />
                         </ui:VisualElement>
                         <ui:VisualElement name="consentFormdataData10" style="flex-grow: 0;">
-                            <ui:Label tabindex="-1" text="I have read this form and decided that I will participate in the project described above. Its general purposes, the particulars of involvement and possible risks and inconveniences have been explained to my satisfaction. I understand that I can withdraw at any time." parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                            <ui:Label tabindex="-1" text="I have read this form and decided that I will participate in the project described above. Its general purposes, the particulars of involvement and possible risks and inconveniences have been explained to my satisfaction. I understand that I can withdraw at any time.&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" class="consentformData" style="white-space: normal;" />
+                            <ui:Toggle label="&quot;I Consent to Participate in the study.&quot;" name="consentToggle" class="consentformData" style="flex-direction: row-reverse;" />
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>

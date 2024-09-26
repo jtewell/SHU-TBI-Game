@@ -15,6 +15,7 @@ public class ScreenChangeButton : MonoBehaviour
     private Label ThankYouMessage;
     private Button ViewButton;
     private Button ExitButton;
+    private Toggle consentToggle;
 
 
     // Start is called before the first frame update
@@ -34,6 +35,7 @@ public class ScreenChangeButton : MonoBehaviour
         DeclineButton = root.Q<Button>("DeclineButton");
         ViewButton = root.Q<Button>("ViewButton");
         ExitButton = root.Q<Button>("ExitButton");
+        consentToggle = root.Q<Toggle>("consentToggle");
 
         //Find the Label
         ThankYouMessage = root.Q<Label>("ThankYouMessage");
@@ -90,8 +92,19 @@ public class ScreenChangeButton : MonoBehaviour
             AcceptButton.clicked += () =>
             {
                 Debug.Log("AcceptButton Found");
-                // Load the next scene
-                SceneManager.LoadScene("ScreeningQuestions");
+                // Check if the consent toggle is checked
+                if (consentToggle.value == false)
+                {
+                    Debug.Log("Consent not given");
+                    return;
+                }
+                else
+                {
+                    // Load the next scene
+                    SceneManager.LoadScene("ScreeningQuestions");
+                    Debug.Log("Consent given");
+                }
+                
             };
         }
         else

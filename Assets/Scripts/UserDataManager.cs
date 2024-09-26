@@ -488,9 +488,18 @@ public class UserDataManager : MonoBehaviour
                 {
 
                     UserDataManager.Instance.LogDataQ29();
+                    SceneManager.LoadScene("Avatar_Selection");
                 }
                 break;
             case 30:
+                //if (string.IsNullOrEmpty(Q30SelectedOption))
+                //{
+                //    hasErrors = true;
+                //    continueButtonNum.SetEnabled(!hasErrors);
+                //}
+                //else
+                //{
+                //}
                 break;
 
         }

@@ -1,0 +1,32 @@
+.avatar {
+    width: 300px;      /* Fixed width for each avatar */
+    height: 300px;     /* Fixed height for each avatar */
+    margin-right: 10px; /* Space between avatars */
+    flex-shrink: 0;    /* Prevents avatars from shrinking */
+    background-size: contain; /* Ensures the background image covers the container */
+    position: relative; /* Keeps the position for any additional styles */
+}
+.unity-scroll-view__content-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+.unity-scroll-view {
+    height: 400px;
+    width: 100%; 
+    margin: 0;
+}
+.item {
+    width: 300px; /* Set to a width that allows 4 items to fit */
+    height: 500px; /* Set height as needed */
+}
+.selected-avatar {
+    border: 2px solid yellow; /* Change the border color to highlight */
+    background-color: rgba(0, 0, 139, 0.5); /* Optional: Add a semi-transparent yellow background */
+    transform: scale(1.2); /* Slightly enlarge the selected avatar */
+    border-radius: 15px; /* Rounded corners */
+    transition: transform 0.3s ease, background-color 0.3s ease, border 0.3s ease; /* Add a transition effect */
+}
+
+
+

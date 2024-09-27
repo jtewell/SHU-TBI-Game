@@ -486,14 +486,14 @@
             <ui:Button text="Continue" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q29Continue" class="OptionsButton buttonContinue" style="align-items: center; align-self: center;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="Question30" style="flex-grow: 1; background-color: rgba(57, 157, 249, 0.86); display: none; width: auto; height: auto;">
+    <ui:VisualElement name="Question30" style="flex-grow: 1; background-color: rgb(57, 157, 249); display: none; width: auto; height: auto;">
         <ui:VisualElement name="Q30PreviousButtonContainer" class="previousContainer" style="flex-grow: 0;">
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q30PreviousButton" class="previousButton" style="background-image: url(&apos;project://database/Assets/images/left-arrow.png?fileID=2800000&amp;guid=f8ceb62693795da479122e2dcf77a16b&amp;type=3#left-arrow&apos;); background-color: rgba(45, 45, 45, 0);" />
         </ui:VisualElement>
         <ui:VisualElement name="QuestionContainer" class="titleBackground" style="flex-grow: 0; position: relative; align-items: center; align-self: center; left: auto; flex-direction: column; justify-content: space-around; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); top: 40px; background-color: rgb(255, 255, 255); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; flex-wrap: nowrap; display: flex;">
-            <ui:Label tabindex="-1" text="Thank you for answering the questions! You may start playing the game!" parse-escape-sequences="true" display-tooltip-when-elided="true" class="titleQuestion30px" style="color: rgb(0, 0, 0); white-space: normal; display: none;" />
+            <ui:Label tabindex="-1" text="Thank you for answering the questions! You may start playing the game!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="titleQuestion30px" style="color: rgb(0, 0, 0); white-space: normal; display: flex;" />
         </ui:VisualElement>
-        <ui:VisualElement name="Q30NextButton" style="flex-grow: 0; width: 100%; height: 30%; bottom: auto; top: 42%; display: none;">
+        <ui:VisualElement name="Q30NextButton" style="flex-grow: 0; width: 100%; height: 30%; bottom: auto; top: 30%; display: flex;">
             <ui:Button text="Continue" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q30Continue" class="OptionsButton buttonContinue" style="align-items: center; align-self: center;" />
         </ui:VisualElement>
     </ui:VisualElement>

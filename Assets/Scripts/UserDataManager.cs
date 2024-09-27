@@ -54,8 +54,6 @@ public class UserDataManager : MonoBehaviour
     private VisualElement ErrorMessageContainer;
     private Button continueButtonNum;
 
-    private string scriptUrl = "https://script.google.com/macros/s/AKfycbyh4seaBy4Ev_XH0fTAEAJYo48cFL_2tv48LZBbNA6h5kpT8365CEZWORD9enET7X2J/exec";
-
     private void Awake()
     {
         // Ensure there's only one instance of this class
@@ -139,384 +137,38 @@ public class UserDataManager : MonoBehaviour
             questions[questionIndex - 1].style.display = DisplayStyle.None;
         }
     }
-
-    // Method to handle the "Continue" button click for a specific question
     private void OnContinueButtonClick(int questionIndex)
     {
-        bool hasErrors = false; // Flag to track if there are validation errors
+        bool hasErrors = false;
+        string[] selectedOptions = { SelectedMonth, SelectedDay, SelectedYear, SelectedGender, Q3SelectedOption, Q4SelectedOption, Q5SelectedOption, Q6SelectedOption, Q7SelectedOption, Q8SelectedOption, Q9SelectedOption, Q11SelectedOption, Q12SelectedOption, Q13SelectedOption, Q14SelectedOption, Q15SelectedOption, Q16SelectedOption, Q17SelectedOption, Q18SelectedOption, Q19SelectedOption, Q20SelectedOption, Q21SelectedOption, Q22SelectedOption, Q23SelectedOption, Q24SelectedOption, Q25SelectedOption, Q26SelectedOption, Q27SelectedOption, Q28SelectedOption, Q29SelectedOption };
 
-        switch (questionIndex)
+        if (questionIndex >= 1 && questionIndex <= 29)
         {
-            case 1:
-                if (string.IsNullOrEmpty(SelectedMonth) || string.IsNullOrEmpty(SelectedDay) || string.IsNullOrEmpty(SelectedYear))
-                {
-                    
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                    
-                }
-                else
-                {
-                    
-                    UserDataManager.Instance.LogData();
-                }
-                break;
+            if (string.IsNullOrEmpty(selectedOptions[questionIndex - 1]))
+            {
+                hasErrors = true;
+                continueButtonNum.SetEnabled(!hasErrors);
+            }
+        }
+        else if (questionIndex == 30)
+        {
+            SubmitDataToSheet();
 
-            case 2:
-                if (string.IsNullOrEmpty(SelectedGender))
-                {
-                   hasErrors = true;
-                   continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-                    
-                    UserDataManager.Instance.LogDataQ2();
-                }
-                break;
-            case 3:
-                if (string.IsNullOrEmpty(Q3SelectedOption))
-                {
-                   hasErrors = true;
-                   continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-                    
-                    UserDataManager.Instance.LogDataQ3();
-                }
-                break;
-            case 4:
-                if (string.IsNullOrEmpty(Q4SelectedOption))
-                {
-                   hasErrors = true;
-                   continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-                    
-                    UserDataManager.Instance.LogDataQ4();
-                }
-                break;
-            case 5:
-                if (string.IsNullOrEmpty(Q5SelectedOption))
-                {
-                   hasErrors = true;
-                   continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-                    SubmitDataToSheet();
-                    UserDataManager.Instance.LogDataQ5();
-                }
-                break;
-            case 6:
-                if (string.IsNullOrEmpty(Q6SelectedOption))
-                {
-                   hasErrors = true;
-                   continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-                    
-                    UserDataManager.Instance.LogDataQ6();
-                }
-                break;
-            case 7:
-                if (string.IsNullOrEmpty(Q7SelectedOption))
-                {
-                   hasErrors = true;
-                   continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-                    
-                    UserDataManager.Instance.LogDataQ7();
-                }
-                break;
-            case 8:
-                if (string.IsNullOrEmpty(Q8SelectedOption))
-                {
-                   hasErrors = true;
-                   continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-                    
-                    UserDataManager.Instance.LogDataQ8();
-                }
-                break;
-            case 9:
-                if (string.IsNullOrEmpty(Q9SelectedOption))
-                {
-                   hasErrors = true;
-                   continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-                    
-                    UserDataManager.Instance.LogDataQ9();
-                }
-                break;
-            case 10:
-                break;
-            case 11:
-                if (string.IsNullOrEmpty(Q11SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ11();
-                }
-                break;
-            case 12:
-                if (string.IsNullOrEmpty(Q12SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ12();
-                }
-
-                break;
-            case 13:
-                if (string.IsNullOrEmpty(Q13SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ13();
-                }
-
-                break;
-            case 14:
-                if (string.IsNullOrEmpty(Q14SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ14();
-                }
-                break;
-            case 15:
-                if (string.IsNullOrEmpty(Q15SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ15();
-                }
-                break;
-            case 16:
-                if (string.IsNullOrEmpty(Q16SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ16();
-                }
-                break;
-            case 17:
-                if (string.IsNullOrEmpty(Q17SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ17();
-                }
-                break;
-            case 18:
-                if (string.IsNullOrEmpty(Q18SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ18();
-                }
-                break;
-            case 19:
-                if (string.IsNullOrEmpty(Q19SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ19();
-                }
-                break;
-            case 20:
-                if (string.IsNullOrEmpty(Q20SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ20();
-                }
-                break;
-            case 21:
-                if (string.IsNullOrEmpty(Q21SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ21();
-                }
-                break;
-            case 22:
-                if (string.IsNullOrEmpty(Q22SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ22();
-                }
-                break;
-            case 23:
-                if (string.IsNullOrEmpty(Q23SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ23();
-                }
-                break;
-            case 24:
-                if (string.IsNullOrEmpty(Q24SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ24();
-                }
-                break;
-            case 25:
-                if (string.IsNullOrEmpty(Q25SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ25();
-                }
-                break;
-            case 26:
-                if (string.IsNullOrEmpty(Q26SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ26();
-                }
-                break;
-            case 27:
-                if (string.IsNullOrEmpty(Q27SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ27();
-                }
-                break;
-            case 28:
-                if (string.IsNullOrEmpty(Q28SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ28();
-                }
-                break;
-            case 29:
-                if (string.IsNullOrEmpty(Q29SelectedOption))
-                {
-                    hasErrors = true;
-                    continueButtonNum.SetEnabled(!hasErrors);
-                }
-                else
-                {
-
-                    UserDataManager.Instance.LogDataQ29();
-                    SceneManager.LoadScene("Avatar_Selection");
-                }
-                break;
-            case 30:
-                //if (string.IsNullOrEmpty(Q30SelectedOption))
-                //{
-                //    hasErrors = true;
-                //    continueButtonNum.SetEnabled(!hasErrors);
-                //}
-                //else
-                //{
-                //}
-                break;
-
+            SceneManager.LoadScene("Avatar_Selection");
         }
         if (!hasErrors)
         {
             if (questions[questionIndex - 1] != null)
 
-            
-            questions[questionIndex - 1].style.display = DisplayStyle.None; // Hide the current question
+
+                questions[questionIndex - 1].style.display = DisplayStyle.None; // Hide the current question
 
             if (questionIndex < questions.Length && questions[questionIndex] != null)
             {
-                Debug.Log("I'm Working");
+                
                 questions[questionIndex].style.display = DisplayStyle.Flex; // Show the next question
             }
         }
-        
     }
     public void SubmitDataToSheet()
     {
@@ -526,175 +178,62 @@ public class UserDataManager : MonoBehaviour
     private IEnumerator SubmitDataCoroutine()
     {
         WWWForm form = new WWWForm();
-        form.AddField("data", JsonUtility.ToJson(new
+        // Create a dictionary to hold the Google Form entry IDs and their corresponding values
+        Dictionary<string, string> formData = new Dictionary<string, string>
         {
-            month = SelectedMonth,
-            day = SelectedDay,
-            year = SelectedYear,
-            gender = SelectedGender,
-            q3 = Q3SelectedOption,
-            q4 = Q4SelectedOption,
-            q5 = Q5SelectedOption
+            { "entry.1715281728", SelectedMonth },
+            { "entry.629660407", SelectedDay },
+            { "entry.982217643", SelectedYear },
+            { "entry.1484659508", SelectedGender },
+            { "entry.1012726362", Q3SelectedOption },
+            { "entry.2103931096", Q4SelectedOption },
+            { "entry.1340725638", Q5SelectedOption },
+            { "entry.336654288", Q6SelectedOption },
+            { "entry.1653943654", Q7SelectedOption },
+            { "entry.248416756", Q8SelectedOption },
+            { "entry.2131642439", Q9SelectedOption },
+            { "entry.1654358928", Q11SelectedOption },
+            { "entry.61572081", Q12SelectedOption },
+            { "entry.1296288566", Q13SelectedOption },
+            { "entry.1428857749", Q14SelectedOption },
+            { "entry.123124654", Q15SelectedOption },
+            { "entry.439547470", Q16SelectedOption },
+            { "entry.2105550583", Q17SelectedOption },
+            { "entry.1062803565", Q18SelectedOption },
+            { "entry.258204172", Q19SelectedOption },
+            { "entry.1402924908", Q20SelectedOption },
+            { "entry.1183053925", Q21SelectedOption },
+            { "entry.953435869", Q22SelectedOption },
+            { "entry.1985824873", Q23SelectedOption },
+            { "entry.1100358298", Q24SelectedOption },
+            { "entry.188062488", Q25SelectedOption },
+            { "entry.1061759675", Q26SelectedOption },
+            { "entry.1629763265", Q27SelectedOption },
+            { "entry.798811690", Q28SelectedOption },
+            { "entry.1387695143", Q29SelectedOption }
+        };
+        // Iterate over the dictionary and add each field to the form
+        foreach (KeyValuePair<string, string> field in formData)
+        {
+            form.AddField(field.Key, field.Value);
+        }
 
-        }));
+        // Set your Google Apps Script web app URL here
+        string url = "https://docs.google.com/forms/d/e/1FAIpQLSe1CpGcYz-zV-OV8xfAl0BP4K8g2WQtLwgLaMbge6YOgMrrfw/formResponse";
 
-        using (UnityWebRequest www = UnityWebRequest.Post(scriptUrl, form))
+        // Create the UnityWebRequest for a POST request
+        using (UnityWebRequest www = UnityWebRequest.Post(url, form))
         {
             yield return www.SendWebRequest();
-
             if (www.result == UnityWebRequest.Result.Success)
             {
-                Debug.Log("Data successfully submitted!");
+                Debug.Log("FeedBack Submitted Successfully");
             }
             else
             {
-                Debug.LogError($"Error: {www.error}");
+                Debug.Log("Error: " + www.error);
             }
         }
-    }
-
-    // Method to log all data to the console
-
-    public void LogData()
-    {
-        Debug.Log("Hi,I'm from user data manager");
-        Debug.Log($"DOB: {SelectedMonth} {SelectedDay}, {SelectedYear}");
-    }
-    public void LogDataQ2()
-    {
-        Debug.Log("Hi,I'm from user data manager Q2");
-        Debug.Log($"Gender: {SelectedGender}");
-    }
-    public void LogDataQ3()
-    {
-        Debug.Log("Hi,I'm from user data manager Q3");
-        Debug.Log($"Q3: {Q3SelectedOption}");
-    }
-    public void LogDataQ4()
-    {
-        Debug.Log("Hi,I'm from user data manager Q4");
-        Debug.Log($"Q4: {Q4SelectedOption}");
-    }
-    public void LogDataQ5()
-    {
-        Debug.Log("Hi,I'm from user data manager Q5");
-        Debug.Log($"Q5: {Q5SelectedOption}");
-    }
-    public void LogDataQ6()
-    {
-        Debug.Log("Hi,I'm from user data manager Q6");
-        Debug.Log($"Q6: {Q6SelectedOption}");
-    }
-    public void LogDataQ7()
-    {
-        Debug.Log("Hi,I'm from user data manager Q7");
-        Debug.Log($"Q7: {Q7SelectedOption}");
-    }
-    public void LogDataQ8()
-    {
-        Debug.Log("Hi,I'm from user data manager Q8");
-        Debug.Log($"Q8: {Q8SelectedOption}");
-    }
-    public void LogDataQ9()
-    {
-        Debug.Log("Hi,I'm from user data manager Q9");
-        Debug.Log($"Q9: {Q9SelectedOption}");
-    }
-    public void LogDataQ11()
-    {
-        Debug.Log("Hi,I'm from user data manager Q11");
-        Debug.Log($"Q11: {Q11SelectedOption}");
-    }
-    public void LogDataQ12()
-    {
-        Debug.Log("Hi,I'm from user data manager Q12");
-        Debug.Log($"Q12: {Q12SelectedOption}");
-    }
-    public void LogDataQ13()
-    {
-        Debug.Log("Hi,I'm from user data manager Q13");
-        Debug.Log($"Q13: {Q13SelectedOption}");
-    }
-    public void LogDataQ14()
-    {
-        Debug.Log("Hi,I'm from user data manager Q14");
-        Debug.Log($"Q14: {Q14SelectedOption}");
-    }
-    public void LogDataQ15()
-    {
-        Debug.Log("Hi,I'm from user data manager Q15");
-        Debug.Log($"Q15: {Q15SelectedOption}");
-    }
-    public void LogDataQ16()
-    {
-        Debug.Log("Hi,I'm from user data manager Q16");
-        Debug.Log($"Q16: {Q16SelectedOption}");
-    }
-    public void LogDataQ17()
-    {
-        Debug.Log("Hi,I'm from user data manager Q17");
-        Debug.Log($"Q17: {Q17SelectedOption}");
-    }
-    public void LogDataQ18()
-    {
-        Debug.Log("Hi,I'm from user data manager Q18");
-        Debug.Log($"Q18: {Q18SelectedOption}");
-    }
-    public void LogDataQ19()
-    {
-        Debug.Log("Hi,I'm from user data manager Q19");
-        Debug.Log($"Q19: {Q19SelectedOption}");
-    }
-    public void LogDataQ20()
-    {
-        Debug.Log("Hi,I'm from user data manager Q20");
-        Debug.Log($"Q20: {Q20SelectedOption}");
-    }
-    public void LogDataQ21()
-    {
-        Debug.Log("Hi,I'm from user data manager Q21");
-        Debug.Log($"Q21: {Q21SelectedOption}");
-    }
-
-    public void LogDataQ22()
-    {
-        Debug.Log("Hi,I'm from user data manager Q22");
-        Debug.Log($"Q22: {Q22SelectedOption}");
-    }
-    public void LogDataQ23()
-    {
-        Debug.Log("Hi,I'm from user data manager Q23");
-        Debug.Log($"Q23: {Q23SelectedOption}");
-    }
-    public void LogDataQ24()
-    {
-        Debug.Log("Hi,I'm from user data manager Q24");
-        Debug.Log($"Q24: {Q24SelectedOption}");
-    }
-    public void LogDataQ25()
-    {
-        Debug.Log("Hi,I'm from user data manager Q25");
-        Debug.Log($"Q25: {Q25SelectedOption}");
-    }
-    public void LogDataQ26()
-    {
-        Debug.Log("Hi,I'm from user data manager Q26");
-        Debug.Log($"Q26: {Q26SelectedOption}");
-    }
-    public void LogDataQ27()
-    {
-        Debug.Log("Hi,I'm from user data manager Q27");
-        Debug.Log($"Q27: {Q27SelectedOption}");
-    }
-    public void LogDataQ28()
-    {
-        Debug.Log("Hi,I'm from user data manager Q28");
-        Debug.Log($"Q28: {Q28SelectedOption}");
-    }
-    public void LogDataQ29()
-    {
-        Debug.Log("Hi,I'm from user data manager Q29");
-        Debug.Log($"Q29: {Q29SelectedOption}");
     }
 
 }

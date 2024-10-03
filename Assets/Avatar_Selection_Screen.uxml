@@ -1,31 +1,36 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/AvatarSelectionScreen.uss?fileID=7433441132597879392&amp;guid=288f273a12d736d439336423c4a3e782&amp;type=3#AvatarSelectionScreen" />
     <ui:VisualElement name="avatarSelectionContainer" style="flex-grow: 1; background-color: rgb(57, 157, 249);">
-        <ui:Label tabindex="-1" text="Please choose an Avatar" parse-escape-sequences="true" display-tooltip-when-elided="true" name="titleAvatarSelection" class="avatar heading" style="width: auto; height: auto;" />
-        <ui:VisualElement name="selectAvatarConfirmationContainer" style="flex-grow: 1;">
-            <ui:Label tabindex="-1" text="Select this Avatar?" parse-escape-sequences="true" display-tooltip-when-elided="true" name="selectAvatarConfirmationTitle" class="heading" />
-            <ui:VisualElement name="selectAvatarConfirmationButtonContainer" style="flex-grow: 1; flex-direction: row; justify-content: space-between; align-self: center; align-items: stretch; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
-                <ui:Button text="Yes" parse-escape-sequences="true" display-tooltip-when-elided="true" name="yesButton" class="button" style="width: 100px;" />
-                <ui:Button text="No" parse-escape-sequences="true" display-tooltip-when-elided="true" name="noButton" class="button" style="width: 100px;" />
+        <ui:VisualElement name="avatarGenderSelectionContainer" style="flex-grow: 0; align-items: auto; justify-content: flex-start; align-self: center; margin-top: 0; padding-top: 0; -unity-text-align: upper-left; top: 215px;">
+            <ui:Label tabindex="-1" text="Select Avatar Gender" parse-escape-sequences="true" display-tooltip-when-elided="true" class="Title" style="align-self: center;" />
+            <ui:VisualElement name="genderOptionsContainer" style="flex-grow: 0; flex-direction: row; align-self: center;">
+                <ui:Button text="Male" parse-escape-sequences="true" display-tooltip-when-elided="true" name="maleButton" class="button" />
+                <ui:Button text="Female" parse-escape-sequences="true" display-tooltip-when-elided="true" name="femaleButton" class="button" />
+                <ui:Button text="Non-Binary" parse-escape-sequences="true" display-tooltip-when-elided="true" name="nonBinaryButton" class="button" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="scrollingButtonsContainer" style="flex-grow: 0; flex-direction: row; height: 150px; align-items: center; justify-content: space-between; top: 85px;">
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="scrollLeft" style="height: 100px; width: 100px; background-color: rgba(188, 188, 188, 0); background-image: url(&apos;project://database/Assets/images/left-arrow.png?fileID=2800000&amp;guid=f8ceb62693795da479122e2dcf77a16b&amp;type=3#left-arrow&apos;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="scrollRight" style="width: 100px; height: 100px; background-color: rgba(188, 188, 188, 0); background-image: url(&apos;project://database/Assets/images/right-arrow.png?fileID=2800000&amp;guid=ed37fb7dc833ceb49ae15323b28732dc&amp;type=3#right-arrow&apos;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; -unity-text-align: middle-center;" />
-        </ui:VisualElement>
-        <ui:ScrollView mode="Horizontal" focusable="true" horizontal-scroller-visibility="Hidden" name="avatarSelectionScrollingView" style="height: 400px; overflow: auto; width: auto; top: 75px; justify-content: flex-start;">
-            <ui:VisualElement name="contentContainer" style="flex-direction: row; flex-wrap: nowrap; display: flex; top: auto;">
-                <ui:VisualElement name="avatar1Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/demo1.png?fileID=2800000&amp;guid=b88158b4a872ba64e89baf60604c2b0c&amp;type=3#demo1&apos;); cursor: pointer;" />
-                <ui:VisualElement name="avatar2Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/demo2.png?fileID=2800000&amp;guid=23e9a40f2366d5844a4c988d33855a3b&amp;type=3#demo2&apos;); cursor: pointer;" />
-                <ui:VisualElement name="avatar3Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/demo1.png?fileID=2800000&amp;guid=b88158b4a872ba64e89baf60604c2b0c&amp;type=3#demo1&apos;); cursor: pointer;" />
-                <ui:VisualElement name="avatar4Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/demo2.png?fileID=2800000&amp;guid=23e9a40f2366d5844a4c988d33855a3b&amp;type=3#demo2&apos;); cursor: pointer;" />
-                <ui:VisualElement name="avatar5Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/demo1.png?fileID=2800000&amp;guid=b88158b4a872ba64e89baf60604c2b0c&amp;type=3#demo1&apos;); cursor: pointer;" />
-                <ui:VisualElement name="avatar6Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/demo2.png?fileID=2800000&amp;guid=23e9a40f2366d5844a4c988d33855a3b&amp;type=3#demo2&apos;); cursor: pointer;" />
-                <ui:VisualElement name="avatar7Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/demo1.png?fileID=2800000&amp;guid=b88158b4a872ba64e89baf60604c2b0c&amp;type=3#demo1&apos;); cursor: pointer;" />
-                <ui:VisualElement name="avatar8Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/demo2.png?fileID=2800000&amp;guid=23e9a40f2366d5844a4c988d33855a3b&amp;type=3#demo2&apos;); cursor: pointer;" />
-                <ui:VisualElement name="avatar9Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/demo1.png?fileID=2800000&amp;guid=b88158b4a872ba64e89baf60604c2b0c&amp;type=3#demo1&apos;); cursor: pointer;" />
-                <ui:VisualElement name="avatar10Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/demo2.png?fileID=2800000&amp;guid=23e9a40f2366d5844a4c988d33855a3b&amp;type=3#demo2&apos;); cursor: pointer;" />
+        <ui:VisualElement name="avatarContainer" style="flex-grow: 1; display: none;">
+            <ui:Label tabindex="-1" text="Please choose an Avatar" parse-escape-sequences="true" display-tooltip-when-elided="true" name="titleAvatarSelection" class="avatar heading Title" style="width: auto; height: auto; align-self: center; display: flex;" />
+            <ui:VisualElement name="selectAvatarConfirmationContainer" style="flex-grow: 1; display: none;">
+                <ui:Label tabindex="-1" text="Select this Avatar?" parse-escape-sequences="true" display-tooltip-when-elided="true" name="selectAvatarConfirmationTitle" class="heading Title" />
+                <ui:VisualElement name="selectAvatarConfirmationButtonContainer" style="flex-grow: 1; flex-direction: row; justify-content: space-between; align-self: center; align-items: stretch; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
+                    <ui:Button text="Yes" parse-escape-sequences="true" display-tooltip-when-elided="true" name="yesButton" class="button" />
+                    <ui:Button text="No" parse-escape-sequences="true" display-tooltip-when-elided="true" name="noButton" class="button" />
+                </ui:VisualElement>
             </ui:VisualElement>
-        </ui:ScrollView>
+            <ui:VisualElement name="scrollingButtonsContainer" style="flex-grow: 0; flex-direction: row; height: 150px; align-items: center; justify-content: space-between; top: 50px; display: flex;">
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="scrollLeft" style="height: 100px; width: 100px; background-color: rgba(188, 188, 188, 0); background-image: url(&apos;project://database/Assets/images/left-arrow.png?fileID=2800000&amp;guid=f8ceb62693795da479122e2dcf77a16b&amp;type=3#left-arrow&apos;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="scrollRight" style="width: 100px; height: 100px; background-color: rgba(188, 188, 188, 0); background-image: url(&apos;project://database/Assets/images/right-arrow.png?fileID=2800000&amp;guid=ed37fb7dc833ceb49ae15323b28732dc&amp;type=3#right-arrow&apos;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:ScrollView mode="Horizontal" focusable="true" horizontal-scroller-visibility="Hidden" name="avatarSelectionScrollingView" style="height: 400px; overflow: auto; width: auto; top: 20px; justify-content: flex-start; display: flex;">
+                <ui:VisualElement name="contentContainer" style="flex-direction: row; flex-wrap: nowrap; display: flex; top: auto;">
+                    <ui:VisualElement name="avatar1Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/char1.png?fileID=2800000&amp;guid=d575470df3b8db14cb2a9327289fa07a&amp;type=3#char1&apos;); cursor: pointer;" />
+                    <ui:VisualElement name="avatar2Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/char2.png?fileID=2800000&amp;guid=3290aa5ecfc37644487c99d17d48d969&amp;type=3#char2&apos;); cursor: pointer;" />
+                    <ui:VisualElement name="avatar3Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/char3.png?fileID=2800000&amp;guid=b80abbfe5c88f8f41a6d8de1d183a518&amp;type=3#char3&apos;); cursor: pointer;" />
+                    <ui:VisualElement name="avatar4Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/char4.png?fileID=2800000&amp;guid=984d6729e7de8374c83fab3fe46cba61&amp;type=3#char4&apos;); cursor: pointer;" />
+                    <ui:VisualElement name="avatar5Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/char5.png?fileID=2800000&amp;guid=1bea177e40cdcd54ca9ac568a4d435cf&amp;type=3#char5&apos;); cursor: pointer;" />
+                </ui:VisualElement>
+            </ui:ScrollView>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

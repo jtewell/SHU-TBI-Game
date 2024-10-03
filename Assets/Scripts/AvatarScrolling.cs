@@ -1,142 +1,163 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-
 public class AvatarScrolling : MonoBehaviour
-
 {
-    public VisualElement avatarSelectionContainer;
-    public VisualElement scrollingButtonsContainer;
+    // UI elements references
+    public VisualElement avatarContainer, avatarSelectionContainer, scrollingButtonsContainer, selectAvatarConfirmationContainer, avatarGenderSelectionContainer;
     public ScrollView avatarSelectionScrollingView;
-    public Button scrollLeft;
-    public Button scrollRight;
-    public VisualElement selectAvatarConfirmationContainer; // Reference to the confirmation container
-    public Button yesButton;
-    public Button noButton;
+    public Button scrollLeft, scrollRight, yesButton, noButton, maleButton, femaleButton, nonBinaryButton;
     public Label titleAvatarSelection;
-    private float scrollAmount = 200f; // The amount to scroll per click
-    private VisualElement selectedAvatar; // Store the currently selected avatar
+    private string selectedGender;
 
+    // Scroll amount per click
+    private float scrollAmount = 200f;
 
-
+    // Reference to the currently selected avatar
+    private VisualElement selectedAvatar;
 
     void Start()
     {
+        // Get the root UI document
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        // Get the visual elements from the UIDocument
+        // Initialize references to the visual elements from the UI
+        avatarContainer = root.Q<VisualElement>("avatarContainer");
         avatarSelectionContainer = root.Q<VisualElement>("avatarSelectionContainer");
         scrollingButtonsContainer = root.Q<VisualElement>("scrollingButtonsContainer");
         avatarSelectionScrollingView = root.Q<ScrollView>("avatarSelectionScrollingView");
         selectAvatarConfirmationContainer = root.Q<VisualElement>("selectAvatarConfirmationContainer");
+        avatarGenderSelectionContainer = root.Q<VisualElement>("avatarGenderSelectionContainer");
 
-        // Get the buttons and labels
+        // Initialize buttons and labels
         yesButton = root.Q<Button>("yesButton");
         noButton = root.Q<Button>("noButton");
         scrollLeft = root.Q<Button>("scrollLeft");
         scrollRight = root.Q<Button>("scrollRight");
+        maleButton = root.Q<Button>("maleButton");
+        femaleButton = root.Q<Button>("femaleButton");
+        nonBinaryButton = root.Q<Button>("nonBinaryButton");
         titleAvatarSelection = root.Q<Label>("titleAvatarSelection");
 
-        // Register Click Events
+        // Register button click events for scrolling and confirmation actions
         scrollLeft.clicked += ScrollLeftButton;
         scrollRight.clicked += ScrollRightButton;
+        maleButton.clicked += () => OnGenderSelected("Male");
+        femaleButton.clicked += () => OnGenderSelected("Female");
+        nonBinaryButton.clicked += () => OnGenderSelected("Non-Binary");
 
-        // Hide confirmation container initially
+
+        // Hide the avatar confirmation container initially
+        avatarContainer.style.display = DisplayStyle.None;
         selectAvatarConfirmationContainer.style.display = DisplayStyle.None;
-        // Register button click events
+
+        // Register button click events for the Yes/No confirmation
         yesButton.clicked += OnYesButtonClicked;
         noButton.clicked += OnNoButtonClicked;
 
-
-        // Get all avatar containers and register click events
-        var avatarContainers = avatarSelectionScrollingView.Query<VisualElement>(className: "avatar").ToList();
-        foreach (var avatar in avatarContainers)
-        {
-            avatar.RegisterCallback<ClickEvent>(ev => OnAvatarClicked(avatar));
-        }
+        // Get all avatar elements in the scroll view and register click events
+        var avatarContainerstore = avatarSelectionScrollingView.Query<VisualElement>(className: "avatar").ToList();
+        avatarContainerstore.ForEach(avatar => avatar.RegisterCallback<ClickEvent>(ev => OnAvatarClicked(avatar)));
+    }
+    //on gender selected method
+    private void OnGenderSelected(string gender)
+    {
+        selectedGender = gender;
+        Debug.Log("Selected Gender: "+gender);
+        avatarGenderSelectionContainer.style.display = DisplayStyle.None;
+        avatarContainer.style.display = DisplayStyle.Flex;
     }
     // Handle avatar click event
     private void OnAvatarClicked(VisualElement avatar)
     {
-        Debug.Log("Avatar clicked: " + avatar.name); // Log the avatar clicked
+        Debug.Log("Avatar clicked: " + avatar.name);
 
         // If the clicked avatar is already selected, deselect it
         if (selectedAvatar == avatar)
         {
-            selectedAvatar.RemoveFromClassList("selected-avatar");
-            selectedAvatar.style.backgroundColor = new Color(1, 1, 1, 0); // Reset background to transparent
-            selectedAvatar.transform.scale = new Vector3(1f, 1f, 1f); // Reset scale if necessary
-            selectedAvatar = null; // Clear selection
+            DeselectAvatar();  // Deselect current avatar
             return;
         }
-        // Remove selection highlight from the previously selected avatar
+
+        // Deselect previously selected avatar, if any
+        DeselectAvatar();
+
+        // Set the clicked avatar as the new selected avatar
+        selectedAvatar = avatar;
+        HighlightAvatar(avatar);  // Highlight the newly selected avatar
+
+        // Show the confirmation container for avatar selection
+        selectAvatarConfirmationContainer.style.display = DisplayStyle.Flex;
+    }
+
+    // Deselect the currently selected avatar
+    private void DeselectAvatar()
+    {
         if (selectedAvatar != null)
         {
+            // Remove selection highlight and reset avatar appearance
             selectedAvatar.RemoveFromClassList("selected-avatar");
-            selectedAvatar.style.backgroundColor = new Color(1, 1, 1, 0); // Reset background to transparent
-            // Optionally reset the scale if necessary
-            selectedAvatar.transform.scale = new Vector3(1f, 1f, 1f);
-            //Vector3.one;
+            selectedAvatar.style.backgroundColor = new Color(1, 1, 1, 0); // Transparent background
+            selectedAvatar.transform.scale = Vector3.one;  // Reset scale to default
         }
-
-        // Highlight the clicked avatar
-        selectedAvatar = avatar;
-        selectedAvatar.AddToClassList("selected-avatar");
-        selectedAvatar.style.backgroundColor = new Color(0, 0, 139 / 255f, 0.5f); // Set background to yellow
-        selectedAvatar.style.borderTopLeftRadius = new Length(15); // Rounded corners
-        selectedAvatar.style.borderTopRightRadius = new Length(15); // Rounded corners
-        selectedAvatar.style.borderBottomLeftRadius = new Length(15); // Rounded corners
-        selectedAvatar.style.borderBottomRightRadius = new Length(15); // Rounded corners
-        selectedAvatar.transform.scale = new Vector3(1.2f, 1.2f, 1.2f);
-
-        // Show the confirmation container
-        selectAvatarConfirmationContainer.style.display = DisplayStyle.Flex;
-        //titleAvatarSelection.style.display = DisplayStyle.None;
     }
-    // Handle "Yes" button click
+
+    // Highlight the newly selected avatar
+    private void HighlightAvatar(VisualElement avatar)
+    {
+        // Add a highlight class, change background color, apply corner radius and scale
+        avatar.AddToClassList("selected-avatar");
+        avatar.style.backgroundColor = new Color(0, 0, 139 / 255f, 0.5f); // Semi-transparent blue background
+        selectedAvatar.style.borderTopLeftRadius = new Length(10); // Rounded corners
+        selectedAvatar.style.borderTopRightRadius = new Length(10); // Rounded corners
+        selectedAvatar.style.borderBottomLeftRadius = new Length(10); // Rounded corners
+        selectedAvatar.style.borderBottomRightRadius = new Length(10); // Rounded corners
+        avatar.transform.scale = new Vector3(1.2f, 1.2f, 1.2f);  // Slightly increase size
+    }
+
+    // Handle "Yes" button click - confirm avatar selection
     private void OnYesButtonClicked()
     {
         Debug.Log("Avatar selection confirmed: " + selectedAvatar.name);
-        // Add your logic for confirming the avatar selection here
-
-        // Hide the confirmation container
-        selectAvatarConfirmationContainer.style.display = DisplayStyle.None;
+        DeselectAvatar();  // Deselect avatar after confirmation
+        selectAvatarConfirmationContainer.style.display = DisplayStyle.None;  // Hide confirmation UI
     }
 
-    // Handle "No" button click
+    // Handle "No" button click - cancel avatar selection
     private void OnNoButtonClicked()
     {
         Debug.Log("Avatar selection canceled.");
-        // Reset the selected avatar
-        if (selectedAvatar != null)
-        {
-            selectedAvatar.RemoveFromClassList("selected-avatar");
-            selectedAvatar = null;
-        }
-
-        // Hide the confirmation container
-        selectAvatarConfirmationContainer.style.display = DisplayStyle.None;
+        DeselectAvatar();  // Deselect the current avatar
+        selectAvatarConfirmationContainer.style.display = DisplayStyle.None;  // Hide confirmation UI
     }
 
-
-    //add logic for scrolling left
-    void ScrollLeftButton()
+    // Scroll left button logic
+    private void ScrollLeftButton()
     {
-        Debug.Log("i'm inside scroll left");
-        avatarSelectionScrollingView.scrollOffset = new Vector2(avatarSelectionScrollingView.scrollOffset.x - scrollAmount, avatarSelectionScrollingView.scrollOffset.y);
+        Debug.Log("Scrolling left");
+
+        // Calculate the new scroll offset and prevent scrolling past the start
+        avatarSelectionScrollingView.scrollOffset = new Vector2(
+            Mathf.Max(avatarSelectionScrollingView.scrollOffset.x - scrollAmount, 0),  // Ensure it doesn't scroll past 0
+            avatarSelectionScrollingView.scrollOffset.y
+        );
     }
 
-    //add logic for scrolling right
-    void ScrollRightButton()
+    // Scroll right button logic
+    private void ScrollRightButton()
     {
-        Debug.Log("i'm inside scroll right");
-        avatarSelectionScrollingView.scrollOffset = new Vector2(avatarSelectionScrollingView.scrollOffset.x + scrollAmount, avatarSelectionScrollingView.scrollOffset.y);
-    }
-    // Update is called once per frame
-    void Update()
-    {
+        Debug.Log("Scrolling right");
 
+        // Calculate the maximum possible scroll offset (content width minus visible area width)
+        float maxScrollOffsetX = avatarSelectionScrollingView.contentContainer.worldBound.width - avatarSelectionScrollingView.worldBound.width;
+
+        // Scroll and ensure it doesn't exceed the maximum scroll offset
+        avatarSelectionScrollingView.scrollOffset = new Vector2(
+            Mathf.Min(avatarSelectionScrollingView.scrollOffset.x + scrollAmount, maxScrollOffsetX),  // Scroll within the limits
+            avatarSelectionScrollingView.scrollOffset.y
+        );
     }
+
+    // Empty update method (in case needed for future use)
+    void Update() { }
 }

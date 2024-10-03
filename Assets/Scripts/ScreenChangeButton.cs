@@ -1,178 +1,70 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class ScreenChangeButton : MonoBehaviour
 {
-    // Declare the buttons
-    private Button AcceptButton;
-    private Button DeclineButton;
-    private VisualElement ThankYouMessage_Container;
-    private VisualElement consentForm_ScrollView;
-    private VisualElement BottomLayerForm;
+    // UI elements
+    private Button AcceptButton, DeclineButton, ViewButton, ExitButton;
+    private VisualElement ThankYouMessage_Container, consentForm_ScrollView, BottomLayerForm;
     private Label ThankYouMessage;
-    private Button ViewButton;
-    private Button ExitButton;
     private Toggle consentToggle;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        // Access the UI Document and retrieve the root visual element
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        //find visual element
+        // Initialize UI elements
         consentForm_ScrollView = root.Q<VisualElement>("consentForm_ScrollView");
         ThankYouMessage_Container = root.Q<VisualElement>("ThankYouMessage_Container");
         BottomLayerForm = root.Q<VisualElement>("BottomLayerForm");
-
-
-        // Find the button 
         AcceptButton = root.Q<Button>("AcceptButton");
         DeclineButton = root.Q<Button>("DeclineButton");
         ViewButton = root.Q<Button>("ViewButton");
         ExitButton = root.Q<Button>("ExitButton");
         consentToggle = root.Q<Toggle>("consentToggle");
-
-        //Find the Label
         ThankYouMessage = root.Q<Label>("ThankYouMessage");
 
-        //check if visual element is found
-        if (ThankYouMessage_Container != null)
-        {
-            ThankYouMessage_Container.style.display = DisplayStyle.None;
-        }
-        else
-        {
-            Debug.Log("ThankYouMessage_Container not found");
-        }
+        // Hide initially
+        ThankYouMessage_Container.style.display = DisplayStyle.None;
+        ViewButton.style.display = DisplayStyle.None;
+        ExitButton.style.display = DisplayStyle.None;
 
-        if (ViewButton != null)
+        // ViewButton click logic
+        ViewButton?.RegisterCallback<ClickEvent>(ev =>
         {
+            consentForm_ScrollView.style.display = DisplayStyle.Flex;
+            AcceptButton.style.display = DisplayStyle.Flex;
+            DeclineButton.style.display = DisplayStyle.Flex;
             ViewButton.style.display = DisplayStyle.None;
-            ViewButton.clicked += () =>
-            {
-                Debug.Log("ViewButton clicked");
-
-                // Show the consentForm_ScrollView and hide the ThankYouMessage_Container
-                if (consentForm_ScrollView != null)
-                {
-                    consentForm_ScrollView.style.display = DisplayStyle.Flex;
-                    AcceptButton.style.display = DisplayStyle.Flex;
-                    DeclineButton.style.display = DisplayStyle.Flex;
-                    ViewButton.style.display = DisplayStyle.None;
-                    ExitButton.style.display = DisplayStyle.None;
-                }
-
-                if (ThankYouMessage_Container != null)
-                {
-                    ThankYouMessage_Container.style.display = DisplayStyle.None;
-                }
-            };
-        }
-        else
-        {
-            Debug.LogWarning("ViewButton not found");
-        }
-        if (ExitButton != null)
-        {
             ExitButton.style.display = DisplayStyle.None;
-        }
-        else
-        {
-            Debug.Log("ExitButton not found");
-        }
+            ThankYouMessage_Container.style.display = DisplayStyle.None;
+        });
 
-        // Add a click event to the "AcceptButton" to load the next scene
-        if (AcceptButton != null)
+        // AcceptButton click logic
+        AcceptButton?.RegisterCallback<ClickEvent>(ev =>
         {
-            AcceptButton.clicked += () =>
+            if (!consentToggle.value)
             {
-                Debug.Log("AcceptButton Found");
-                // Check if the consent toggle is checked
-                if (consentToggle.value == false)
-                {
-                    Debug.Log("Consent not given");
-                    return;
-                }
-                else
-                {
-                    // Load the next scene
-                    SceneManager.LoadScene("ScreeningQuestions");
-                    Debug.Log("Consent given");
-                }
-                
-            };
-        }
-        else
+                AcceptButton.style.backgroundColor = new StyleColor(Color.grey);
+                return;
+            }
+            AcceptButton.style.backgroundColor = new StyleColor(Color.white);
+            SceneManager.LoadScene("ScreeningQuestions");
+        });
+
+        // DeclineButton click logic
+        DeclineButton?.RegisterCallback<ClickEvent>(ev =>
         {
-            Debug.Log("AcceptButton not found");
-        }
-        if (DeclineButton != null)
-        {
-            DeclineButton.clicked += () =>
-            {
-                Debug.Log("DeclineButton Found");
-                //show a message box to Thank them for their time
+            ThankYouMessage_Container.style.display = DisplayStyle.Flex;
+            foreach (var child in ThankYouMessage_Container.Children())
+                child.style.display = DisplayStyle.Flex;
 
-                // Display the Thank You message and hide the consent form
-                if (ThankYouMessage_Container != null)
-                {
-                    Debug.Log("I'm inside thank you container");
-                    ThankYouMessage_Container.style.display = DisplayStyle.Flex;
-                    // Ensure all children of ThankYouMessage_Container are visible
-                    foreach (var child in ThankYouMessage_Container.Children())
-                    {
-                        child.style.display = DisplayStyle.Flex;
-                        
-                    }
-                }
-
-                if (consentForm_ScrollView != null)
-                {
-                    consentForm_ScrollView.style.display = DisplayStyle.None;
-                }
-                // Hide the Accept and Decline buttons inside BottomLayerForm
-                if (BottomLayerForm != null)
-                {
-                    Debug.Log("Hiding Accept and Decline buttons, showing View and Exit buttons");
-
-                    if (AcceptButton != null)
-                    {
-                        AcceptButton.style.display = DisplayStyle.None;
-                    }
-
-                    if (DeclineButton != null)
-                    {
-                        DeclineButton.style.display = DisplayStyle.None;
-                    }
-
-                    if (ViewButton != null)
-                    {
-                        ViewButton.style.display = DisplayStyle.Flex;
-                    }
-
-                    if (ExitButton != null)
-                    {
-                        ExitButton.style.display = DisplayStyle.Flex;
-                    }
-                }
-
-            };
-        }
-        else
-        {
-            Debug.Log("DeclineButton not found");
-        }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+            consentForm_ScrollView.style.display = DisplayStyle.None; // Hide the consent form
+            AcceptButton.style.display = DisplayStyle.None; // Hide the Accept button
+            DeclineButton.style.display = DisplayStyle.None; // Hide the Decline button
+            ViewButton.style.display = DisplayStyle.Flex; // Show the View button
+            ExitButton.style.display = DisplayStyle.Flex; // Show the Exit button
+        });
     }
 }

@@ -12,13 +12,7 @@ using UnityEngine.UI;
 
 public class DropDownOfScreeningQuestions : MonoBehaviour
 {
-    private DropdownField monthDropDown;
-    private DropdownField dayDropDown;
-    private DropdownField yearDropDown;
-    private DropdownField Q5DropdownField;
-    private DropdownField Q6DropdownField;
-    private DropdownField Q8DropdownField;
-    private DropdownField Q9DropdownField;
+    private DropdownField monthDropDown, dayDropDown, yearDropDown, Q5DropdownField, Q6DropdownField, Q8DropdownField, Q9DropdownField;
 
     // Start is called before the first frame update
     void Start()

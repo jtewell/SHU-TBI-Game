@@ -1,68 +1,25 @@
 .avatar {
-    width: 300px;
-    height: 300px;
-    margin-right: 10px;
-    flex-shrink: 0;
-    background-size: contain;
-    position: relative;
-    font-size: 40px;
-    -unity-font-definition: initial;
-    -unity-font: url('project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&type=3#Inter_18pt-Bold');
-    -unity-font-style: bold;
-    -unity-text-align: middle-center;
-}
-
-.unity-scroll-view__content-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-    overflow: auto;
-}
-
-.unity-scroll-view {
-    height: 400px;
-    width: 100%;
-    margin: 0;
-}
-
-.item {
-    width: 300px;
-    height: 500px;
-}
-
-.selected-avatar {
-    border: 2px solid yellow;
-    background-color: rgba(0, 0, 139, 0.5);
-    transform: ;
-    border-radius: 15px;
-    transition: transform 0.3s ease, background-color 0.3s ease, border 0.3s ease;
-}
-
-.heading {
-    -unity-font: url('project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&type=3#Inter_18pt-Bold');
-    -unity-font-definition: initial;
-    -unity-font-style: bold;
-    font-size: 40px;
-    -unity-text-align: middle-center;
+    width: 200px;
+    height: 200px;
 }
 
 .button {
     width: auto;
-    height: auto;
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
+    height: 60px;
+    -unity-font-style: bold;
+    -unity-font: url('project://database/Assets/Font/Inter/static/Inter_18pt-Regular.ttf?fileID=12800000&guid=8a8a2183e5f7e0d4d92f8ede6dc3f27a&type=3#Inter_18pt-Regular');
+    -unity-font-definition: initial;
+    font-size: 30px;
+    background-color: rgb(255, 255, 255);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    border-left-color: rgb(0, 0, 0);
-    border-right-color: rgb(0, 0, 0);
-    border-top-color: rgb(0, 0, 0);
-    border-bottom-color: rgb(0, 0, 0);
-    -unity-font: url('project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&type=3#Inter_18pt-Bold');
+}
+
+.Title {
     -unity-font-definition: initial;
+    -unity-font: url('project://database/Assets/Font/Inter/static/Inter_24pt-Bold.ttf?fileID=12800000&guid=da27cabab740c494abc094c9cfc06851&type=3#Inter_24pt-Bold');
+    font-size: 40px;
     -unity-font-style: bold;
-    font-size: 30px;
-    margin-right: 20px;
 }

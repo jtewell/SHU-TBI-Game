@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/AvatarSelectionScreen.uss?fileID=7433441132597879392&amp;guid=288f273a12d736d439336423c4a3e782&amp;type=3#AvatarSelectionScreen" />
+    <Style src="project://database/Assets/UI%20Toolkit/USSFiles/AvatarSelectionScreen.uss?fileID=7433441132597879392&amp;guid=288f273a12d736d439336423c4a3e782&amp;type=3#AvatarSelectionScreen" />
     <ui:VisualElement name="avatarSelectionContainer" style="flex-grow: 1; background-color: rgb(57, 157, 249);">
-        <ui:VisualElement name="avatarGenderSelectionContainer" style="flex-grow: 0; align-items: auto; justify-content: flex-start; align-self: center; margin-top: 0; padding-top: 0; -unity-text-align: upper-left; top: 215px;">
-            <ui:Label tabindex="-1" text="Select Avatar Gender" parse-escape-sequences="true" display-tooltip-when-elided="true" class="Title" style="align-self: center;" />
+        <ui:VisualElement name="avatarGenderSelectionContainer" style="flex-grow: 0; align-items: auto; justify-content: flex-start; align-self: center; margin-top: 0; padding-top: 0; -unity-text-align: upper-left; top: 200px; display: flex;">
+            <ui:Label tabindex="-1" text="Time to choose your character, &#10;Would you like to be" parse-escape-sequences="true" display-tooltip-when-elided="true" class="Title" style="align-self: center; -unity-text-align: upper-center; display: flex;" />
             <ui:VisualElement name="genderOptionsContainer" style="flex-grow: 0; flex-direction: row; align-self: center;">
                 <ui:Button text="Male" parse-escape-sequences="true" display-tooltip-when-elided="true" name="maleButton" class="button" />
                 <ui:Button text="Female" parse-escape-sequences="true" display-tooltip-when-elided="true" name="femaleButton" class="button" />
@@ -10,12 +10,11 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="avatarContainer" style="flex-grow: 1; display: none;">
-            <ui:Label tabindex="-1" text="Please choose an Avatar" parse-escape-sequences="true" display-tooltip-when-elided="true" name="titleAvatarSelection" class="avatar heading Title" style="width: auto; height: auto; align-self: center; display: flex;" />
-            <ui:VisualElement name="selectAvatarConfirmationContainer" style="flex-grow: 1; display: none;">
-                <ui:Label tabindex="-1" text="Select this Avatar?" parse-escape-sequences="true" display-tooltip-when-elided="true" name="selectAvatarConfirmationTitle" class="heading Title" />
-                <ui:VisualElement name="selectAvatarConfirmationButtonContainer" style="flex-grow: 1; flex-direction: row; justify-content: space-between; align-self: center; align-items: stretch; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
+            <ui:Label tabindex="-1" text="Please choose an character" parse-escape-sequences="true" display-tooltip-when-elided="true" name="titleAvatarSelection" class="Title" style="width: auto; height: auto; align-self: center; display: flex;" />
+            <ui:VisualElement name="selectAvatarConfirmationContainer" style="flex-grow: 1; display: flex;">
+                <ui:Label tabindex="-1" text="Pick me?" parse-escape-sequences="true" display-tooltip-when-elided="true" name="selectAvatarConfirmationTitle" class="heading Title" style="-unity-text-align: upper-center;" />
+                <ui:VisualElement name="selectAvatarConfirmationButtonContainer" style="flex-grow: 1; flex-direction: row; justify-content: space-between; align-self: center; align-items: stretch; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; display: flex;">
                     <ui:Button text="Yes" parse-escape-sequences="true" display-tooltip-when-elided="true" name="yesButton" class="button" />
-                    <ui:Button text="No" parse-escape-sequences="true" display-tooltip-when-elided="true" name="noButton" class="button" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="scrollingButtonsContainer" style="flex-grow: 0; flex-direction: row; height: 150px; align-items: center; justify-content: space-between; top: 50px; display: flex;">

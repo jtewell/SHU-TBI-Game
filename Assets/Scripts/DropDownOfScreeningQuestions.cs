@@ -80,7 +80,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             }
             yearDropDown.choices = choicesDobYear;
             // set the default value current year
-            yearDropDown.value = currentYear.ToString();
+            yearDropDown.value = "Year";
 
             // Register a callback for when the value changes
             yearDropDown.RegisterValueChangedCallback(evt =>
@@ -123,7 +123,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
         if (Q6DropdownField != null)
         {
             Q6DropdownField.choices = choicesYear;
-            Q6DropdownField.value = currentYear.ToString();
+            Q6DropdownField.value = "Year";
             Q6DropdownField.RegisterValueChangedCallback(evt =>
             {
                 UserDataManager.Instance.Q6SelectedOption = evt.newValue;
@@ -132,9 +132,11 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
         if (Q9DropdownField != null)
         {
             Q9DropdownField.choices = choicesYear;
-            Q9DropdownField.value = currentYear.ToString();
+            Q9DropdownField.value = "Year";
+           
             Q9DropdownField.RegisterValueChangedCallback(evt =>
             {
+                
                 UserDataManager.Instance.Q9SelectedOption = evt.newValue;
             });
         }

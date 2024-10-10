@@ -14,7 +14,13 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
     private Button[] q3Buttons = new Button[2];
     private Button[] q4Buttons = new Button[2];
     private Button[] q7Buttons = new Button[2];
-    private Button selectedButton;
+    //private Button selectedButton;
+
+    // Individual selected buttons for each question
+    private Button selectedGenderButton;
+    private Button selectedQ3Button;
+    private Button selectedQ4Button;
+    private Button selectedQ7Button;
 
 
     void Start()
@@ -66,7 +72,8 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         if (genderButtons[2] != null) genderButtons[2].clicked += () => OnGenderButtonClick(genderButtons[2],"Others");
 
         // Assuming Q3 buttons have some specific methods
-        if (q3Buttons[0] != null) q3Buttons[0].clicked += () => OnQ3ButtonClick(q3Buttons[0],"Yes");
+        if (q3Buttons[0] != null) q3Buttons[0].clicked += () => OnQ3ButtonClick(q3Buttons[0],"Yes"); 
+
         if (q3Buttons[1] != null) q3Buttons[1].clicked += () => OnQ3ButtonClick(q3Buttons[1],"No");
 
         // Assuming Q4 buttons have some specific methods
@@ -76,42 +83,41 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         //Assuming Q7 buttons have some specific methods
         if (q7Buttons[0] != null) q7Buttons[0].clicked += () => OnQ7ButtonClick(q7Buttons[0], "Yes");
         if (q7Buttons[1] != null) q7Buttons[1].clicked += () => OnQ7ButtonClick(q7Buttons[1],"No");
-
-
-
-
     }
+
     // Method to handle gender button clicks
     private void OnGenderButtonClick(Button clickedButton, string gender)
     {
         // Remove the 'selected' class from the previously selected button, if any
-        if (selectedButton != null)
+        if (selectedGenderButton != null)
         {
-            selectedButton.RemoveFromClassList("selected");
+            selectedGenderButton.RemoveFromClassList("selected");
         }
 
         // Set the clicked button as the selected button and apply the 'selected' class
-        selectedButton = clickedButton;
-        selectedButton.AddToClassList("selected");
+        selectedGenderButton = clickedButton;
+        selectedGenderButton.AddToClassList("selected");
 
-        // Update UserDataManager with the selected gender
-        UserDataManager.Instance.SelectedGender = gender;
+            // Update UserDataManager with the selected gender
+            UserDataManager.Instance.SelectedGender = gender;
 
-        
+        // Call method to check if the user can continue
+        //HandleNextStep();
+
     }
 
     // Method to handle Q3 button clicks
     private void OnQ3ButtonClick(Button clickedButton, string option)
     {
         // Remove the 'selected' class from the previously selected button, if any
-        if (selectedButton != null)
+        if (selectedQ3Button != null)
         {
-            selectedButton.RemoveFromClassList("selected");
+            selectedQ3Button.RemoveFromClassList("selected");
         }
 
         // Set the clicked button as the selected button and apply the 'selected' class
-        selectedButton = clickedButton;
-        selectedButton.AddToClassList("selected");
+        selectedQ3Button = clickedButton;
+        selectedQ3Button.AddToClassList("selected");
 
         // Set the selected option for Q3 in UserDataManager
         UserDataManager.Instance.Q3SelectedOption = option;
@@ -121,14 +127,14 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
     private void OnQ4ButtonClick(Button clickedButton, string option)
     {
         // Remove the 'selected' class from the previously selected button, if any
-        if (selectedButton != null)
+        if (selectedQ4Button != null)
         {
-            selectedButton.RemoveFromClassList("selected");
+            selectedQ4Button.RemoveFromClassList("selected");
         }
 
         // Set the clicked button as the selected button and apply the 'selected' class
-        selectedButton = clickedButton;
-        selectedButton.AddToClassList("selected");
+        selectedQ4Button = clickedButton;
+        selectedQ4Button.AddToClassList("selected");
 
         // Set the selected option for Q4 in UserDataManager
         UserDataManager.Instance.Q4SelectedOption = option;
@@ -138,19 +144,17 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
     private void OnQ7ButtonClick(Button clickedButton, string option)
     {
         // Remove the 'selected' class from the previously selected button, if any
-        if (selectedButton != null)
+        if (selectedQ7Button != null)
         {
-            selectedButton.RemoveFromClassList("selected");
+            selectedQ7Button.RemoveFromClassList("selected");
         }
 
         // Set the clicked button as the selected button and apply the 'selected' class
-        selectedButton = clickedButton;
-        selectedButton.AddToClassList("selected");
+        selectedQ7Button = clickedButton;
+        selectedQ7Button.AddToClassList("selected");
 
         // Set the selected option for Q7 in UserDataManager
         UserDataManager.Instance.Q7SelectedOption = option;
 
     }
-
-
 }

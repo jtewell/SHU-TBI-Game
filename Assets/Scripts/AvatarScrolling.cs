@@ -53,7 +53,6 @@ public class AvatarScrolling : MonoBehaviour
 
         // Register button click events for the Yes/No confirmation
         yesButton.clicked += OnYesButtonClicked;
-        noButton.clicked += OnNoButtonClicked;
 
         // Get all avatar elements in the scroll view and register click events
         var avatarContainerstore = avatarSelectionScrollingView.Query<VisualElement>(className: "avatar").ToList();
@@ -66,6 +65,19 @@ public class AvatarScrolling : MonoBehaviour
         Debug.Log("Selected Gender: "+gender);
         avatarGenderSelectionContainer.style.display = DisplayStyle.None;
         avatarContainer.style.display = DisplayStyle.Flex;
+
+        // Select the first avatar by default when the avatar container is shown
+        SelectFirstAvatarByDefault();
+    }
+    // Method to select the first avatar
+    private void SelectFirstAvatarByDefault()
+    {
+        var avatarContainerstore = avatarSelectionScrollingView.Query<VisualElement>(className: "avatar").ToList();
+        if (avatarContainerstore.Count > 0)
+        {
+            var firstAvatar = avatarContainerstore[0];
+            OnAvatarClicked(firstAvatar);  // Trigger the click event on the first avatar
+        }
     }
     // Handle avatar click event
     private void OnAvatarClicked(VisualElement avatar)
@@ -123,14 +135,7 @@ public class AvatarScrolling : MonoBehaviour
         selectAvatarConfirmationContainer.style.display = DisplayStyle.None;  // Hide confirmation UI
     }
 
-    // Handle "No" button click - cancel avatar selection
-    private void OnNoButtonClicked()
-    {
-        Debug.Log("Avatar selection canceled.");
-        DeselectAvatar();  // Deselect the current avatar
-        selectAvatarConfirmationContainer.style.display = DisplayStyle.None;  // Hide confirmation UI
-    }
-
+    
     // Scroll left button logic
     private void ScrollLeftButton()
     {

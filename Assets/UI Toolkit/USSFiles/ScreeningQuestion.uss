@@ -6,6 +6,7 @@
     -unity-font-definition: initial;
     -unity-font-style: bold;
     -unity-text-align: middle-center;
+    top: 2%;
 }
 
 .buttonContinue {
@@ -22,6 +23,7 @@
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     background-color: rgb(255, 255, 255);
+    -unity-font-definition: initial;
 }
 
 .optionButtons {
@@ -46,6 +48,7 @@
     padding-right: 12px;
     padding-bottom: 10px;
     padding-left: 12px;
+    top: auto;
 }
 
 .optionButtons.selected {
@@ -70,6 +73,7 @@
     flex-wrap: wrap;
     text-overflow: clip;
     -unity-font-definition: initial;
+    top: 2%;
 }
 
 .dropdown {
@@ -86,6 +90,7 @@
     margin-right: 0;
     padding-right: 0;
     margin-top: 5%;
+    top: 8%;
 }
 
 .errorMessageContainer {
@@ -115,4 +120,27 @@
     align-items: auto;
     flex-wrap: nowrap;
     position: relative;
+}
+
+.optionButtonsContainer {
+    top: 8%;
+}
+
+.note30px {
+    -unity-font: url('project://database/Assets/Font/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&guid=bf3ffa3c1a4bd7a46a3cf43b6f6d4cc2&type=3#Inter_18pt-Bold');
+    -unity-font-style: bold;
+    font-size: 40px;
+    -unity-text-align: middle-center;
+    flex-wrap: wrap;
+    text-overflow: clip;
+    -unity-font-definition: initial;
+    top: 20%;
+}
+
+.continueButtonContainer {
+    top: 50%;
+}
+
+.continueButtonafter10 {
+    top: 35%;
 }

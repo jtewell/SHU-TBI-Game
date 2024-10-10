@@ -114,8 +114,11 @@ public class UserDataManager : MonoBehaviour
             if (previousButtons[i] != null)
                 previousButtons[i].clicked += () => OnPreviousButtonClick(index + 1);
             if (continueButtons[i] != null)
+            {
                 continueButtonNum = continueButtons[i];
                 continueButtons[i].clicked += () => OnContinueButtonClick(index + 1);
+            }
+                
         }
 
 
@@ -140,14 +143,43 @@ public class UserDataManager : MonoBehaviour
     private void OnContinueButtonClick(int questionIndex)
     {
         bool hasErrors = false;
-        string[] selectedOptions = { SelectedMonth, SelectedDay, SelectedYear, SelectedGender, Q3SelectedOption, Q4SelectedOption, Q5SelectedOption, Q6SelectedOption, Q7SelectedOption, Q8SelectedOption, Q9SelectedOption, Q11SelectedOption, Q12SelectedOption, Q13SelectedOption, Q14SelectedOption, Q15SelectedOption, Q16SelectedOption, Q17SelectedOption, Q18SelectedOption, Q19SelectedOption, Q20SelectedOption, Q21SelectedOption, Q22SelectedOption, Q23SelectedOption, Q24SelectedOption, Q25SelectedOption, Q26SelectedOption, Q27SelectedOption, Q28SelectedOption, Q29SelectedOption };
+        //marge three values to form a date
+        string Q1SelectedOption = SelectedMonth + "/" + SelectedDay + "/" + SelectedYear;
+        string Q2SelectedOption = SelectedGender;
+        string[] selectedOptions = { Q1SelectedOption, Q2SelectedOption,
+            Q3SelectedOption, Q4SelectedOption, Q5SelectedOption, Q6SelectedOption, Q7SelectedOption,
+            Q8SelectedOption, Q9SelectedOption,"yes", Q11SelectedOption, Q12SelectedOption, Q13SelectedOption,
+            Q14SelectedOption, Q15SelectedOption, Q16SelectedOption, Q17SelectedOption, Q18SelectedOption,
+            Q19SelectedOption, Q20SelectedOption, Q21SelectedOption, Q22SelectedOption, Q23SelectedOption,
+            Q24SelectedOption, Q25SelectedOption, Q26SelectedOption, Q27SelectedOption, Q28SelectedOption, Q29SelectedOption };
 
-        if (questionIndex >= 1 && questionIndex <= 29)
+        //check if the selected option is empty
+        if (questionIndex == 1)
         {
-            if (string.IsNullOrEmpty(selectedOptions[questionIndex - 1]))
+            Debug.Log($"selectedOptions[{questionIndex - 1}] = {selectedOptions[questionIndex - 1]}");
+
+            if (string.IsNullOrEmpty(Q1SelectedOption) || string.IsNullOrEmpty(SelectedDay) || string.IsNullOrEmpty(SelectedYear))
             {
                 hasErrors = true;
-                continueButtonNum.SetEnabled(!hasErrors);
+            }
+        }
+        if (questionIndex >= 2 && questionIndex <= 29)
+        {
+            Debug.Log("Hi");
+
+            if (questionIndex == 10)
+            {
+                continueButtonNum.SetEnabled(true);
+            }
+            else
+            {
+                Debug.Log($"selectedOptions[{questionIndex - 1}] = {selectedOptions[questionIndex - 1]}");
+                if (string.IsNullOrEmpty(selectedOptions[questionIndex - 1]))
+                {
+                    Debug.Log(questionIndex - 1);
+                    hasErrors = true;
+
+                }
             }
         }
         else if (questionIndex == 30)
@@ -156,20 +188,22 @@ public class UserDataManager : MonoBehaviour
 
             SceneManager.LoadScene("Avatar_Selection");
         }
+
+        //Update the continue button state based on whether there are errors
+        continueButtonNum.SetEnabled(!hasErrors);
+
+
         if (!hasErrors)
         {
             if (questions[questionIndex - 1] != null)
-
-
                 questions[questionIndex - 1].style.display = DisplayStyle.None; // Hide the current question
 
+
             if (questionIndex < questions.Length && questions[questionIndex] != null)
-            {
-                
                 questions[questionIndex].style.display = DisplayStyle.Flex; // Show the next question
-            }
         }
     }
+   
     public void SubmitDataToSheet()
     {
         StartCoroutine(SubmitDataCoroutine());

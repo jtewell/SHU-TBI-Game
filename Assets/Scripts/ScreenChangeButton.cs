@@ -40,17 +40,28 @@ public class ScreenChangeButton : MonoBehaviour
             ExitButton.style.display = DisplayStyle.None;
             ThankYouMessage_Container.style.display = DisplayStyle.None;
         });
+        // Update AcceptButton state when the consentToggle is changed
+        consentToggle.RegisterValueChangedCallback(evt =>
+        {
+            AcceptButton.SetEnabled(evt.newValue);  // Disable/enable based on toggle value
+        });
 
         // AcceptButton click logic
         AcceptButton?.RegisterCallback<ClickEvent>(ev =>
         {
             if (!consentToggle.value)
             {
-                AcceptButton.style.backgroundColor = new StyleColor(Color.grey);
+                //disable accept button
+                AcceptButton.SetEnabled(false);
+                //AcceptButton.style.display = DisplayStyle.None;
                 return;
             }
-            AcceptButton.style.backgroundColor = new StyleColor(Color.white);
+           
+            //enable accept button
+            AcceptButton.SetEnabled(true);
             SceneManager.LoadScene("ScreeningQuestions");
+            
+           
         });
 
         // DeclineButton click logic

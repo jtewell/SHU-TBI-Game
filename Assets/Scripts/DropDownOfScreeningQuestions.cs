@@ -28,7 +28,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
         Q9DropdownField = root.Q<DropdownField>("Q9DropdownField");
 
         // Define the choices for the dropdown
-        var choicesMonth = new List<string> { "Month", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+        var choicesMonth = new List<string> { "Month", "Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" };
 
         // get the current year
         int currentYear = System.DateTime.Now.Year;

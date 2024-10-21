@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/USSFiles/AvatarSelectionScreen.uss?fileID=7433441132597879392&amp;guid=288f273a12d736d439336423c4a3e782&amp;type=3#AvatarSelectionScreen" />
     <ui:VisualElement name="avatarSelectionContainer" style="flex-grow: 1; background-color: rgb(57, 157, 249);">
-        <ui:VisualElement name="avatarGenderSelectionContainer" style="flex-grow: 0; align-items: auto; justify-content: flex-start; align-self: center; margin-top: 0; padding-top: 0; -unity-text-align: upper-left; top: 200px; display: flex;">
-            <ui:Label tabindex="-1" text="Time to choose your character!&#10;Would you like to be..." parse-escape-sequences="true" display-tooltip-when-elided="true" class="Title" style="align-self: center; -unity-text-align: upper-center; display: flex;" />
-            <ui:VisualElement name="genderOptionsContainer" style="flex-grow: 0; flex-direction: row; align-self: center; justify-content: flex-start; align-items: auto;">
+        <ui:VisualElement name="avatarGenderSelectionContainer" style="flex-grow: 0; align-items: auto; justify-content: flex-start; align-self: center; margin-top: 0; padding-top: 0; -unity-text-align: upper-left; top: 150px; display: flex;">
+            <ui:Label tabindex="-1" text="Time to choose your character!&#10;Would you like to be..." parse-escape-sequences="true" display-tooltip-when-elided="true" class="Title" style="align-self: center; -unity-text-align: upper-center; display: flex; top: auto;" />
+            <ui:VisualElement name="genderOptionsContainer" style="flex-grow: 0; flex-direction: row; align-self: center; justify-content: flex-start; align-items: auto; top: 50px;">
                 <ui:Button text="Male" parse-escape-sequences="true" display-tooltip-when-elided="true" name="maleButton" class="button" style="margin-right: 30px;" />
                 <ui:Button text="Female" parse-escape-sequences="true" display-tooltip-when-elided="true" name="femaleButton" class="button" style="margin-right: 30px;" />
                 <ui:Button text="Non-Binary" parse-escape-sequences="true" display-tooltip-when-elided="true" name="nonBinaryButton" class="button" />
@@ -21,9 +21,9 @@
                     <ui:Button text="Yes" parse-escape-sequences="true" display-tooltip-when-elided="true" name="yesButton" class="button" style="color: rgb(0, 71, 136);" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:ScrollView mode="Horizontal" focusable="true" horizontal-scroller-visibility="Hidden" name="avatarSelectionScrollingView" style="height: auto; overflow: auto; width: auto; top: auto; justify-content: flex-start; display: flex; flex-grow: 0;">
-                <ui:VisualElement name="contentContainer" style="flex-direction: row; flex-wrap: nowrap; display: flex; top: auto;">
-                    <ui:VisualElement name="avatar1Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/char1.png?fileID=2800000&amp;guid=d575470df3b8db14cb2a9327289fa07a&amp;type=3#char1&apos;); cursor: pointer;" />
+            <ui:ScrollView mode="Horizontal" focusable="true" horizontal-scroller-visibility="Hidden" name="avatarSelectionScrollingView" style="height: auto; overflow: auto; width: auto; justify-content: center; display: flex; flex-grow: 0; align-self: center; align-items: center; flex-direction: row;">
+                <ui:VisualElement name="contentContainer" style="display: flex; flex-direction: row; align-self: center; align-items: center; justify-content: space-between;">
+                    <ui:VisualElement name="avatar1Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/char1.png?fileID=2800000&amp;guid=c567f8f73795fa34bb764eadaa3b403f&amp;type=3#char1&apos;); cursor: pointer; align-self: center; align-items: center; flex-direction: row; justify-content: flex-start;" />
                     <ui:VisualElement name="avatar2Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/char2.png?fileID=2800000&amp;guid=3290aa5ecfc37644487c99d17d48d969&amp;type=3#char2&apos;); cursor: pointer;" />
                     <ui:VisualElement name="avatar3Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/char3.png?fileID=2800000&amp;guid=b80abbfe5c88f8f41a6d8de1d183a518&amp;type=3#char3&apos;); cursor: pointer;" />
                     <ui:VisualElement name="avatar4Container" class="avatar" style="background-image: url(&apos;project://database/Assets/images/char4.png?fileID=2800000&amp;guid=984d6729e7de8374c83fab3fe46cba61&amp;type=3#char4&apos;); cursor: pointer;" />
@@ -31,9 +31,11 @@
                 </ui:VisualElement>
             </ui:ScrollView>
         </ui:VisualElement>
-        <ui:VisualElement name="thankYouMessageContainer" style="flex-grow: 0; align-self: auto; justify-content: flex-start; align-items: auto; top: 250px; flex-wrap: wrap; height: 200px; display: none;">
-            <ui:Label tabindex="-1" text="You did selected Avatar. Let&apos;s play game now...!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="thankYouLabel" class="Title" style="flex-wrap: wrap; white-space: normal; -unity-text-align: middle-center;" />
-            <ui:Button text="PLAY" parse-escape-sequences="true" display-tooltip-when-elided="true" name="continueGamePlayButton" class="button" style="align-items: auto; justify-content: flex-end; align-self: center;" />
+        <ui:VisualElement name="thankYouMessageContainer" style="flex-grow: 0; align-self: center; justify-content: flex-start; align-items: center; top: auto; flex-wrap: wrap; height: auto; display: none; width: auto; flex-direction: row;">
+            <ui:VisualElement name="charMessageContainer" style="flex-grow: 0; background-image: none; height: 500px; width: 500px; align-items: auto; align-self: auto;" />
+            <ui:VisualElement name="buttonContainer" style="flex-grow: 1;">
+                <ui:Button text="PLAY" parse-escape-sequences="true" display-tooltip-when-elided="true" name="continueGamePlayButton" class="button" style="align-items: auto; justify-content: flex-end; align-self: center; height: 100px; width: 200px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

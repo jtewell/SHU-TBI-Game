@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections;
+using System.Collections.Generic;
 
 
 public class AvatarScrolling : MonoBehaviour
 {
     // UI elements references
-    public VisualElement avatarContainer, avatarSelectionContainer, scrollingButtonsContainer, selectAvatarConfirmationContainer, avatarGenderSelectionContainer, thankYouMessageContainer;
+    public VisualElement avatarContainer, avatarSelectionContainer, scrollingButtonsContainer, selectAvatarConfirmationContainer, 
+        avatarGenderSelectionContainer, thankYouMessageContainer, charMessageContainer;
     public ScrollView avatarSelectionScrollingView;
     public Button scrollLeft, scrollRight, yesButton, noButton, maleButton, femaleButton, nonBinaryButton, continueGamePlayButton;
     public Label titleAvatarSelection, thankYouLabel;
@@ -31,6 +33,7 @@ public class AvatarScrolling : MonoBehaviour
         selectAvatarConfirmationContainer = root.Q<VisualElement>("selectAvatarConfirmationContainer");
         avatarGenderSelectionContainer = root.Q<VisualElement>("avatarGenderSelectionContainer");
         thankYouMessageContainer = root.Q<VisualElement>("thankYouMessageContainer");
+        charMessageContainer = root.Q<VisualElement>("charMessageContainer");
 
         // Initialize buttons and labels
         yesButton = root.Q<Button>("yesButton");
@@ -72,9 +75,6 @@ public class AvatarScrolling : MonoBehaviour
         Debug.Log("Selected Gender: "+gender);
         avatarGenderSelectionContainer.style.display = DisplayStyle.None;
         avatarContainer.style.display = DisplayStyle.Flex;
-
-        // Select the first avatar by default when the avatar container is shown
-        //SelectFirstAvatarByDefault();
     }
 
     // Handle avatar click event
@@ -89,19 +89,51 @@ public class AvatarScrolling : MonoBehaviour
             selectAvatarConfirmationContainer.style.display = DisplayStyle.None;  // Hide confirmation if deselected
             return;
         }
-
         // Deselect previously selected avatar, if any
         DeselectAvatar();
-
         // Set the clicked avatar as the new selected avatar
         selectedAvatar = avatar;
         HighlightAvatar(avatar);  // Highlight the newly selected avatar
-
         // Show and position the confirmation container near the selected avatar
         DisplayConfirmationNearAvatar(avatar);
-        // Show the confirmation container for avatar selection
-        //selectAvatarConfirmationContainer.style.display = DisplayStyle.Flex;
     }
+    //change image of charMessageContainer based on selected avatar
+    private void ChangeAvatarBackground(string avatarName)
+    {
+        // Mapping of avatar containers to character names
+        var avatarMapping = new Dictionary<string, string>
+    {
+        { "avatar1Container", "char1" },
+        { "avatar2Container", "char2" },
+        { "avatar3Container", "char3" },
+        { "avatar4Container", "char4" },
+        { "avatar5Container", "char5" }
+    };
+
+        // Check if the avatarName exists in the mapping
+        if (avatarMapping.TryGetValue(avatarName, out string characterName))
+        {
+            string imagePath = $"Assets/images/{characterName}_message.png"; // Construct the image path
+
+            // Check if the file exists before trying to load it
+            if (System.IO.File.Exists(imagePath))
+            {
+                byte[] fileData = System.IO.File.ReadAllBytes(imagePath);
+                Texture2D texture = new Texture2D(2, 2);
+                texture.LoadImage(fileData); // Load the image into the texture
+                charMessageContainer.style.backgroundImage = new StyleBackground(texture); // Apply the background
+            }
+            else
+            {
+                Debug.LogError($"Failed to load background image for avatar: {characterName}. File not found at {imagePath}");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Failed to load background image for avatar: {avatarName}. Avatar name not recognized.");
+        }
+    }
+
     // Handle layout change event
     private void OnLayoutChanged(GeometryChangedEvent evt)
     {
@@ -132,11 +164,15 @@ public class AvatarScrolling : MonoBehaviour
         // Add a highlight class, change background color, apply corner radius and scale
         avatar.AddToClassList("selected-avatar");
         avatar.style.backgroundColor = new Color(0, 0, 139 / 255f, 0.5f); // Semi-transparent blue background
+
+
+
+        // Apply rounded corners to the selected avatar
         selectedAvatar.style.borderTopLeftRadius = new Length(10); // Rounded corners
         selectedAvatar.style.borderTopRightRadius = new Length(10); // Rounded corners
         selectedAvatar.style.borderBottomLeftRadius = new Length(10); // Rounded corners
         selectedAvatar.style.borderBottomRightRadius = new Length(10); // Rounded corners
-        avatar.transform.scale = new Vector3(1.2f, 1.2f, 1.2f);  // Slightly increase size
+        //avatar.transform.scale = new Vector3(1.2f, 1.2f, 1.2f);  // Slightly increase size
     }
     // Method to position the confirmation container near the selected avatar
     private void DisplayConfirmationNearAvatar(VisualElement avatar)
@@ -166,16 +202,10 @@ public class AvatarScrolling : MonoBehaviour
         float confirmationLeft = avatarWorldBound.x + (avatarWorldBound.width - selectAvatarConfirmationContainer.resolvedStyle.width) / 2; // Center horizontally
         float confirmationTop = avatarWorldBound.y - selectAvatarConfirmationContainer.resolvedStyle.height - 15; // Position above the avatar
 
-        // Debug logs for position calculations
-        Debug.Log("Avatar Position: " + avatarWorldBound);
-        Debug.Log("Calculated Confirmation Position: (left: " + confirmationLeft + "px, top: " + confirmationTop + "px)");
 
         // Set the position
         selectAvatarConfirmationContainer.style.left = confirmationLeft;
         selectAvatarConfirmationContainer.style.top = confirmationTop;
-
-        // Log the size of the confirmation container for debugging
-        Debug.Log("Confirmation Container Size: (width: " + selectAvatarConfirmationContainer.resolvedStyle.width + ", height: " + selectAvatarConfirmationContainer.resolvedStyle.height + ")");
 
         // Set the background color to dark blue
         selectAvatarConfirmationContainer.style.backgroundColor = new Color(0, 0, 139 / 255f, 0.8f); // Dark blue color
@@ -193,13 +223,15 @@ public class AvatarScrolling : MonoBehaviour
     // Handle "Yes" button click - confirm avatar selection
     private void OnYesButtonClicked()
     {
-        Debug.Log("Avatar selection confirmed: " + selectedAvatar.name);
         DeselectAvatar();  // Deselect avatar after confirmation
         selectAvatarConfirmationContainer.style.display = DisplayStyle.None;  // Hide confirmation UI
        // Hide other UI elements if necessary
         HideOtherUIElements(); // Implement this method to hide any additional elements
+        // Change the background of the character message container
+        ChangeAvatarBackground(selectedAvatar.name);
         // Show the thank you message
         ShowThankYouMessage();
+
     }
     //Hide other UI elements when click on "Yes" button
     private void HideOtherUIElements()
@@ -218,31 +250,23 @@ public class AvatarScrolling : MonoBehaviour
     {
         // Hide the confirmation container
         selectAvatarConfirmationContainer.style.display = DisplayStyle.None;
-
         // Hide other UI elements if necessary
         HideOtherUIElements();
-
         // Show the thank you message
         ShowThankYouMessage();
     }
-
     // Scroll left button logic
     private void ScrollLeftButton()
     {
-        Debug.Log("Scrolling left");
-
         // Calculate the new scroll offset and prevent scrolling past the start
         avatarSelectionScrollingView.scrollOffset = new Vector2(
             Mathf.Max(avatarSelectionScrollingView.scrollOffset.x - scrollAmount, 0),  // Ensure it doesn't scroll past 0
             avatarSelectionScrollingView.scrollOffset.y
         );
     }
-
     // Scroll right button logic
     private void ScrollRightButton()
     {
-        Debug.Log("Scrolling right");
-
         // Calculate the maximum possible scroll offset (content width minus visible area width)
         float maxScrollOffsetX = avatarSelectionScrollingView.contentContainer.worldBound.width - avatarSelectionScrollingView.worldBound.width;
 

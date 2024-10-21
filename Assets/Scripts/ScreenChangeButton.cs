@@ -46,22 +46,14 @@ public class ScreenChangeButton : MonoBehaviour
             AcceptButton.SetEnabled(evt.newValue);  // Disable/enable based on toggle value
         });
 
+        // Initially disable the AcceptButton on scene load
+        AcceptButton?.SetEnabled(false);
         // AcceptButton click logic
         AcceptButton?.RegisterCallback<ClickEvent>(ev =>
-        {
-            if (!consentToggle.value)
-            {
-                //disable accept button
-                AcceptButton.SetEnabled(false);
-                //AcceptButton.style.display = DisplayStyle.None;
-                return;
-            }
-           
+        {  
             //enable accept button
             AcceptButton.SetEnabled(true);
-            SceneManager.LoadScene("ScreeningQuestions");
-            
-           
+            SceneManager.LoadScene("ScreeningQuestions");  
         });
 
         // DeclineButton click logic

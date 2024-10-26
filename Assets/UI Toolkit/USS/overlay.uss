@@ -1,4 +1,32 @@
 .text {
-    -unity-font-style: bold;
+    -unity-font-style: normal;
     font-size: 20px;
+    -unity-font-definition: initial;
+    -unity-font: url('project://database/Assets/Fonts/Inter/static/Inter_18pt-Bold.ttf?fileID=12800000&guid=53a47e366f193ff43a10ed49a434d184&type=3#Inter_18pt-Bold');
+    color: rgb(255, 255, 255);
+}
+
+.InventoryItemBoxDesign {
+    width: 120px;
+    height: 100px;
+    margin-top: 15px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: rgb(156, 119, 85);
+    border-left-color: rgb(128, 94, 63);
+    border-right-color: rgb(128, 94, 63);
+    border-top-color: rgb(128, 94, 63);
+    border-bottom-color: rgb(128, 94, 63);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    flex-direction: row;
+    align-self: flex-start;
+    align-items: auto;
 }

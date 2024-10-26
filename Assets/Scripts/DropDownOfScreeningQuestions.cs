@@ -37,13 +37,14 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
 
         if (monthDropDown != null)
         {
-           
+
             // Set the choices
             monthDropDown.choices = choicesMonth;
             monthDropDown.value = "Month";
 
             // Register a callback for when the value changes 
-            monthDropDown.RegisterValueChangedCallback(evt => {
+            monthDropDown.RegisterValueChangedCallback(evt =>
+            {
                 UserDataManager.Instance.SelectedMonth = evt.newValue;
             });
         }
@@ -88,10 +89,11 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
                 UserDataManager.Instance.SelectedYear = evt.newValue;
             });
 
+
         }
 
 
-       
+
         if (Q5DropdownField != null)
         {
             Q5DropdownField.choices = choices1to5;
@@ -113,7 +115,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
 
 
 
-      
+
         var choicesYear = new List<string>();
         // get the current year
         for (int i = currentYear; i >= 1900; i--)
@@ -133,14 +135,14 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
         {
             Q9DropdownField.choices = choicesYear;
             Q9DropdownField.value = "Year";
-           
+
             Q9DropdownField.RegisterValueChangedCallback(evt =>
             {
-                
+
                 UserDataManager.Instance.Q9SelectedOption = evt.newValue;
             });
         }
-        
+
 
     }
 

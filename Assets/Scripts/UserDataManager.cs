@@ -47,6 +47,7 @@ public class UserDataManager : MonoBehaviour
     public string Q29SelectedOption { get; set; }
     public string Q30SelectedOption { get; set; }
 
+    
     // Arrays to hold references to VisualElement and Button components for each question
     private VisualElement[] questions = new VisualElement[30];
     private Button[] previousButtons = new Button[30];
@@ -114,15 +115,21 @@ public class UserDataManager : MonoBehaviour
             if (previousButtons[i] != null)
                 previousButtons[i].clicked += () => OnPreviousButtonClick(index + 1);
             if (continueButtons[i] != null)
-            {
+            {   
                 continueButtonNum = continueButtons[i];
+                
                 continueButtons[i].clicked += () => OnContinueButtonClick(index + 1);
             }
-                
+            // Disable the continue buttons on load (they will be enabled when the user selects an option)
+            //if (continueButtons[i] != null)
+            //    continueButtons[i].SetEnabled(false); // Disable on load
         }
 
 
     }
+
+    
+
     // Method to handle the "Previous" button click for a specific question
     private void OnPreviousButtonClick(int questionIndex)
     {
@@ -144,6 +151,7 @@ public class UserDataManager : MonoBehaviour
     {
         bool hasErrors = false;
         //marge three values to form a date
+
         string Q1SelectedOption = SelectedMonth + "/" + SelectedDay + "/" + SelectedYear;
         string Q2SelectedOption = SelectedGender;
         string[] selectedOptions = { Q1SelectedOption, Q2SelectedOption,
@@ -158,9 +166,11 @@ public class UserDataManager : MonoBehaviour
         {
             Debug.Log($"selectedOptions[{questionIndex - 1}] = {selectedOptions[questionIndex - 1]}");
 
-            if (string.IsNullOrEmpty(Q1SelectedOption) || string.IsNullOrEmpty(SelectedDay) || string.IsNullOrEmpty(SelectedYear))
+            //check if the selected option is empty
+            if (string.IsNullOrEmpty(SelectedMonth) || string.IsNullOrEmpty(SelectedDay) || string.IsNullOrEmpty(SelectedYear))
             {
                 hasErrors = true;
+
             }
         }
         if (questionIndex >= 2 && questionIndex <= 29)
@@ -189,10 +199,9 @@ public class UserDataManager : MonoBehaviour
             SceneManager.LoadScene("Avatar_Selection");
         }
 
-        //Update the continue button state based on whether there are errors
+        //Update the continue button state based on whether there are errors and change its color  to dark grey
         continueButtonNum.SetEnabled(!hasErrors);
-
-
+        
         if (!hasErrors)
         {
             if (questions[questionIndex - 1] != null)
@@ -269,5 +278,4 @@ public class UserDataManager : MonoBehaviour
             }
         }
     }
-
 }

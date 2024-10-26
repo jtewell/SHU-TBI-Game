@@ -8,9 +8,9 @@ public class AvatarScrolling : MonoBehaviour
 {
     // UI elements references
     public VisualElement avatarContainer, avatarSelectionContainer, scrollingButtonsContainer, selectAvatarConfirmationContainer, 
-        avatarGenderSelectionContainer, thankYouMessageContainer, charMessageContainer;
+        avatarGenderSelectionContainer, thankYouMessageContainer, charMessageContainer, previousButtonContainer;
     public ScrollView avatarSelectionScrollingView;
-    public Button scrollLeft, scrollRight, yesButton, noButton, maleButton, femaleButton, nonBinaryButton, continueGamePlayButton;
+    public Button scrollLeft, scrollRight, yesButton, noButton, maleButton, femaleButton, nonBinaryButton, continueGamePlayButton, previousButton;
     public Label titleAvatarSelection, thankYouLabel;
     private string selectedGender;
 
@@ -34,6 +34,7 @@ public class AvatarScrolling : MonoBehaviour
         avatarGenderSelectionContainer = root.Q<VisualElement>("avatarGenderSelectionContainer");
         thankYouMessageContainer = root.Q<VisualElement>("thankYouMessageContainer");
         charMessageContainer = root.Q<VisualElement>("charMessageContainer");
+        previousButtonContainer = root.Q<VisualElement>("previousButtonContainer");
 
         // Initialize buttons and labels
         yesButton = root.Q<Button>("yesButton");
@@ -46,6 +47,7 @@ public class AvatarScrolling : MonoBehaviour
         titleAvatarSelection = root.Q<Label>("titleAvatarSelection");
         thankYouLabel = root.Q<Label>("thankYouLabel");
         continueGamePlayButton = root.Q<Button>("continueGamePlayButton");
+        previousButton = root.Q<Button>("previousButton");
 
         // Register button click events for scrolling and confirmation actions
         scrollLeft.clicked += ScrollLeftButton;
@@ -53,6 +55,7 @@ public class AvatarScrolling : MonoBehaviour
         maleButton.clicked += () => OnGenderSelected("Male");
         femaleButton.clicked += () => OnGenderSelected("Female");
         nonBinaryButton.clicked += () => OnGenderSelected("Non-Binary");
+        previousButton.clicked += () => OnPreviousButtonClicked();
 
 
         // Hide the avatar confirmation container initially
@@ -67,6 +70,16 @@ public class AvatarScrolling : MonoBehaviour
         avatarContainerstore.ForEach(avatar => avatar.RegisterCallback<ClickEvent>(ev => OnAvatarClicked(avatar)));
         avatarSelectionScrollingView.RegisterCallback<GeometryChangedEvent>(OnLayoutChanged);
 
+    }
+    //create a function to handle previous button click event 
+    private void OnPreviousButtonClicked()
+    {
+        // Hide the current UI elements
+        avatarContainer.style.display = DisplayStyle.Flex;
+        thankYouMessageContainer.style.display = DisplayStyle.None;
+        charMessageContainer.style.backgroundImage = null; // Clear the background image
+        previousButtonContainer.style.display = DisplayStyle.Flex;
+        
     }
     //on gender selected method
     private void OnGenderSelected(string gender)

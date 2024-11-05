@@ -28,7 +28,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
         Q9DropdownField = root.Q<DropdownField>("Q9DropdownField");
 
         // Define the choices for the dropdown
-        var choicesMonth = new List<string> { "Month", "Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" };
+        var choicesMonth = new List<string> { "Month", "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" };
 
         // get the current year
         int currentYear = System.DateTime.Now.Year;
@@ -45,7 +45,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             // Register a callback for when the value changes 
             monthDropDown.RegisterValueChangedCallback(evt =>
             {
-                UserDataManager.Instance.SelectedMonth = evt.newValue;
+                ScreeningQuestionUserDataManager.Instance.SelectedMonth = evt.newValue;
             });
         }
         if (dayDropDown != null)
@@ -66,7 +66,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             // Register a callback for when the value changes
             dayDropDown.RegisterValueChangedCallback(evt =>
             {
-                UserDataManager.Instance.SelectedDay = evt.newValue;
+                ScreeningQuestionUserDataManager.Instance.SelectedDay = evt.newValue;
             });
 
         }
@@ -86,7 +86,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             // Register a callback for when the value changes
             yearDropDown.RegisterValueChangedCallback(evt =>
             {
-                UserDataManager.Instance.SelectedYear = evt.newValue;
+                ScreeningQuestionUserDataManager.Instance.SelectedYear = evt.newValue;
             });
 
 
@@ -100,7 +100,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             Q5DropdownField.value = "0";
             Q5DropdownField.RegisterValueChangedCallback(evt =>
             {
-                UserDataManager.Instance.Q5SelectedOption = evt.newValue;
+                ScreeningQuestionUserDataManager.Instance.Q5SelectedOption = evt.newValue;
             });
         }
         if (Q8DropdownField != null)
@@ -109,7 +109,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             Q8DropdownField.value = "0";
             Q8DropdownField.RegisterValueChangedCallback(evt =>
             {
-                UserDataManager.Instance.Q8SelectedOption = evt.newValue;
+                ScreeningQuestionUserDataManager.Instance.Q8SelectedOption = evt.newValue;
             });
         }
 
@@ -128,7 +128,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             Q6DropdownField.value = "Year";
             Q6DropdownField.RegisterValueChangedCallback(evt =>
             {
-                UserDataManager.Instance.Q6SelectedOption = evt.newValue;
+                ScreeningQuestionUserDataManager.Instance.Q6SelectedOption = evt.newValue;
             });
         }
         if (Q9DropdownField != null)
@@ -139,7 +139,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             Q9DropdownField.RegisterValueChangedCallback(evt =>
             {
 
-                UserDataManager.Instance.Q9SelectedOption = evt.newValue;
+                ScreeningQuestionUserDataManager.Instance.Q9SelectedOption = evt.newValue;
             });
         }
 

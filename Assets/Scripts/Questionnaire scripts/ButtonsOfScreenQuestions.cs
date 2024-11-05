@@ -98,8 +98,8 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         selectedGenderButton = clickedButton;
         selectedGenderButton.AddToClassList("selected");
 
-            // Update UserDataManager with the selected gender
-            UserDataManager.Instance.SelectedGender = gender;
+        // Update UserDataManager with the selected gender
+        ScreeningQuestionUserDataManager.Instance.SelectedGender = gender;
 
         // Call method to check if the user can continue
         //HandleNextStep();
@@ -120,7 +120,7 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         selectedQ3Button.AddToClassList("selected");
 
         // Set the selected option for Q3 in UserDataManager
-        UserDataManager.Instance.Q3SelectedOption = option;
+        ScreeningQuestionUserDataManager.Instance.Q3SelectedOption = option;
 
     }
     // Method to handle Q4 button clicks
@@ -137,7 +137,7 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         selectedQ4Button.AddToClassList("selected");
 
         // Set the selected option for Q4 in UserDataManager
-        UserDataManager.Instance.Q4SelectedOption = option;
+        ScreeningQuestionUserDataManager.Instance.Q4SelectedOption = option;
 
     }
     // Method to handle Q7 button clicks
@@ -154,7 +154,7 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         selectedQ7Button.AddToClassList("selected");
 
         // Set the selected option for Q7 in UserDataManager
-        UserDataManager.Instance.Q7SelectedOption = option;
+        ScreeningQuestionUserDataManager.Instance.Q7SelectedOption = option;
 
     }
 }

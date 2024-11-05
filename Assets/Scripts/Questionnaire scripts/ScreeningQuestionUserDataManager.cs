@@ -9,10 +9,10 @@ using UnityEngine.Networking;
 
 
 
-public class UserDataManager : MonoBehaviour
+public class ScreeningQuestionUserDataManager : MonoBehaviour
 {
     // Singleton instance
-    public static UserDataManager Instance { get; private set; }
+    public static ScreeningQuestionUserDataManager Instance { get; private set; }
 
     // User input data
     public string SelectedMonth { get; set; }
@@ -47,13 +47,20 @@ public class UserDataManager : MonoBehaviour
     public string Q29SelectedOption { get; set; }
     public string Q30SelectedOption { get; set; }
 
-    
+
     // Arrays to hold references to VisualElement and Button components for each question
     private VisualElement[] questions = new VisualElement[30];
     private Button[] previousButtons = new Button[30];
     private Button[] continueButtons = new Button[30];
     private VisualElement ErrorMessageContainer;
     private Button continueButtonNum;
+
+    //keeps track of what question
+    private int questionNumber = 1;
+
+    // Unique identifier for the user (generated randomly)
+    public string userId { get; private set; }
+
 
     private void Awake()
     {
@@ -62,6 +69,19 @@ public class UserDataManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // Make this persist across scenes
+
+            // Generate and store the unique identifier if it doesn't exist
+            if (!PlayerPrefs.HasKey("UserId"))
+            {
+                userId = GenerateUniqueId();
+                PlayerPrefs.SetString("UserId", userId);
+                PlayerPrefs.Save();
+            }
+            else
+            {
+                userId = PlayerPrefs.GetString("UserId");
+            }
+
         }
         else
         {
@@ -69,30 +89,26 @@ public class UserDataManager : MonoBehaviour
         }
     }
 
+    // Method to generate a random unique identifier
+    private string GenerateUniqueId()
+    {
+        // Generate a random number and return it as a string
+        return Random.Range(100000, 999999).ToString();
+    }
+
     private void OnEnable()
     {
         // Get the UIDocument component attached to the same GameObject
         var uiDocument = GetComponent<UIDocument>();
-        if (uiDocument == null)
-        {
-            Debug.LogError("UIDocument component is missing from the GameObject.");
-            return;
-        }
+       
 
         // Get the root VisualElement of the UI document
         var root = uiDocument.rootVisualElement;
-        if (root == null)
-        {
-            Debug.LogError("Root VisualElement is not found.");
-            return;
-        }
-
+       
         // Initialize the question VisualElements by finding them in the UI hierarchy
         for (int i = 0; i < questions.Length; i++)
         {
             questions[i] = root.Q<VisualElement>($"Question{i + 1}");
-            if (questions[i] == null)
-                Debug.LogError($"Question{i + 1} element not found in the UXML.");
         }
 
         // Initialize the previous and continue buttons for each question
@@ -101,10 +117,6 @@ public class UserDataManager : MonoBehaviour
             previousButtons[i] = root.Q<Button>($"Q{i + 1}PreviousButton");
             continueButtons[i] = root.Q<Button>($"Q{i + 1}Continue");
 
-            if (previousButtons[i] == null)
-                Debug.LogError($"PreviousButton for Question{i + 1} not found.");
-            if (continueButtons[i] == null)
-                Debug.LogError($"ContinueButton for Question{i + 1} not found.");
         }
 
 
@@ -115,33 +127,78 @@ public class UserDataManager : MonoBehaviour
             if (previousButtons[i] != null)
                 previousButtons[i].clicked += () => OnPreviousButtonClick(index + 1);
             if (continueButtons[i] != null)
-            {   
+            {
                 continueButtonNum = continueButtons[i];
-                
+
                 continueButtons[i].clicked += () => OnContinueButtonClick(index + 1);
             }
             // Disable the continue buttons on load (they will be enabled when the user selects an option)
-            //if (continueButtons[i] != null)
-            //    continueButtons[i].SetEnabled(false); // Disable on load
+            if (continueButtons[i] != null)
+                continueButtons[i].SetEnabled(false); // Disable on load
         }
 
-
+        //Run after 100 ms (running sooner will accidentally trigger the callback due to the form getting filled)
+        root.schedule.Execute(() => { RegisterSelectionEvents(root); }).StartingIn(100);
     }
 
-    
+    //This will loop through each element of the UI Form that can be interacted with and registers OnSelectionMade with them
+    private void RegisterSelectionEvents(VisualElement element)
+    {
+        foreach (var child in element.Children())
+        {
+            if (child is DropdownField dropdownField)
+            {
+                dropdownField.RegisterValueChangedCallback(evt => OnSelectionMade());
+            }
+
+            if (child is Button button)
+            {
+                
+                button.RegisterCallback<ClickEvent>(evt => OnSelectionMade());
+            }
+
+            RegisterSelectionEvents(child);
+        }
+    }
+
+    //Any time the user performs some selection (i.e. button click) this will be triggered to enable (or not) the continue buttons
+    private void OnSelectionMade()
+    {
+       
+
+        if (questionNumber == 1 && !(string.IsNullOrEmpty(SelectedMonth) || string.IsNullOrEmpty(SelectedDay) || string.IsNullOrEmpty(SelectedYear)))
+        {
+            continueButtons[0].SetEnabled(true);
+        }
+
+        if (questionNumber == 2 && !string.IsNullOrEmpty(SelectedGender))
+        {
+
+            continueButtons[1].SetEnabled(true);
+        }
+
+        if (questionNumber > 2 && questionNumber < 30)
+        {
+            string[] selectedOptions = { null, null,
+            Q3SelectedOption, Q4SelectedOption, Q5SelectedOption, Q6SelectedOption, Q7SelectedOption,
+            Q8SelectedOption, Q9SelectedOption,"yes", Q11SelectedOption, Q12SelectedOption, Q13SelectedOption,
+            Q14SelectedOption, Q15SelectedOption, Q16SelectedOption, Q17SelectedOption, Q18SelectedOption,
+            Q19SelectedOption, Q20SelectedOption, Q21SelectedOption, Q22SelectedOption, Q23SelectedOption,
+            Q24SelectedOption, Q25SelectedOption, Q26SelectedOption, Q27SelectedOption, Q28SelectedOption, Q29SelectedOption };
+
+            if (!string.IsNullOrEmpty(selectedOptions[questionNumber - 1]))
+            {
+                continueButtons[questionNumber - 1].SetEnabled(true);
+            }
+        }
+    }
 
     // Method to handle the "Previous" button click for a specific question
     private void OnPreviousButtonClick(int questionIndex)
     {
-        if (questionIndex == 1)
+        if (questions[questionIndex - 2] != null && questions[questionIndex - 1] != null)
         {
-            Debug.Log("PreviousButton Found");
-            // Load the previous scene (e.g., the consent form)
-            SceneManager.LoadScene("ConsentForm");
-        }
-        else if (questions[questionIndex - 2] != null && questions[questionIndex - 1] != null)
-        {
-            Debug.Log("I'm Working for previous");
+            
             // Hide the current question and show the previous question
             questions[questionIndex - 2].style.display = DisplayStyle.Flex;
             questions[questionIndex - 1].style.display = DisplayStyle.None;
@@ -149,6 +206,9 @@ public class UserDataManager : MonoBehaviour
     }
     private void OnContinueButtonClick(int questionIndex)
     {
+        //Update this each time the continue button is selected
+        questionNumber = questionIndex + 1;
+
         bool hasErrors = false;
         //marge three values to form a date
 
@@ -164,8 +224,7 @@ public class UserDataManager : MonoBehaviour
         //check if the selected option is empty
         if (questionIndex == 1)
         {
-            Debug.Log($"selectedOptions[{questionIndex - 1}] = {selectedOptions[questionIndex - 1]}");
-
+           
             //check if the selected option is empty
             if (string.IsNullOrEmpty(SelectedMonth) || string.IsNullOrEmpty(SelectedDay) || string.IsNullOrEmpty(SelectedYear))
             {
@@ -175,7 +234,7 @@ public class UserDataManager : MonoBehaviour
         }
         if (questionIndex >= 2 && questionIndex <= 29)
         {
-            Debug.Log("Hi");
+            
 
             if (questionIndex == 10)
             {
@@ -183,10 +242,10 @@ public class UserDataManager : MonoBehaviour
             }
             else
             {
-                Debug.Log($"selectedOptions[{questionIndex - 1}] = {selectedOptions[questionIndex - 1]}");
+                
                 if (string.IsNullOrEmpty(selectedOptions[questionIndex - 1]))
                 {
-                    Debug.Log(questionIndex - 1);
+                    
                     hasErrors = true;
 
                 }
@@ -201,7 +260,7 @@ public class UserDataManager : MonoBehaviour
 
         //Update the continue button state based on whether there are errors and change its color  to dark grey
         continueButtonNum.SetEnabled(!hasErrors);
-        
+
         if (!hasErrors)
         {
             if (questions[questionIndex - 1] != null)
@@ -212,18 +271,14 @@ public class UserDataManager : MonoBehaviour
                 questions[questionIndex].style.display = DisplayStyle.Flex; // Show the next question
         }
     }
-   
+
+    // Method to submit the user data to the Google Form via the GoogleFormSubmitter component 
     public void SubmitDataToSheet()
     {
-        StartCoroutine(SubmitDataCoroutine());
-    }
-
-    private IEnumerator SubmitDataCoroutine()
-    {
-        WWWForm form = new WWWForm();
         // Create a dictionary to hold the Google Form entry IDs and their corresponding values
         Dictionary<string, string> formData = new Dictionary<string, string>
         {
+            { "entry.1172381183", userId },
             { "entry.1715281728", SelectedMonth },
             { "entry.629660407", SelectedDay },
             { "entry.982217643", SelectedYear },
@@ -255,27 +310,17 @@ public class UserDataManager : MonoBehaviour
             { "entry.798811690", Q28SelectedOption },
             { "entry.1387695143", Q29SelectedOption }
         };
-        // Iterate over the dictionary and add each field to the form
-        foreach (KeyValuePair<string, string> field in formData)
+
+        // Call the GoogleFormSubmitter singleton to submit the data to the Google Form 
+        if (GoogleFormSubmitter.Instance != null)
         {
-            form.AddField(field.Key, field.Value);
+            // Submit the form data to the Google Form via the GoogleFormSubmitter component 
+            GoogleFormSubmitter.Instance.SubmitDataToSheet(formData);
+        }
+        else
+        {
+            Debug.LogError("GoogleFormSubmitter instance is not available.");
         }
 
-        // Set your Google Apps Script web app URL here
-        string url = "https://docs.google.com/forms/d/e/1FAIpQLSe1CpGcYz-zV-OV8xfAl0BP4K8g2WQtLwgLaMbge6YOgMrrfw/formResponse";
-
-        // Create the UnityWebRequest for a POST request
-        using (UnityWebRequest www = UnityWebRequest.Post(url, form))
-        {
-            yield return www.SendWebRequest();
-            if (www.result == UnityWebRequest.Result.Success)
-            {
-                Debug.Log("FeedBack Submitted Successfully");
-            }
-            else
-            {
-                Debug.Log("Error: " + www.error);
-            }
-        }
     }
 }

@@ -10,8 +10,10 @@ using UnityEngine.UIElements.StyleSheets;
 public class RatingButtonsScreeningQuestion : MonoBehaviour
 {
     // Array to hold references to the rating buttons
-    private Button[] q11RatingButtons, q12RatingButtons, q13RatingButtons, q14RatingButtons, q15RatingButtons, q16RatingButtons, q17RatingButtons, q18RatingButtons,
-        q19RatingButtons, q20RatingButtons, q21RatingButtons, q22RatingButtons, q23RatingButtons, q24RatingButtons, q25RatingButtons, q26RatingButtons, q27RatingButtons, q28RatingButtons, q29RatingButtons;
+    private Button[] q11RatingButtons, q12RatingButtons, q13RatingButtons, q14RatingButtons, q15RatingButtons, 
+        q16RatingButtons, q17RatingButtons, q18RatingButtons, q19RatingButtons, q20RatingButtons, q21RatingButtons, 
+        q22RatingButtons, q23RatingButtons, q24RatingButtons, q25RatingButtons, q26RatingButtons, q27RatingButtons, 
+        q28RatingButtons, q29RatingButtons;
     private Button selectedButton;
 
 
@@ -82,78 +84,25 @@ public class RatingButtonsScreeningQuestion : MonoBehaviour
         selectedButton = clickedButton;
         selectedButton.AddToClassList("selected");
 
-        // Set the selected option in the UserDataManager
-        switch (questionNumber)
+
+        // Use reflection to dynamically set the selected option
+        var userDataManager = ScreeningQuestionUserDataManager.Instance;
+        string propertyName = $"Q{questionNumber}SelectedOption";
+
+        // Use reflection to get the property  and set its value to the selected rating 
+        var property = userDataManager.GetType().GetProperty(propertyName);
+      
+        if (property != null)
         {
-            case 11:
-                UserDataManager.Instance.Q11SelectedOption = rating.ToString();
-                Debug.Log("Q11SelectedOption: " + UserDataManager.Instance.Q11SelectedOption);
-                break;
-            case 12:
-                UserDataManager.Instance.Q12SelectedOption = rating.ToString();
-                break;
-            case 13:
-                UserDataManager.Instance.Q13SelectedOption = rating.ToString();
-                break;
-            case 14:
-                UserDataManager.Instance.Q14SelectedOption = rating.ToString();
-                break;
-            case 15:
-                UserDataManager.Instance.Q15SelectedOption = rating.ToString();
-                break;
-            case 16:
-                UserDataManager.Instance.Q16SelectedOption = rating.ToString();
-                break;
-            case 17:
-                UserDataManager.Instance.Q17SelectedOption = rating.ToString();
-                break;
-            case 18:
-                UserDataManager.Instance.Q18SelectedOption = rating.ToString();
-                break;
-            case 19:
-                UserDataManager.Instance.Q19SelectedOption = rating.ToString();
-                break;
-            case 20:
-                UserDataManager.Instance.Q20SelectedOption = rating.ToString();
-                break;
-            case 21:
-                UserDataManager.Instance.Q21SelectedOption = rating.ToString();
-                break;
-            case 22:
-                UserDataManager.Instance.Q22SelectedOption = rating.ToString();
-                break;
-            case 23:
-                UserDataManager.Instance.Q23SelectedOption = rating.ToString();
-                break;
-            case 24:
-                UserDataManager.Instance.Q24SelectedOption = rating.ToString();
-                break;
-            case 25:
-                UserDataManager.Instance.Q25SelectedOption = rating.ToString();
-                break;
-            case 26:
-                UserDataManager.Instance.Q26SelectedOption = rating.ToString();
-                break;
-            case 27:
-                UserDataManager.Instance.Q27SelectedOption = rating.ToString();
-                break;
-            case 28:
-                UserDataManager.Instance.Q28SelectedOption = rating.ToString();
-                break;
-            case 29:
-                UserDataManager.Instance.Q29SelectedOption = rating.ToString();
-                break;
-            default:
-                Debug.LogError("Invalid question number");
-                break;
+            // Set the value of the property to the selected rating 
+            property.SetValue(userDataManager, rating.ToString());
         }
-    }
+        else
+        {
+            // Log an error if the property is not found
+            Debug.LogError("Invalid question number or property not found");
+        }
 
-
-
-
-    void Update()
-    {
 
     }
 }

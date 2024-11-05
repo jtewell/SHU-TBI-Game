@@ -10,7 +10,8 @@ public class AvatarScrolling : MonoBehaviour
     public VisualElement avatarContainer, avatarSelectionContainer, scrollingButtonsContainer, selectAvatarConfirmationContainer, 
         avatarGenderSelectionContainer, thankYouMessageContainer, charMessageContainer, previousButtonContainer;
     public ScrollView avatarSelectionScrollingView;
-    public Button scrollLeft, scrollRight, yesButton, noButton, maleButton, femaleButton, nonBinaryButton, continueGamePlayButton, previousButton;
+    public Button scrollLeft, scrollRight, yesButton, noButton, maleButton, femaleButton, nonBinaryButton, 
+        continueGamePlayButton, previousButton;
     public Label titleAvatarSelection, thankYouLabel;
     private string selectedGender;
 
@@ -86,6 +87,9 @@ public class AvatarScrolling : MonoBehaviour
     {
         selectedGender = gender;
         Debug.Log("Selected Gender: "+gender);
+        // Store the selected gender in the Singleton class
+        AvatarSelectionManager.Instance.SetGender(gender);
+
         avatarGenderSelectionContainer.style.display = DisplayStyle.None;
         avatarContainer.style.display = DisplayStyle.Flex;
     }
@@ -107,6 +111,10 @@ public class AvatarScrolling : MonoBehaviour
         // Set the clicked avatar as the new selected avatar
         selectedAvatar = avatar;
         HighlightAvatar(avatar);  // Highlight the newly selected avatar
+
+        // Store the selected avatar in the Singleton class
+        AvatarSelectionManager.Instance.SetAvatar(avatar.name);
+
         // Show and position the confirmation container near the selected avatar
         DisplayConfirmationNearAvatar(avatar);
     }
@@ -126,7 +134,7 @@ public class AvatarScrolling : MonoBehaviour
         // Check if the avatarName exists in the mapping
         if (avatarMapping.TryGetValue(avatarName, out string characterName))
         {
-            string imagePath = $"Assets/images/{characterName}_message.png"; // Construct the image path
+            string imagePath = $"Assets/images/Questionnaire_Images/{characterName}_message.png"; // Construct the image path
 
             // Check if the file exists before trying to load it
             if (System.IO.File.Exists(imagePath))

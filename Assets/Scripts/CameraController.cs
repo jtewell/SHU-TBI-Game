@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     private Vector3 playeroffset = new Vector3(0, 7, 3);
     private Vector3 NPCoffset = new Vector3(-2, 2, 2);
     private GameObject NPCHead;
-    private DialogueRunner dialogueRunner;
+    public DialogueRunner dialogueRunner;
     private bool dialogCamActive = false;
     
 
@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (dialogCamActive == false)
+        if (dialogueRunner.IsDialogueRunning== false)
         {
             transform.position = player.transform.position + playeroffset;
             transform.LookAt(player.transform);
@@ -33,15 +33,10 @@ public class CameraController : MonoBehaviour
         
     }
 
-    public void OnDialogStart()
-    {
-        dialogCamActive = true;
-    }
-
-    public void OnDialogFinish()
+    /*public void OnDialogFinish()
     {
         dialogCamActive = false;
-    }
+    } */
 
     public void SwitchedScene()
     {
@@ -56,6 +51,6 @@ public class CameraController : MonoBehaviour
             transform.position = player.transform.position + NPCoffset;
             transform.LookAt(NPCHead.transform);
         }
-        dialogCamActive = true;
+       // dialogCamActive = true;
     }
 }

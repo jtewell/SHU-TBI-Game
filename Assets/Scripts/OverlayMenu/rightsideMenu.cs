@@ -79,6 +79,7 @@ public class rightsideMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
+
+   
 }

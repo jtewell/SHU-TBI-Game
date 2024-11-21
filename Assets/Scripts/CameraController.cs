@@ -6,7 +6,8 @@ using Yarn.Unity;
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
-    private Vector3 playeroffset = new Vector3(0, 7, 3);
+    public GameObject playerCameraRoot;
+    private Vector3 playeroffset;
     private Vector3 NPCoffset = new Vector3(-2, 2, 2);
     private GameObject NPCHead;
     public DialogueRunner dialogueRunner;
@@ -19,6 +20,7 @@ public class CameraController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
        // playeroffset = transform.position - player.transform.position;
         dialogueRunner = FindObjectOfType<Yarn.Unity.DialogueRunner>();
+        playeroffset = transform.localPosition;
         
     }
 
@@ -28,7 +30,7 @@ public class CameraController : MonoBehaviour
         if (dialogueRunner.IsDialogueRunning== false)
         {
             transform.position = player.transform.position + playeroffset;
-            transform.LookAt(player.transform);
+           // transform.LookAt(playerCameraRoot.transform);
         }
         
     }

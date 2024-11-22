@@ -3337,6 +3337,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
   m_PrefabInstance: {fileID: 1796194841}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1796194843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3668050717809186887, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+  m_PrefabInstance: {fileID: 1796194841}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1838643990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3659,10 +3670,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2
-  Player: {fileID: 0}
+  Player: {fileID: 1796194842}
   DistanceDebug: 1
-  OnInteract: {fileID: 0}
-  ActionText: {fileID: 0}
+  OnInteract: {fileID: 1117511053}
+  ActionText: {fileID: 1796194843}
 --- !u!4 &1921309371
 Transform:
   m_ObjectHideFlags: 0
@@ -4892,7 +4903,19 @@ MonoBehaviour:
   DisplayText: Press E to Use
   m_InteractAction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: 74e86c729626c3a49b9d1682b9c97dd8, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &4051469158746302469
 PrefabInstance:
   m_ObjectHideFlags: 0

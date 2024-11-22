@@ -354,7 +354,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 134753959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62f4bbbe18b8046b994376046bbb4d11, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b760af65e250a8499f469cc248a110f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &134753961
@@ -366,9 +366,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 134753959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257c040110b361345952706fdf441fad, type: 3}
+  m_Script: {fileID: 11500000, guid: 450d3bdbb8f7f654aa0cf92f224b2bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisplayText: Press E to Use
+  m_InteractAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &134753962
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3651,9 +3655,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1921309369}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed725c7778b342c459524386c0493425, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f167e07ea03cb34ab5508085f86720a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 2
+  Player: {fileID: 0}
+  DistanceDebug: 1
+  OnInteract: {fileID: 0}
+  ActionText: {fileID: 0}
 --- !u!4 &1921309371
 Transform:
   m_ObjectHideFlags: 0
@@ -4806,6 +4815,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 791057619310927385, guid: 27e0d38383a9b2840a19c398bed9c51c, type: 3}
+      propertyPath: conversationStartNode
+      value: Start
+      objectReference: {fileID: 0}
     - target: {fileID: 1954140344933405428, guid: 27e0d38383a9b2840a19c398bed9c51c, type: 3}
       propertyPath: m_Name
       value: NPC
@@ -4850,11 +4863,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2226487761408299777, guid: 27e0d38383a9b2840a19c398bed9c51c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1954140344933405428, guid: 27e0d38383a9b2840a19c398bed9c51c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3428525577425612417}
   m_SourcePrefab: {fileID: 100100000, guid: 27e0d38383a9b2840a19c398bed9c51c, type: 3}
+--- !u!1 &3428525577425612416 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1954140344933405428, guid: 27e0d38383a9b2840a19c398bed9c51c, type: 3}
+  m_PrefabInstance: {fileID: 3428525577425612415}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3428525577425612417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3428525577425612416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450d3bdbb8f7f654aa0cf92f224b2bee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisplayText: Press E to Use
+  m_InteractAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &4051469158746302469
 PrefabInstance:
   m_ObjectHideFlags: 0

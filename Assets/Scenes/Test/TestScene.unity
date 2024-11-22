@@ -486,9 +486,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 175721449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf2464cdee6b74a378d39145ec00cfe8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b4110f4be4904a4db4c2349e38c323a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorNumber: 0
+  Target: 
 --- !u!114 &175721451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,9 +500,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 175721449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257c040110b361345952706fdf441fad, type: 3}
+  m_Script: {fileID: 11500000, guid: 450d3bdbb8f7f654aa0cf92f224b2bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisplayText: Press E to Use
+  m_InteractAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &175721452
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1823,9 +1829,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1153646595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257c040110b361345952706fdf441fad, type: 3}
+  m_Script: {fileID: 11500000, guid: 450d3bdbb8f7f654aa0cf92f224b2bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisplayText: Press E to Use
+  m_InteractAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1153646597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1921,9 +1931,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1153646595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf2464cdee6b74a378d39145ec00cfe8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b4110f4be4904a4db4c2349e38c323a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorNumber: 0
+  Target: 
 --- !u!114 &1153646602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1933,9 +1945,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1153646595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d01a255acbdfd4b7c8374bc8363fce5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f58a09903bd8f64097da1909f369dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questController: {fileID: 1127734636}
 --- !u!1 &1190916406
 GameObject:
   m_ObjectHideFlags: 0
@@ -3269,7 +3282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3277,7 +3290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_LocalRotation.z
@@ -3289,7 +3302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

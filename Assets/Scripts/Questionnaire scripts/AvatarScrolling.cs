@@ -134,7 +134,7 @@ public class AvatarScrolling : MonoBehaviour
         // Check if the avatarName exists in the mapping
         if (avatarMapping.TryGetValue(avatarName, out string characterName))
         {
-            string imagePath = $"Assets/images/Questionnaire_Images/{characterName}_message.png"; // Construct the image path
+            string imagePath = $"Assets/Art/Textures/Questionnaire_Images/{characterName}_message.png"; // Construct the image path
 
             // Check if the file exists before trying to load it
             if (System.IO.File.Exists(imagePath))

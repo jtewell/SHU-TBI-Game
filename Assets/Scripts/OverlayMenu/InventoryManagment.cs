@@ -1,69 +1,92 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class InventoryManagment : MonoBehaviour
 {
-    // Reference to the UI Document that holds the inventory UI elements 
-    private UIDocument uiInventory;
-    public VisualTreeAsset InventoryItems;
+    public UIDocument uiDocument; // Assign your UIDocument here
+    public string imageFolder = "Assets/Images/InventoryImages"; // Path to your images
+    //public VisualTreeAsset itemTemplate; // Optional: Template for items (if using)
+
     private VisualElement inventoryContainer;
 
-
-
-    // Start is called before the first frame update 
-    private void OnEnable()
+    void Start()
     {
-        uiInventory = GetComponent<UIDocument>();
+        var rootElement = uiDocument.rootVisualElement;
+        // Get the inventory container from the UI Document
+        //inventoryContainer = rootElement.rootVisualElement.Q<VisualElement>("inventoryContainer");
 
-    }
-     public void PopulateInventoryUI()
-    {
-        if (uiInventory == null )
+        if (inventoryContainer == null)
         {
-            Debug.LogError("UI Inventory ");
-            return;
+            Debug.LogError("Inventory container not found!");
         }
-        if (InventoryItems == null)
-            {
-                Debug.LogError("InventoryItems is not assigned");
-                return;
-            }
-        TemplateContainer itemButtonContainer = InventoryItems.Instantiate();
-        var itemContainer = uiInventory.rootVisualElement.Q("itemContainer");
-
-        if (itemContainer == null)
-        {
-            Debug.LogError("Item container not found in the UI");
-            return;
-        }
-
-        itemContainer.Clear(); // Clear existing items
-        itemContainer.Add(itemButtonContainer);
-
-        // Set the size of the container (make it larger, for example, 80% of the screen size)
-        itemContainer.style.width = Length.Percent(80);  // Adjust the percentage as needed
-        itemContainer.style.height = Length.Percent(80);  // Adjust the percentage as needed
-
-        // Set the parent container to use Flexbox layout (to help center the child container)
-        itemContainer.style.position = Position.Absolute;
-        itemContainer.style.left = Length.Percent(50);  // Position horizontally at the center
-        itemContainer.style.top = Length.Percent(50);   // Position vertically at the center
-        itemContainer.style.transformOrigin = new TransformOrigin(0.5f, 0.5f, 0);
-
-        // Ensure proper centering by applying flexbox to the parent of itemContainer
-        itemContainer.style.alignSelf = Align.Center;  // Align the container at the center of the parent
-        //itemContainer.style.justifySelf = Justify.Center;  // Align it horizontally in the middle of the parent
-
-        // You can adjust the margins to fine-tune the placement if needed (though flexbox should handle it)
-
-
-        // Adjust the position to ensure it's truly centered considering its size
-        itemContainer.style.marginLeft = Length.Percent(-40); // 50% minus half of the width (50% - 40%)
-        itemContainer.style.marginTop = Length.Percent(-50);  // 50% minus half of the height (50% - 40%)
-
     }
 
+    void Update()
+    {
+        // Example: Add item on pressing the 'I' key
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            AddItemToInventory("wallet.png", "Wallet");
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            AddItemToInventory("key-chain.png", "Keys");
+        }
+        else if (Input.GetKeyDown(KeyCode.U))
+        {
+            AddItemToInventory("umbrella.png", "Umbrella");
+        }
+    }
 
+    public void AddItemToInventory(string imageName, string itemName)
+    {
+        if (inventoryContainer == null) return;
+
+        // Create the parent container for the item
+        VisualElement itemContainer = new VisualElement();
+        itemContainer.style.flexDirection = FlexDirection.Column;
+        itemContainer.style.width = 250;
+        itemContainer.style.height = 450;
+        itemContainer.style.marginLeft = 10;
+        itemContainer.style.marginRight = 10;
+
+        // Add the image element
+        VisualElement imageElement = new VisualElement();
+        imageElement.style.width = 80;
+        imageElement.style.height = 80;
+        imageElement.style.alignSelf = Align.Center;
+
+        // Load the image dynamically
+        string imagePath = $"{imageFolder}/{imageName}";
+        var imageTexture = LoadImage(imagePath);
+        if (imageTexture != null)
+        {
+            imageElement.style.backgroundImage = new StyleBackground(imageTexture);
+        }
+        else
+        {
+            Debug.LogError($"Image not found at: {imagePath}");
+        }
+
+        itemContainer.Add(imageElement);
+
+        // Add the label for the item
+        Label itemLabel = new Label(itemName);
+        itemLabel.style.unityFontStyleAndWeight = FontStyle.Bold;
+        itemLabel.style.fontSize = 20;
+        itemLabel.style.alignSelf = Align.Center;
+
+        itemContainer.Add(itemLabel);
+
+        // Add the item to the inventory container
+        inventoryContainer.Add(itemContainer);
+    }
+
+    private Texture2D LoadImage(string path)
+    {
+        // Load image as Texture2D
+        return UnityEditor.AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+    }
 }
-   

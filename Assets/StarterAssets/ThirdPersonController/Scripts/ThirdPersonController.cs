@@ -87,6 +87,11 @@ namespace StarterAssets
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
 
+        public static ThirdPersonController Instance;
+        internal bool IsMoving => PlayerMovementDirection != Vector3.zero;
+
+        public Vector3 PlayerMovementDirection { private set; get; }
+
         // timeout deltatime
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
@@ -267,9 +272,15 @@ namespace StarterAssets
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
-            // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            // Update PlayerMovementDirection (this is the direction the player is moving in)
+            PlayerMovementDirection = targetDirection.normalized * _speed;
+
+            // Move the player using the CharacterController
+            _controller.Move(PlayerMovementDirection * Time.deltaTime);
+
+            //// move the player
+            //_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+            //                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
             if (_hasAnimator)

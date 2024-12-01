@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
         if (dialogueRunner.IsDialogueRunning== false)
         {
             transform.position = player.transform.position + playeroffset;
-           // transform.LookAt(playerCameraRoot.transform);
+            // transform.LookAt(playerCameraRoot.transform);
         }
         
     }

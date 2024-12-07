@@ -18,9 +18,8 @@ public class InteractableNPC : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         cameraController = mainCamera.GetComponent<CameraController>();
     }
-    private void PlayDialogue()
+    public void PlayDialogue()
     {
         dialogueRunner.StartDialogue(conversationStartNode);
-        cameraController.InteractNPC();
     }
 }

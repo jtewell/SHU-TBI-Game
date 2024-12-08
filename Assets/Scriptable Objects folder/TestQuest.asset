@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c195ffa4d8ca0408d7530e0863e141, type: 3}
   m_Name: TestQuest
   m_EditorClassIdentifier: 
-  questId: 
-  questDisplayName: 
-  steps: []
+  questId: firstquest
+  questDisplayName: 'Quest 1 '
+  steps:
+  - <StepId>k__BackingField: pickuptree
+    <InstructionText>k__BackingField: Pickup the Tree
+    <IsCompleted>k__BackingField: 1

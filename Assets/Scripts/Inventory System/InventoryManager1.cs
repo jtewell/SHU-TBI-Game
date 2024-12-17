@@ -4,7 +4,7 @@ using Development;
 
 using UnityEngine;
 
-public class InventoryManager : MonoSingleton<InventoryManager>
+public class InventoryManager1 : MonoSingleton<InventoryManager1>
 {
     private List<Item> Items;
     

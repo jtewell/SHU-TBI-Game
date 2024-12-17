@@ -121,8 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5982922367442997984}
-        m_TargetAssemblyTypeName: RightsideButtonManager, Assembly-CSharp
+      - m_Target: {fileID: 1511129914494733249}
+        m_TargetAssemblyTypeName: InventoryUIManager, Assembly-CSharp
         m_MethodName: OnInventoryButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -329,8 +329,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5982922367442997984}
-        m_TargetAssemblyTypeName: RightsideButtonManager, Assembly-CSharp
+      - m_Target: {fileID: 6511354877046866618}
+        m_TargetAssemblyTypeName: MapUIManager, Assembly-CSharp
         m_MethodName: OnCompassButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -767,7 +767,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a8942670d19002e459a4f5ea5cfbade4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00005d407f39ecd45aa272e4c713b4b5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -922,6 +922,7 @@ GameObject:
   - component: {fileID: 3154057686838489685}
   - component: {fileID: 6394369069868858726}
   - component: {fileID: 5491076869420687640}
+  - component: {fileID: 6511354877046866618}
   m_Layer: 5
   m_Name: MapUI
   m_TagString: Untagged
@@ -990,6 +991,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6511354877046866618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450899037632556207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec05d42f126ad94ea59147a4887b437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapUI: {fileID: 1450899037632556207}
+  CloseButton: {fileID: 2937467845082305925}
+  CompassButton: {fileID: 5750130649041207247}
+  playerMarker: {fileID: 7291062515126768281}
 --- !u!1 &1650629145371760015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,7 +1251,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -23}
-  m_SizeDelta: {x: 800, y: 45}
+  m_SizeDelta: {x: 1080, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2163440988604209027
 CanvasRenderer:
@@ -1665,7 +1682,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 720}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1968,6 +1985,7 @@ GameObject:
   - component: {fileID: 3536342327654424220}
   - component: {fileID: 3769589883608337987}
   - component: {fileID: 4952579220773932922}
+  - component: {fileID: 1511129914494733249}
   m_Layer: 5
   m_Name: InventoryUI
   m_TagString: Untagged
@@ -2036,6 +2054,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1511129914494733249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515640041231571581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cde24b9ce6fc1f43b303abfcb292347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventoryUI: {fileID: 3515640041231571581}
+  CloseButton: {fileID: 1416441674603050276}
+  wallet: {fileID: 21300000, guid: 9064b3d39fa93a84099504b68870478f, type: 3}
+  keys: {fileID: 21300000, guid: c10154a013f5cea469ee11e1ada72165, type: 3}
+  umbrella: {fileID: 21300000, guid: 86042e64f3421a342827b9c00be1b7e1, type: 3}
+  OnelineItemContainer: {fileID: 5520836968011763605}
+  SecondlineItemContainer: {fileID: 308525686750344310}
+  itemPrefab: {fileID: 626756172772889631}
 --- !u!1 &3534862214701156207
 GameObject:
   m_ObjectHideFlags: 0
@@ -4177,7 +4215,7 @@ GameObject:
   - component: {fileID: 5018854801997272878}
   - component: {fileID: 5334354125870270763}
   m_Layer: 5
-  m_Name: player_Visual
+  m_Name: Player Marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4438,13 +4476,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5982922367442997984}
-        m_TargetAssemblyTypeName: RightsideButtonManager, Assembly-CSharp
-        m_MethodName: OnMapButtonClicked
-        m_Mode: 1
+      - m_Target: {fileID: 6511354877046866618}
+        m_TargetAssemblyTypeName: MapUIManager, Assembly-CSharp
+        m_MethodName: GroundSetup
+        m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6511354877046866618}
+        m_TargetAssemblyTypeName: MapUIManager, Assembly-CSharp
+        m_MethodName: OnMapButtonClicked
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4747,8 +4797,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5982922367442997984}
-        m_TargetAssemblyTypeName: RightsideButtonManager, Assembly-CSharp
+      - m_Target: {fileID: 1511129914494733249}
+        m_TargetAssemblyTypeName: InventoryUIManager, Assembly-CSharp
         m_MethodName: OnCloseButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -4880,8 +4930,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5982922367442997984}
-        m_TargetAssemblyTypeName: RightsideButtonManager, Assembly-CSharp
+      - m_Target: {fileID: 6511354877046866618}
+        m_TargetAssemblyTypeName: MapUIManager, Assembly-CSharp
         m_MethodName: OnCloseButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -5369,7 +5419,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3723171932711856969}
-  - component: {fileID: 5982922367442997984}
   - component: {fileID: 6213043121111752303}
   m_Layer: 0
   m_Name: TestScripts
@@ -5393,29 +5442,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7629596816574779605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5982922367442997984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8860246419309200290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cde24b9ce6fc1f43b303abfcb292347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MapUI: {fileID: 1450899037632556207}
-  InventoryUI: {fileID: 3515640041231571581}
-  CloseButton: {fileID: 1416441674603050276}
-  CompassButton: {fileID: 0}
-  wallet: {fileID: 21300000, guid: 9064b3d39fa93a84099504b68870478f, type: 3}
-  keys: {fileID: 21300000, guid: c10154a013f5cea469ee11e1ada72165, type: 3}
-  umbrella: {fileID: 21300000, guid: 86042e64f3421a342827b9c00be1b7e1, type: 3}
-  OnelineItemContainer: {fileID: 5520836968011763605}
-  SecondlineItemContainer: {fileID: 308525686750344310}
-  itemPrefab: {fileID: 1035843360802642453}
-  player_Visual: {fileID: 7291062515126768281}
 --- !u!114 &6213043121111752303
 MonoBehaviour:
   m_ObjectHideFlags: 0

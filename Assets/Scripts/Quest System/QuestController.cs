@@ -4,11 +4,12 @@ using System.Linq;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class QuestController : MonoBehaviour
 {
     public Quest currentQuest;
-    [DoNotSerialize] [CanBeNull] internal QuestUIController _questUIController;
+    public UnityEvent onFinishStep;
 
     public void FinishStep(string stepId)
     {
@@ -20,7 +21,8 @@ public class QuestController : MonoBehaviour
         }
 
         step.IsCompleted = true;
-        _questUIController?.RenderQuest();
-        
+
+        onFinishStep.Invoke();
+
     }
 }

@@ -43,7 +43,7 @@ public class QuestUIController : MonoBehaviour
 
         questSteps.fixedItemHeight = 100; //TODO: Use Virtualization for Dynamic
         RenderQuest();
-        questController._questUIController = this;
+        //questController._questUIController = this;
     }
 
     private void OnDisable()

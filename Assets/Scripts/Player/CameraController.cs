@@ -5,54 +5,47 @@ using Yarn.Unity;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject playerCameraRoot;
-    private Vector3 playeroffset;
-    private Vector3 NPCoffset = new Vector3(-2, 2, 2);
-    private GameObject NPCHead;
-    public DialogueRunner dialogueRunner;
-    private bool dialogCamActive = false;
-    
+    //public GameObject player;
+    //public GameObject playerCameraRoot;
+    //private Vector3 playeroffset = new Vector3(0, 5, 6);
+    //private Vector3 NPCoffset = new Vector3(-2, 2, 2);
+    //private GameObject NPCHead;
+
+    private Camera MainCamera;
+    private Camera NPCCamera;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-       // playeroffset = transform.position - player.transform.position;
-        dialogueRunner = FindObjectOfType<Yarn.Unity.DialogueRunner>();
-        playeroffset = transform.localPosition;
-        
-    }
+        //Get the camera references
+        MainCamera = transform.Find("MainCamera").GetComponent<Camera>();
+        NPCCamera = transform.Find("DialogCamera").GetComponent<Camera>();
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        if (dialogueRunner.IsDialogueRunning== false)
-        {
-            transform.position = player.transform.position + playeroffset;
-           // transform.LookAt(playerCameraRoot.transform);
-        }
-        
-    }
+        //NPCCamera.transform.position = transform.position + NPCoffset;
+        NPCCamera.enabled = false;
+        MainCamera.enabled = true;
 
-    /*public void OnDialogFinish()
-    {
-        dialogCamActive = false;
-    } */
+    }
 
     public void SwitchedScene()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        transform.position = player.transform.position + playeroffset;
+        //player = GameObject.FindGameObjectWithTag("Player");
+        //MainCamera.transform.position = transform.position + playeroffset;
+        //NPCCamera.transform.position = transform.position + NPCoffset;
     }
-    public void InteractNPC()
+
+    public void ActivateNPCCamera()
     {
-        if (dialogueRunner.IsDialogueRunning)
-        {
-            NPCHead = GameObject.FindGameObjectWithTag("NPCHead");
-            transform.position = player.transform.position + NPCoffset;
-            transform.LookAt(NPCHead.transform);
-        }
-       // dialogCamActive = true;
+        MainCamera.enabled = false;
+        NPCCamera.enabled = true;
+        //NPCHead = GameObject.FindGameObjectWithTag("NPCHead");
+        //NPCCamera.transform.LookAt(NPCHead.transform);
+    }
+
+    public void DeactivateNPCCamera()
+    {
+        NPCCamera.enabled = false;
+        MainCamera.enabled = true;
     }
 }

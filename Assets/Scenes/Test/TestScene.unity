@@ -4234,6 +4234,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6042832025230935937, guid: 1b50b59d3a6a85140aa426225b010b3a, type: 3}
   m_PrefabInstance: {fileID: 2060564059}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2099816882 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2035402963719721428, guid: d7734440e3623a945a60cfae29842db4, type: 3}
+  m_PrefabInstance: {fileID: 8273078096231827114}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb765aa5314408d4985d0ed4f7cec8d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2120885265
 GameObject:
   m_ObjectHideFlags: 0
@@ -5239,6 +5250,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2035402963719721428, guid: d7734440e3623a945a60cfae29842db4, type: 3}
+      propertyPath: questController
+      value: 
+      objectReference: {fileID: 1127734636}
     - target: {fileID: 2809830924659739311, guid: d7734440e3623a945a60cfae29842db4, type: 3}
       propertyPath: m_Name
       value: Overlay
@@ -5384,6 +5399,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Quest Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 4670649839288408823, guid: 64d83c33e5197a44d99e6257aff8960d, type: 3}
+      propertyPath: onFinishStep.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2099816882}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -923,6 +923,7 @@ GameObject:
   - component: {fileID: 6394369069868858726}
   - component: {fileID: 5491076869420687640}
   - component: {fileID: 6511354877046866618}
+  - component: {fileID: 7453236034237547530}
   m_Layer: 5
   m_Name: MapUI
   m_TagString: Untagged
@@ -1007,6 +1008,25 @@ MonoBehaviour:
   CloseButton: {fileID: 2937467845082305925}
   CompassButton: {fileID: 5750130649041207247}
   playerMarker: {fileID: 7291062515126768281}
+--- !u!114 &7453236034237547530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450899037632556207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9cc34c501c32fc419c1f213b41680b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageRect: {fileID: 2033886419160772923}
+  playerRect: {fileID: 6340260576016536225}
+  zoomInButton: {fileID: 111348672645167302}
+  zoomOutButton: {fileID: 8445546642663169083}
+  zoomSpeed: 0.1
+  minScale: 0.6
+  maxScale: 2
 --- !u!1 &1650629145371760015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,7 +1656,6 @@ RectTransform:
   - {fileID: 4920504004568659632}
   - {fileID: 3154057686838489685}
   - {fileID: 3536342327654424220}
-  - {fileID: 3723171932711856969}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1962,7 +1981,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6213043121111752303}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ZoomController, Assembly-CSharp
         m_MethodName: ZoomIn
         m_Mode: 1
@@ -3867,7 +3886,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6213043121111752303}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ZoomController, Assembly-CSharp
         m_MethodName: ZoomOut
         m_Mode: 1
@@ -4476,18 +4495,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6511354877046866618}
-        m_TargetAssemblyTypeName: MapUIManager, Assembly-CSharp
-        m_MethodName: GroundSetup
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 6511354877046866618}
         m_TargetAssemblyTypeName: MapUIManager, Assembly-CSharp
         m_MethodName: OnMapButtonClicked
@@ -5410,57 +5417,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &8860246419309200290
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3723171932711856969}
-  - component: {fileID: 6213043121111752303}
-  m_Layer: 0
-  m_Name: TestScripts
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3723171932711856969
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8860246419309200290}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.283237, y: 17.109827, z: 0}
-  m_LocalScale: {x: 0.92485553, y: 0.92485553, z: 0.92485553}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7629596816574779605}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6213043121111752303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8860246419309200290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9cc34c501c32fc419c1f213b41680b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageRect: {fileID: 2033886419160772923}
-  playerRect: {fileID: 6340260576016536225}
-  zoomInButton: {fileID: 111348672645167302}
-  zoomOutButton: {fileID: 8445546642663169083}
-  zoomSpeed: 0.1
-  minScale: 1
-  maxScale: 2
 --- !u!1 &8877443526523823460
 GameObject:
   m_ObjectHideFlags: 0

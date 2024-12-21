@@ -5,47 +5,37 @@ using Yarn.Unity;
 
 public class CameraController : MonoBehaviour
 {
-    //public GameObject player;
-    //public GameObject playerCameraRoot;
-    //private Vector3 playeroffset = new Vector3(0, 5, 6);
-    //private Vector3 NPCoffset = new Vector3(-2, 2, 2);
-    //private GameObject NPCHead;
+    [SerializeField] private GameObject MainCamera;
+    [SerializeField] private GameObject NPCCamera;
 
-    private Camera MainCamera;
-    private Camera NPCCamera;
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        //Get the camera references
-        MainCamera = transform.Find("MainCamera").GetComponent<Camera>();
-        NPCCamera = transform.Find("DialogCamera").GetComponent<Camera>();
-
-        //NPCCamera.transform.position = transform.position + NPCoffset;
-        NPCCamera.enabled = false;
-        MainCamera.enabled = true;
-
+        MainCamera.SetActive(true);
+        NPCCamera.SetActive(false);
     }
 
-    public void SwitchedScene()
+    public void ActivateNPCCamera(Transform target)
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
-        //MainCamera.transform.position = transform.position + playeroffset;
-        //NPCCamera.transform.position = transform.position + NPCoffset;
-    }
+        //Turn off main camera, turn on NPC camera
+        MainCamera.SetActive(false);
+        NPCCamera.SetActive(true);
 
-    public void ActivateNPCCamera()
-    {
-        MainCamera.enabled = false;
-        NPCCamera.enabled = true;
-        //NPCHead = GameObject.FindGameObjectWithTag("NPCHead");
-        //NPCCamera.transform.LookAt(NPCHead.transform);
+        //Make NPC camera look at the target
+        NPCCamera.transform.LookAt(target);
+
+        //Make the player look at the target
+        transform.LookAt(target);
+
+        //Don't affect the player's X or Z axis
+        Vector3 rotation = transform.eulerAngles;
+        rotation.x = 0;
+        rotation.z = 0;
+        transform.eulerAngles = rotation;
     }
 
     public void DeactivateNPCCamera()
     {
-        NPCCamera.enabled = false;
-        MainCamera.enabled = true;
+        MainCamera.SetActive(true);
+        NPCCamera.SetActive(false);
     }
 }

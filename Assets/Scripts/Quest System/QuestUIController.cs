@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class QuestUIController : MonoBehaviour
 {
-    public QuestController questController;
+    public QuestManager questController;
     public UIDocument uiDocument;
     public VisualTreeAsset stepUITemplate;
     

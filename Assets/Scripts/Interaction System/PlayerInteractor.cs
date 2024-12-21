@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerInteractor : MonoBehaviour
 {
     public float radius = 10f;
-    public GameObject Player;
     public bool DistanceDebug = false;
 
 
@@ -16,17 +15,13 @@ public class PlayerInteractor : MonoBehaviour
 
     private Interactable _mCurrentInteractable;
     private bool m_HasInteractedInPreviousFrame = false;
-    void Start()
-    {
-        if (Player == null) Player = this.gameObject;
-    }
 
     // Update is called once per frame
     void Update()
     {
         bool tickHasObj = false;
         // Detection
-        Collider[] objectsInRange = Physics.OverlapSphere(Player.transform.position, radius); // PERF: This could use a NonAlloc method... But no need as of now I guess
+        Collider[] objectsInRange = Physics.OverlapSphere(transform.position, radius); // PERF: This could use a NonAlloc method... But no need as of now I guess
         Interactable detectedInteractable;
         foreach (var foundCollider in objectsInRange)
         {
@@ -53,6 +48,6 @@ public class PlayerInteractor : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if(DistanceDebug) Gizmos.DrawWireSphere(Player.transform.position, radius);
+        if(DistanceDebug) Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

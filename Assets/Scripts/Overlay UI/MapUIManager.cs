@@ -12,14 +12,17 @@ public class MapUIManager : MonoBehaviour
     public GameObject playerMarker;
     private Vector3 groundDimensions = new Vector3(200, 0, 200);
 
+    private void Start()
+    {
+        GroundSetup();    
+    }
+
     public void OnCompassButtonClicked()
     {
-        //Player.GetComponent<Player>().ShowCompass();
         Debug.Log("Compass Button Clicked");
     }
     public void OnMapButtonClicked(Transform playerMarker)
     {
-        //Player.GetComponent<Player>().ShowMap();
         MapUI.SetActive(true);
         UpdateMapState(playerMarker);
     }
@@ -29,31 +32,18 @@ public class MapUIManager : MonoBehaviour
         MapUI.SetActive(false);
     }
 
-    // get Ground Dimension
-    public Vector3 GetGroundDimension()
+    public void GroundSetup ()
     {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.InitializeGroundDimensions("Ground/Map");
-            Vector3 groundDimensions = GameManager.Instance.GroundDimensions;
-            //Vector3 groundDimension = GameManager.Instance.InitializeGroundDimensions("Ground/Map");
-            //Debug.Log("Ground Dimension from another scene: " + groundDimensions);
-            return groundDimensions;
-        }
-        else
-        {
-            //Debug.LogError("PlayerManager instance is null!");
-            //return 999, 999, 999; // Return a default value if PlayerManager is not assigned
-            return Vector3.zero;
-        }
-    }
-
-    public void GroundSetup (GameObject ground)
-    {
-        Renderer renderer = ground.GetComponent<Renderer>();
-
+        GameObject ground = GameObject.Find("Town Map");
+        
+        //If we are in the town scene
         if (ground != null)
+        {
+            Renderer renderer = ground.GetComponent<Renderer>();
             groundDimensions = renderer.bounds.size;
+        }
+            
+        //If not in the town scene
         else
             groundDimensions = new Vector3(200, 0, 200);
 
@@ -93,6 +83,5 @@ public class MapUIManager : MonoBehaviour
         Debug.Log($"Map Dimensions: {mapWidth}x{mapHeight}");
         Debug.Log($"Player Icon Position: {playerX}, {playerY}");
         Debug.Log($"Player Rotation Y: {playerRotationY}");
-
     }
 }

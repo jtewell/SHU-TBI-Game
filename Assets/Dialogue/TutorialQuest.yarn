@@ -1,0 +1,84 @@
+﻿title: Quest0_Instructions_Start
+---
+Welcome to the tutorial!
+Use the joystick in the bottom left corner of the screen to walk.
+Try using it now to walk to explore the house.
+===
+
+title: Quest0_Instructions_Item
+---
+You can pick up items that are close to you by pressing the E key on your keyboard.
+Try picking up your keys from the table.
+===
+
+title: Quest0_Instructions_Backpack
+---
+Items that you pick up are added to your backpack.
+You can store up to eight items.
+Try clicking on your backpack to see the keys you picked up.
+===
+
+title: Quest0_Instructions_Door
+---
+You can open doors that are close to you by pressing the E key on your keyboard.
+Try opening the door in the top left corner of the kitchen to go outside into town.
+===
+
+title: Quest0_Instructions_NPC
+---
+Oh it's your friend Ricky over there!
+You can talk to people that are close to you by pressing the E key on the keyboard.
+Try talking to Ricky and see what he wants.
+===
+
+title: Quest0_NPC_Ricky
+---
+<<if $talkedToRicky == false>>
+	Hey can you help me find my skateboard? I think I left it in the park somewhere.
+	If you find it, can you pick it up and bring it to me? 
+	<<set $talkedToRicky = true>>
+<<else>>
+	Have you found my skateboard yet?
+<<endif>>
+
+<<if $foundSkateboard == true>>
+	Wow! Thank you so much!
+	<<jump Quest0_Complete>>
+<<endif>>
+===
+
+title: Quest0_Instructions_Map
+---
+You can check the map to search for locations in the town.
+You can also see your location with the red marker.
+Try opening the map to search for the park.
+===
+
+title: Quest0_Instructions_TodoList
+---
+The todo list at the top of the screen keeps track of your tasks.
+Completed tasks will be shown with a checkbox next to them.
+You objective is to complete all tasks shown in the todo list.
+Try accessing the list by clicking on it now.
+===
+
+title: Quest0_Instructions_HelpButton
+---
+If you ever get stuck or don't know how to complete an objective, click the help button!
+It's the (?) button in the top left corner of the screen.
+If you ever need to pause the game, click the (||) button next to help.
+OK! That's enough explaining. Go find that skateboard!
+===
+
+title: Quest0_Item_Skateboard
+---
+Hey, you found Ricky's skateboard!
+Like your house keys, the skateboard was added to your backpack.
+Go back to Ricky and give it to him!
+<<set $foundSkateboard = true>>
+===
+
+title: Quest0_Complete
+---
+This completes the tutorial.
+===

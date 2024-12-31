@@ -8,8 +8,6 @@ using TMPro;
 
 public class QuestUIControllerUGUI : MonoBehaviour
 {
-    public QuestController questController;
-
     public TMP_Text questTitle;
     public TMP_Dropdown questStepDropdown;
     public Sprite checkmarkOn;
@@ -22,15 +20,13 @@ public class QuestUIControllerUGUI : MonoBehaviour
 
     public void RenderQuest()
     {
-        if (questController == null)
-        {
-            return;
-        }
+        Debug.Log("Hi");
+        if (QuestManager.Instance == null) return;
         questStepDropdown.ClearOptions();
 
         List<TMP_Dropdown.OptionData> stepList = new List<TMP_Dropdown.OptionData>();
 
-        foreach (var step in questController.currentQuest.steps)
+        foreach (var step in QuestManager.Instance.currentQuest.steps)
         {
             Sprite checkmark;
             if (step.IsCompleted == true)

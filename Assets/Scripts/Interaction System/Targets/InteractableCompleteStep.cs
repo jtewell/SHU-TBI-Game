@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class InteractableCompleteStep : MonoBehaviour
 {
-    public QuestController questController;
-
-
     public void FinishStep(string step)
     {
-        questController.FinishStep(step);
+        QuestManager.Instance.FinishStep(step);
     }
 }

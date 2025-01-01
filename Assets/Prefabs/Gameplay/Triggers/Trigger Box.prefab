@@ -66,36 +66,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8555aa3af81f974dbff39211b874d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enterIsOneShot: 1
+  enterIsOneShot: 0
   enterEventCooldown: 0
   onTriggerEnterEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Yarn.Unity.DialogueRunner, YarnSpinner.Unity
-        m_MethodName: StartDialogue
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Items
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1216315600592316364}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Items
-          m_BoolArgument: 0
-        m_CallState: 2
-  exitIsOneShot: 1
+      m_Calls: []
+  exitIsOneShot: 0
   exitEventCooldown: 0
   onTriggerExitEvent:
     m_PersistentCalls:

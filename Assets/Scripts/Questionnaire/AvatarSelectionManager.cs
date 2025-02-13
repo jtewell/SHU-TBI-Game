@@ -4,7 +4,6 @@ public class AvatarSelectionManager : MonoBehaviour
 {
     // Static instance of the class (Singleton)
     private static AvatarSelectionManager _instance;
-    public AvatarSciptableObject Avi;
     // Public static property to access the Singleton instance
     public static AvatarSelectionManager Instance
     {
@@ -31,7 +30,6 @@ public class AvatarSelectionManager : MonoBehaviour
     {
         SelectedGender = gender;
         Debug.Log("Selected Gender: " + gender);
-        Avi.Gender = gender;
     }
 
     // Method to set the selected avatar
@@ -39,7 +37,6 @@ public class AvatarSelectionManager : MonoBehaviour
     {
         SelectedAvatar = avatarName;
         Debug.Log("Selected Avatar: " + avatarName);
-        Avi.Name= avatarName;
     }
 
     // Private constructor to prevent instantiation from outside

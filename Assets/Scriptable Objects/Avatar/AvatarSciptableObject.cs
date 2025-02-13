@@ -9,6 +9,5 @@ public class AvatarSciptableObject : ScriptableObject
 {
     public string Gender;
     public string Name;
-    public string Color;
     public Texture texture;
 }

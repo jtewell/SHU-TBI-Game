@@ -14,7 +14,7 @@ public class AvatarScrolling : MonoBehaviour
         continueGamePlayButton, previousButton;
     public Label titleAvatarSelection, thankYouLabel;
     private string selectedGender;
-
+    public AvatarSciptableObject avi;
     // Scroll amount per click
     private float scrollAmount = 200f;
 
@@ -23,6 +23,7 @@ public class AvatarScrolling : MonoBehaviour
 
     void Start()
     {
+        
         // Get the root UI document
         var root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -92,7 +93,7 @@ public class AvatarScrolling : MonoBehaviour
         Debug.Log("Selected Gender: "+gender);
         // Store the selected gender in the Singleton class
         AvatarSelectionManager.Instance.SetGender(gender);
-
+        avi.Gender = gender;
 
         avatarGenderSelectionContainer.style.display = DisplayStyle.None;
         avatarContainer.style.display = DisplayStyle.Flex;
@@ -118,7 +119,7 @@ public class AvatarScrolling : MonoBehaviour
 
         // Store the selected avatar in the Singleton class
         AvatarSelectionManager.Instance.SetAvatar(avatar.name);
-
+        avi.Name= avatar.name;
         // Show and position the confirmation container near the selected avatar
         DisplayConfirmationNearAvatar(avatar);
     }

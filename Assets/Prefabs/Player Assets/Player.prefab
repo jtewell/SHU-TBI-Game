@@ -1176,6 +1176,7 @@ GameObject:
   - component: {fileID: 4416926081852918493}
   - component: {fileID: 5289053303823920192}
   - component: {fileID: 4403624606523064826}
+  - component: {fileID: -8363436229076498710}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1456,10 +1457,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2
-  Player: {fileID: 4416926081852918481}
   DistanceDebug: 1
   OnInteract: {fileID: 5104454099416834834}
   ActionText: {fileID: 1710219821974393713}
+--- !u!114 &-8363436229076498710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36e61c6253ca924a89b1c05c76986e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  genderOptions:
+  - bodyMesh: {fileID: 3896371383025835918, guid: 23d8f7294e46c074ca8999acdaaeb280, type: 3}
+    skinTextures:
+    - {fileID: 2800000, guid: 8ad00895f06ea2a4abbadac93acb55da, type: 3}
+    - {fileID: 2800000, guid: 39d65ddd12374194a91bb03f03229a09, type: 3}
+    - {fileID: 2800000, guid: 1e13e898c82a93e4092cc41d00b7f67d, type: 3}
+    - {fileID: 2800000, guid: dd84494bf4410e64eb5b8fd9f0f7d0b4, type: 3}
+  - bodyMesh: {fileID: 3896371383025835918, guid: 23d8f7294e46c074ca8999acdaaeb280, type: 3}
+    skinTextures:
+    - {fileID: 2800000, guid: 8ad00895f06ea2a4abbadac93acb55da, type: 3}
+    - {fileID: 2800000, guid: 39d65ddd12374194a91bb03f03229a09, type: 3}
+    - {fileID: 2800000, guid: 1e13e898c82a93e4092cc41d00b7f67d, type: 3}
+    - {fileID: 2800000, guid: dd84494bf4410e64eb5b8fd9f0f7d0b4, type: 3}
+  - bodyMesh: {fileID: 3896371383025835918, guid: 23d8f7294e46c074ca8999acdaaeb280, type: 3}
+    skinTextures:
+    - {fileID: 2800000, guid: 8ad00895f06ea2a4abbadac93acb55da, type: 3}
+    - {fileID: 2800000, guid: 39d65ddd12374194a91bb03f03229a09, type: 3}
+    - {fileID: 2800000, guid: 1e13e898c82a93e4092cc41d00b7f67d, type: 3}
+    - {fileID: 2800000, guid: dd84494bf4410e64eb5b8fd9f0f7d0b4, type: 3}
+  faceTextures:
+  - {fileID: 2800000, guid: 2fcd87e2b492fb947ab968707006db5b, type: 3}
+  - {fileID: 2800000, guid: 0c26fe6f1de45c3488a258f35a7dbaa3, type: 3}
+  - {fileID: 2800000, guid: 3e29f8e3952e02f41928527f38f352d6, type: 3}
+  - {fileID: 2800000, guid: a18d34b0fb42c0f47b2c47c21190b71f, type: 3}
+  avatarSkinnedMesh: {fileID: 2931276858289305478}
+  faceMaterial: {fileID: 2100000, guid: c1631e4175accd643913ed948c5587f3, type: 2}
+  bodyMaterial: {fileID: 2100000, guid: 5a8571d3433777d4f815b1546cf3df34, type: 2}
+  avatarData: {fileID: 11400000, guid: bf7f21d77e712cf409fff62005f8d706, type: 2}
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0
@@ -3040,6 +3080,11 @@ PrefabInstance:
 --- !u!4 &143294649591503641 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 23d8f7294e46c074ca8999acdaaeb280, type: 3}
+  m_PrefabInstance: {fileID: 466031044297030898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &2931276858289305478 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3376098838661614452, guid: 23d8f7294e46c074ca8999acdaaeb280, type: 3}
   m_PrefabInstance: {fileID: 466031044297030898}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1292205679942218437

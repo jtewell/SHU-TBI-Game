@@ -93,6 +93,7 @@ public class AvatarScrolling : MonoBehaviour
         // Store the selected gender in the Singleton class
         AvatarSelectionManager.Instance.SetGender(gender);
 
+
         avatarGenderSelectionContainer.style.display = DisplayStyle.None;
         avatarContainer.style.display = DisplayStyle.Flex;
     }

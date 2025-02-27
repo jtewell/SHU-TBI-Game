@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 [ CreateAssetMenu(fileName = "Avatar", menuName = "SHU/Avatar", order = 1)]
 
-public class AvatarSciptableObject : ScriptableObject
+public class AvatarData : ScriptableObject
 {
     public string Gender;
     public string Name;

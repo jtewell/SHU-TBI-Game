@@ -14,7 +14,7 @@ public class AvatarScrolling : MonoBehaviour
         continueGamePlayButton, previousButton;
     public Label titleAvatarSelection, thankYouLabel;
     private string selectedGender;
-    public AvatarSciptableObject avi;
+    public AvatarData avi;
     // Scroll amount per click
     private float scrollAmount = 200f;
 

@@ -6,13 +6,20 @@ using System.Collections.Generic;
 
 public class AvatarScrolling : MonoBehaviour
 {
+    //Avatar Data Scriptable Object
+    public AvatarData avatarData;
+
     // UI elements references
     public VisualElement avatarContainer, avatarSelectionContainer, scrollingButtonsContainer, selectAvatarConfirmationContainer, 
         avatarGenderSelectionContainer, thankYouMessageContainer, charMessageContainer, previousButtonContainer;
+
     public ScrollView avatarSelectionScrollingView;
+
     public Button scrollLeft, scrollRight, yesButton, noButton, maleButton, femaleButton, nonBinaryButton, 
         continueGamePlayButton, previousButton;
+
     public Label titleAvatarSelection, thankYouLabel;
+
     private string selectedGender;
 
     // Scroll amount per click
@@ -23,6 +30,7 @@ public class AvatarScrolling : MonoBehaviour
 
     void Start()
     {
+        
         // Get the root UI document
         var root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -59,10 +67,10 @@ public class AvatarScrolling : MonoBehaviour
         previousButton.clicked += () => OnPreviousButtonClicked();
         continueGamePlayButton.clicked += () => OnContinueGamePlayButtonClicked();
 
-
-        // Hide the avatar confirmation container initially
+        // Hide the avatar confirmation and thank you containers initially
         avatarContainer.style.display = DisplayStyle.None;
         selectAvatarConfirmationContainer.style.display = DisplayStyle.None;
+        thankYouMessageContainer.style.display = DisplayStyle.None;
 
         // Register button click events for the Yes/No confirmation
         yesButton.clicked += OnYesButtonClicked;
@@ -72,7 +80,8 @@ public class AvatarScrolling : MonoBehaviour
         avatarContainerstore.ForEach(avatar => avatar.RegisterCallback<ClickEvent>(ev => OnAvatarClicked(avatar)));
         avatarSelectionScrollingView.RegisterCallback<GeometryChangedEvent>(OnLayoutChanged);
 
-        OnPreviousButtonClicked();
+        //Show the avatar gender buttons first
+        avatarGenderSelectionContainer.style.display = DisplayStyle.Flex;
 
     }
     //create a function to handle previous button click event 
@@ -89,9 +98,21 @@ public class AvatarScrolling : MonoBehaviour
     private void OnGenderSelected(string gender)
     {
         selectedGender = gender;
-        Debug.Log("Selected Gender: "+gender);
-        // Store the selected gender in the Singleton class
-        AvatarSelectionManager.Instance.SetGender(gender);
+        Debug.Log("Selected Gender: " + gender);
+
+        // Store the selected gender in the scriptable object
+        switch (gender)
+        {
+            case "Male":
+                avatarData.gender = AvatarData.Gender.Male;
+                break;
+            case "Female":
+                avatarData.gender = AvatarData.Gender.Female;
+                break;
+            case "Non-Binary":
+                avatarData.gender = AvatarData.Gender.NonBinary;
+                break;
+        }
 
         avatarGenderSelectionContainer.style.display = DisplayStyle.None;
         avatarContainer.style.display = DisplayStyle.Flex;
@@ -115,8 +136,27 @@ public class AvatarScrolling : MonoBehaviour
         selectedAvatar = avatar;
         HighlightAvatar(avatar);  // Highlight the newly selected avatar
 
-        // Store the selected avatar in the Singleton class
-        AvatarSelectionManager.Instance.SetAvatar(avatar.name);
+        // Store the selected race in the scriptable object
+        switch (avatar.name)
+        {
+            case "avatar1Container":
+                avatarData.skinColor = AvatarData.SkinColor.White;
+                break;
+            case "avatar2Container":
+                avatarData.skinColor = AvatarData.SkinColor.Pale;
+                break;
+            case "avatar3Container":
+                avatarData.skinColor = AvatarData.SkinColor.LightBrown;
+                break;
+            case "avatar4Container":
+                avatarData.skinColor = AvatarData.SkinColor.DarkBrown;
+                break;
+
+            //Need to eliminate this option, for now default to white
+            case "avatar5Container":
+                avatarData.skinColor = AvatarData.SkinColor.White;
+                break;
+        }
 
         // Show and position the confirmation container near the selected avatar
         DisplayConfirmationNearAvatar(avatar);

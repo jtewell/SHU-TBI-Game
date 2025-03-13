@@ -29,7 +29,7 @@ public class OutlineEffectOnHover : MonoBehaviour
                 }
             }
             outlineObject.GetComponent<Collider>().enabled = false;
-            //outlineObject.GetComponent<OutlineEffectOnHover>().enabled = false;
+            outlineObject.GetComponent<OutlineEffectOnHover>().enabled = false;
             this.rend = rend;
         }
         private void OnMouseExit()

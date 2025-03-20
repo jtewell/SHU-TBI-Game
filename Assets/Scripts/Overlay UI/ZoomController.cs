@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class ZoomController : MonoBehaviour
 {
+    public RawImage RawImage;
     public RectTransform imageRect; // The image to zoom
     public RectTransform playerRect;     // The target visual element (player)
 
@@ -25,14 +26,16 @@ public class ZoomController : MonoBehaviour
     {
         // Increase the scale, clamped to the maximum value
         Vector3 newScale = imageRect.localScale + Vector3.one * zoomSpeed;
-        imageRect.localScale = Vector3.Min(newScale, Vector3.one * maxScale);
+        //imageRect.localScale= Vector3.Min(newScale, Vector3.one * maxScale);
+        RawImage.uvRect = new Rect(0, 0, 0.5f, 0.5f);
     }
 
     public void ZoomOut()
     {
         // Decrease the scale, clamped to the minimum value
         Vector3 newScale = imageRect.localScale - Vector3.one * zoomSpeed;
-        imageRect.localScale = Vector3.Max(newScale, Vector3.one * minScale);
+        //imageRect.localScale = Vector3.Max(newScale, Vector3.one * minScale);
+        RawImage.uvRect = new Rect(0, 0, 1f, 1f);
     }
 
     private void AdjustZoom(Vector3 zoomDelta)

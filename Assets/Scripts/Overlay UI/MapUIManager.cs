@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-
 public class MapUIManager : MonoBehaviour
 {
     public GameObject MapUI;
@@ -73,7 +72,7 @@ public class MapUIManager : MonoBehaviour
         playerMarker.GetComponent<RectTransform>().anchoredPosition = new Vector2(playerX, playerY);
 
         //Lastly, update the player marker's rotation- first get the player's rotation
-        float playerRotationY = playerTransform.rotation.eulerAngles.y;
+        float playerRotationY = 180 - playerTransform.localRotation.eulerAngles.y;
 
         //Then apply it to the marker
         playerMarker.transform.rotation = Quaternion.Euler(0, 0, playerRotationY);

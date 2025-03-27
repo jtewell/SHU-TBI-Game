@@ -788,6 +788,7 @@ GameObject:
   - component: {fileID: 5491076869420687640}
   - component: {fileID: 6511354877046866618}
   - component: {fileID: 7453236034237547530}
+  - component: {fileID: 2154385133188220566}
   m_Layer: 5
   m_Name: Map UI
   m_TagString: Untagged
@@ -892,6 +893,20 @@ MonoBehaviour:
   zoomSpeed: 0.1
   minScale: 0.6
   maxScale: 2
+--- !u!114 &2154385133188220566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450899037632556207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6920377e2e680ba4ea540dc928f9d3bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageRect: {fileID: 3989534862639621285}
+  movespeed: 20
 --- !u!1 &1650629145371760015
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,7 +55,8 @@ public class MapUIManager : MonoBehaviour
         Vector3 playerPos = playerTransform.position;
 
         // Get map object child
-        GameObject MapObject = MapUI.transform.Find("Map").gameObject;
+        GameObject MaskObject = MapUI.transform.Find("Mask").gameObject;
+        GameObject MapObject = MaskObject.transform.Find("Map").gameObject;
 
         //Get the map object's rect component
         RectTransform mapDimensions = MapObject.GetComponent<RectTransform>();

@@ -26,16 +26,15 @@ public class ZoomController : MonoBehaviour
     {
         // Increase the scale, clamped to the maximum value
         Vector3 newScale = imageRect.localScale + Vector3.one * zoomSpeed;
-        //imageRect.localScale= Vector3.Min(newScale, Vector3.one * maxScale);
-        RawImage.uvRect = new Rect(0, 0, 0.5f, 0.5f);
-    }
+        imageRect.localScale = Vector3.Min(newScale, Vector3.one * maxScale);
 
+    }
     public void ZoomOut()
     {
         // Decrease the scale, clamped to the minimum value
         Vector3 newScale = imageRect.localScale - Vector3.one * zoomSpeed;
-        //imageRect.localScale = Vector3.Max(newScale, Vector3.one * minScale);
-        RawImage.uvRect = new Rect(0, 0, 1f, 1f);
+        imageRect.localScale = Vector3.Max(newScale, Vector3.one * minScale);
+        
     }
 
     private void AdjustZoom(Vector3 zoomDelta)

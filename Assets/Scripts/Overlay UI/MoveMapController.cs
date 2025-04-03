@@ -6,8 +6,10 @@ public class MoveMapController : MonoBehaviour
 {
     public RectTransform imageRect;
 
-    public float movespeed = 0.5f;
+    public float movespeed = 20f;
+    private float origionalScale = 1f;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,25 +19,33 @@ public class MoveMapController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float CurrentScaleFactor = imageRect.localScale.x;
+        float scaleFactor = CurrentScaleFactor - origionalScale;
+        float speed = movespeed + (scaleFactor * 200f);
         if (Input.GetKey(KeyCode.J))
         {
-            imageRect.transform.position -= new Vector3(movespeed * Time.deltaTime, 0);
+            imageRect.transform.position -= new Vector3(speed * Time.deltaTime, 0);
+            
         }
         if (Input.GetKey(KeyCode.G))
         {
-            imageRect.transform.position += new Vector3(movespeed * Time.deltaTime, 0);
+            imageRect.transform.position += new Vector3(speed * Time.deltaTime, 0);
             
         }
         if (Input.GetKey(KeyCode.H))
         {
-            imageRect.transform.position += new Vector3(0, movespeed * Time.deltaTime);
-
+            imageRect.transform.position += new Vector3(0, speed * Time.deltaTime);
+            
         }
         if (Input.GetKey(KeyCode.Y))
         {
-            imageRect.transform.position -= new Vector3(0, movespeed * Time.deltaTime);
-
+            imageRect.transform.position -= new Vector3(0, speed * Time.deltaTime);
+        }
+            
+        if (Input.GetKey(KeyCode.P))
+        {
+            Debug.Log(CurrentScaleFactor);
+            Debug.Log(speed);
         }
     }
 }

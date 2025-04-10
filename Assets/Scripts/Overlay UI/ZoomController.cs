@@ -11,7 +11,7 @@ public class ZoomController : MonoBehaviour
     public Button zoomInButton;     // The button to zoom in
     public Button zoomOutButton;    // The button to zoom out
     public float zoomSpeed = 0.1f;  // Speed of zooming
-    public float minScale = 0.6f;   // Minimum zoom scale 
+    public float minScale = 1f;   // Minimum zoom scale 
     public float maxScale = 2.0f;   // Maximum zoom scale
 
 

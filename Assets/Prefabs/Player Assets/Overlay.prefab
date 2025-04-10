@@ -890,8 +890,8 @@ MonoBehaviour:
   playerRect: {fileID: 6340260576016536225}
   zoomInButton: {fileID: 111348672645167302}
   zoomOutButton: {fileID: 8445546642663169083}
-  zoomSpeed: 0.1
-  minScale: 0.6
+  zoomSpeed: 0.4
+  minScale: 1
   maxScale: 2
 --- !u!114 &2154385133188220566
 MonoBehaviour:
@@ -906,6 +906,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageRect: {fileID: 3989534862639621285}
+  playerMarker: {fileID: 7291062515126768281}
+  compassButton: {fileID: 5750130649041207247}
   movespeed: 20
 --- !u!1 &1650629145371760015
 GameObject:

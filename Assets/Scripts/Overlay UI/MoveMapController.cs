@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveMapController : MonoBehaviour
 {
     public RectTransform imageRect;
-
+    public GameObject playerMarker;
+    public Button compassButton;
     public float movespeed = 20f;
     private float origionalScale = 1f;
 
@@ -13,7 +15,7 @@ public class MoveMapController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+         compassButton.onClick.AddListener(MoveToPlayer);
     }
 
     // Update is called once per frame
@@ -48,4 +50,9 @@ public class MoveMapController : MonoBehaviour
             Debug.Log(speed);
         }
     }
+    private void MoveToPlayer()
+    {
+        imageRect.transform.position = playerMarker.transform.position;
+    }
+
 }

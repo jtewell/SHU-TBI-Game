@@ -569,6 +569,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1206690}
+  - {fileID: 1643737580}
+  - {fileID: 1390959124}
   m_Father: {fileID: 100979549}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &542508511
@@ -3283,7 +3285,6 @@ Transform:
   - {fileID: 1562753425491805251}
   - {fileID: 1614718374}
   - {fileID: 1014008267}
-  - {fileID: 1390959124}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &966514848
@@ -3548,6 +3549,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5699136248219789768, guid: c022c8625f531ea47a48466e91e023f1, type: 3}
   m_PrefabInstance: {fileID: 1215899904}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1293355244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1293355245}
+  m_Layer: 0
+  m_Name: Front Laundromat Door
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1293355245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293355244}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 89.42, y: 0, z: 64.369995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1643737580}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1310692951
 GameObject:
   m_ObjectHideFlags: 0
@@ -3690,7 +3722,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 903912361}
+    m_TransformParent: {fileID: 502404309}
     m_Modifications:
     - target: {fileID: 773998339550248279, guid: db77ea546c8a75d4f9a62852fffe7ea5, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3712,6 +3744,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fddfad3de80e91949aa75f9aa5c04932, type: 2}
+    - target: {fileID: 7174598137799562990, guid: db77ea546c8a75d4f9a62852fffe7ea5, type: 3}
+      propertyPath: nextScene
+      value: Town
+      objectReference: {fileID: 0}
+    - target: {fileID: 7174598137799562990, guid: db77ea546c8a75d4f9a62852fffe7ea5, type: 3}
+      propertyPath: spawnPoint
+      value: Laundromat Outside
+      objectReference: {fileID: 0}
     - target: {fileID: 9034290013125311465, guid: db77ea546c8a75d4f9a62852fffe7ea5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 89.37499
@@ -5664,6 +5704,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6042832025230935937, guid: 1b50b59d3a6a85140aa426225b010b3a, type: 3}
   m_PrefabInstance: {fileID: 1614718373}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1643737579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1643737580}
+  m_Layer: 0
+  m_Name: Spawn Points
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1643737580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643737579}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1293355245}
+  m_Father: {fileID: 502404309}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1674913100
 GameObject:
   m_ObjectHideFlags: 0

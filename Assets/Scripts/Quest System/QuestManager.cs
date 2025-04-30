@@ -25,6 +25,7 @@ public class QuestManager : PersistentMonoSingleton<QuestManager>
 
     public void FinishStep(string stepId)
     {
+        Debug.Log("Finishing step " + stepId);
         var step = currentQuest.steps.FirstOrDefault(x => x.StepId == stepId);
         if (step == null)
         {

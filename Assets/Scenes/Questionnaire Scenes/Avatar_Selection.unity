@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 6659202}
   - component: {fileID: 6659203}
   - component: {fileID: 6659204}
-  - component: {fileID: 6659205}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -185,18 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ea3dbf4800153438441b8618b67cf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6659205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6659201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5059626ef29f5840a8cf465d181485d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  avatarData: {fileID: 11400000, guid: bf7f21d77e712cf409fff62005f8d706, type: 2}
+  tutorialQuest: {fileID: 11400000, guid: d1724bff19e52f44fb95727d6b1053f3, type: 2}
 --- !u!1 &668898597
 GameObject:
   m_ObjectHideFlags: 0

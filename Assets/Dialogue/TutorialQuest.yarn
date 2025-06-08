@@ -42,8 +42,7 @@ title: Quest0_NPC_Ricky
 <<endif>>
 
 <<if $foundSkateboard == true>>
-	Wow! Thank you so much!
-	<<jump Quest0_Complete>>
+	<<jump Quest0_NPC_GaveSkateboard>>
 <<endif>>
 ===
 
@@ -76,6 +75,12 @@ Hey, you found Ricky's skateboard!
 Like your house keys, the skateboard was added to your backpack.
 Go back to Ricky and give it to him!
 <<set $foundSkateboard = true>>
+===
+
+title: Quest0_NPC_GaveSkateboard
+---
+Wow! Thank you so much!
+<<set $gaveSkateboardToRicky = true>>
 ===
 
 title: Quest0_Complete

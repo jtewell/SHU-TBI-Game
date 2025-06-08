@@ -29,6 +29,8 @@ using UnityEngine;
 
         #region Properties
 
+        public static bool HasInstance => instance != null;
+
         /// <summary>
         /// Gets the instance.
         /// </summary>

@@ -1,10 +1,15 @@
-﻿ using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
+
+[System.Serializable]
+public class FloatEvent : UnityEvent<float> { }
 
 namespace StarterAssets
 {
@@ -32,19 +37,19 @@ namespace StarterAssets
         public AudioClip[] FootstepAudioClips;
         [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
 
-        [Space(10)]
-        [Tooltip("The height the player can jump")]
-        public float JumpHeight = 1.2f;
+        //[Space(10)]
+        //[Tooltip("The height the player can jump")]
+        //private float JumpHeight = 0.0f; //1.2f;
 
-        [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
-        public float Gravity = -15.0f;
+        //[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+        private float Gravity = 0.0f;//-15.0f;
 
-        [Space(10)]
-        [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
-        public float JumpTimeout = 0.50f;
+        //[Space(10)]
+        //[Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
+        private float JumpTimeout = 0.0f;//0.50f;
 
-        [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
-        public float FallTimeout = 0.15f;
+        //[Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
+        private float FallTimeout = 0.15f;
 
         [Header("Player Grounded")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
@@ -75,6 +80,11 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        [Header("Measurement Events")]
+        public FloatEvent OnWalkUpdate;
+
+
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -86,6 +96,8 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+
+
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -150,6 +162,8 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+
         }
 
         private void Update()
@@ -300,7 +314,7 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+/*                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
@@ -310,7 +324,7 @@ namespace StarterAssets
                     {
                         _animator.SetBool(_animIDJump, true);
                     }
-                }
+                }*/
 
                 // jump timeout
                 if (_jumpTimeoutDelta >= 0.0f)

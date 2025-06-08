@@ -10,4 +10,12 @@ public class Quest : ScriptableObject
 
     [SerializeField]
     public BaseStep[] steps;
+
+    public void ClearQuestSteps ()
+    {
+        foreach (BaseStep step in steps)
+        {
+            step.IsCompleted = false;
+        }
+    }
 }

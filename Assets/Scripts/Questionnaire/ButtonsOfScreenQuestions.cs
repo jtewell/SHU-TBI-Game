@@ -6,7 +6,6 @@ using UnityEditor;
 using UnityEngine.UIElements.StyleSheets;
 
 
-
 public class ButtonsOfScreenQuestions : MonoBehaviour
 {
 
@@ -14,14 +13,12 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
     private Button[] q3Buttons = new Button[2];
     private Button[] q4Buttons = new Button[2];
     private Button[] q7Buttons = new Button[2];
-    //private Button selectedButton;
 
     // Individual selected buttons for each question
     private Button selectedGenderButton;
     private Button selectedQ3Button;
     private Button selectedQ4Button;
     private Button selectedQ7Button;
-
 
     void Start()
 
@@ -99,7 +96,7 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         selectedGenderButton.AddToClassList("selected");
 
         // Update UserDataManager with the selected gender
-        ScreeningQuestionUserDataManager.Instance.SelectedGender = gender;
+        MeasurementDataManager.Instance.gender = gender;
 
         // Call method to check if the user can continue
         //HandleNextStep();
@@ -120,7 +117,7 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         selectedQ3Button.AddToClassList("selected");
 
         // Set the selected option for Q3 in UserDataManager
-        ScreeningQuestionUserDataManager.Instance.Q3SelectedOption = option;
+        MeasurementDataManager.Instance.Q3SelectedOption = option;
 
     }
     // Method to handle Q4 button clicks
@@ -137,8 +134,7 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         selectedQ4Button.AddToClassList("selected");
 
         // Set the selected option for Q4 in UserDataManager
-        ScreeningQuestionUserDataManager.Instance.Q4SelectedOption = option;
-
+        MeasurementDataManager.Instance.Q4SelectedOption = option;
     }
     // Method to handle Q7 button clicks
     private void OnQ7ButtonClick(Button clickedButton, string option)
@@ -154,7 +150,7 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         selectedQ7Button.AddToClassList("selected");
 
         // Set the selected option for Q7 in UserDataManager
-        ScreeningQuestionUserDataManager.Instance.Q7SelectedOption = option;
+        MeasurementDataManager.Instance.Q7SelectedOption = option;
 
     }
 }

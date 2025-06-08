@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 
 public class QuestUIController : MonoBehaviour
 {
-    public QuestManager questController;
     public UIDocument uiDocument;
     public VisualTreeAsset stepUITemplate;
     
@@ -18,8 +17,8 @@ public class QuestUIController : MonoBehaviour
     //TODO: Convince Jordan to Update Unity for DataBinding support
     public void RenderQuest()
     {
-        questTitle.text = questController.currentQuest.questDisplayName;
-        questSteps.itemsSource = questController.currentQuest.steps;
+        questTitle.text = QuestManager.Instance.CurrentQuest.questDisplayName;
+        questSteps.itemsSource = QuestManager.Instance.CurrentQuest.steps;
         questSteps.Rebuild();
     }
 
@@ -38,7 +37,7 @@ public class QuestUIController : MonoBehaviour
         
         questSteps.bindItem = (item, index) =>
         {
-            (item.userData as QuestUIItemController)?.SetStepData(questController.currentQuest.steps[index]);
+            (item.userData as QuestUIItemController)?.SetStepData(QuestManager.Instance.CurrentQuest.steps[index]);
         };
 
         questSteps.fixedItemHeight = 100; //TODO: Use Virtualization for Dynamic

@@ -24,6 +24,8 @@ public class OnDialogueNodeEvent : MonoBehaviour
     private bool _startHasBeenTriggered = false;
     private bool _completeHasBeenTriggered = false;
 
+    private DialogueRunner _dialogueRunner;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,16 +35,41 @@ public class OnDialogueNodeEvent : MonoBehaviour
         if (dialogueSystem != null)
         {
             //Get a reference to the dialogue component
-            DialogueRunner dialogueRunner = dialogueSystem.transform.GetComponent<DialogueRunner>();
+            _dialogueRunner = dialogueSystem.transform.GetComponent<DialogueRunner>();
 
             //Subscribe to dialogue node start and event events
-            dialogueRunner.onNodeStart.AddListener(OnDialogueNodeStart);
-            dialogueRunner.onNodeComplete.AddListener(OnDialogueNodeComplete);
+            _dialogueRunner.onNodeStart.AddListener(OnDialogueNodeStart);
+            _dialogueRunner.onNodeComplete.AddListener(OnDialogueNodeComplete);
         }
 
         else
         {
             Debug.Log("Can't find Dialogue System object in scene");
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (_dialogueRunner != null)
+        {
+            //Assume listeners have been added already by start
+            _dialogueRunner.onNodeStart.RemoveListener(OnDialogueNodeStart);
+            _dialogueRunner.onNodeComplete.RemoveListener(OnDialogueNodeComplete);
+
+            //Then add the listeners
+            _dialogueRunner.onNodeStart.AddListener(OnDialogueNodeStart);
+            _dialogueRunner.onNodeComplete.AddListener(OnDialogueNodeComplete);
+        }
+
+    }
+
+    private void OnDisable()
+    {
+        if (_dialogueRunner != null)
+        {
+            //Remove listeners
+            _dialogueRunner.onNodeStart.RemoveListener(OnDialogueNodeStart);
+            _dialogueRunner.onNodeComplete.RemoveListener(OnDialogueNodeComplete);
         }
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEngine.UIElements.StyleSheets;
+using System.Reflection;
 
 
 
@@ -16,14 +17,9 @@ public class RatingButtonsScreeningQuestion : MonoBehaviour
         q28RatingButtons, q29RatingButtons;
     private Button selectedButton;
 
-
-
-
     // Start is called before the first frame update
     void Start()
     {
-
-
         // Initialize buttons for each question
         InitializeButtons(new string[] { "Q11_1", "Q11_2", "Q11_3", "Q11_4", "Q11_5" }, q11RatingButtons, 11);
         InitializeButtons(new string[] { "Q12_1", "Q12_2", "Q12_3", "Q12_4", "Q12_5" }, q12RatingButtons, 12);
@@ -86,24 +82,24 @@ public class RatingButtonsScreeningQuestion : MonoBehaviour
 
 
         // Use reflection to dynamically set the selected option
-        var userDataManager = ScreeningQuestionUserDataManager.Instance;
         string propertyName = $"Q{questionNumber}SelectedOption";
 
-        // Use reflection to get the property  and set its value to the selected rating 
-        var property = userDataManager.GetType().GetProperty(propertyName);
+        // Use reflection to get the property  and set its value to the selected rating
+        BindingFlags flags = BindingFlags.Instance | BindingFlags.Public;
+        var property = MeasurementDataManager.Instance.GetType().GetField(propertyName, flags);
+
+        var field = MeasurementDataManager.Instance.GetType().GetField(propertyName);
       
         if (property != null)
         {
-            // Set the value of the property to the selected rating 
-            property.SetValue(userDataManager, rating.ToString());
+            // Set the value of the property to the selected rating
+            field.SetValue(MeasurementDataManager.Instance, rating.ToString());
         }
         else
         {
             // Log an error if the property is not found
             Debug.LogError("Invalid question number or property not found");
         }
-
-
     }
 }
 

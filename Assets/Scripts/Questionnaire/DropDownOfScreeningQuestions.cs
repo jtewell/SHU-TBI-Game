@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
-using UnityEngine.UIElements.StyleSheets;
-using UnityEditor;
-using UnityEngine.UI;
+
 
 
 
@@ -17,7 +14,6 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         var root = GetComponent<UIDocument>().rootVisualElement;
         monthDropDown = root.Q<DropdownField>("monthDropDown");
         dayDropDown = root.Q<DropdownField>("dayDropDown");
@@ -34,18 +30,14 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
         int currentYear = System.DateTime.Now.Year;
         var choices1to5 = new List<string> { "1", "2", "3", "4", "5+" };
 
-
         if (monthDropDown != null)
         {
-
             // Set the choices
             monthDropDown.choices = choicesMonth;
             monthDropDown.value = "Month";
-
-            // Register a callback for when the value changes 
             monthDropDown.RegisterValueChangedCallback(evt =>
             {
-                ScreeningQuestionUserDataManager.Instance.SelectedMonth = evt.newValue;
+                MeasurementDataManager.Instance.birthMonth = evt.newValue;
             });
         }
         if (dayDropDown != null)
@@ -62,11 +54,9 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
 
             // Optionally, set a default value
             dayDropDown.value = "0";
-
-            // Register a callback for when the value changes
             dayDropDown.RegisterValueChangedCallback(evt =>
             {
-                ScreeningQuestionUserDataManager.Instance.SelectedDay = evt.newValue;
+                MeasurementDataManager.Instance.birthDay = evt.newValue;
             });
 
         }
@@ -82,17 +72,11 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             yearDropDown.choices = choicesDobYear;
             // set the default value current year
             yearDropDown.value = "Year";
-
-            // Register a callback for when the value changes
             yearDropDown.RegisterValueChangedCallback(evt =>
             {
-                ScreeningQuestionUserDataManager.Instance.SelectedYear = evt.newValue;
+                MeasurementDataManager.Instance.birthYear = evt.newValue;
             });
-
-
         }
-
-
 
         if (Q5DropdownField != null)
         {
@@ -100,21 +84,19 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             Q5DropdownField.value = "0";
             Q5DropdownField.RegisterValueChangedCallback(evt =>
             {
-                ScreeningQuestionUserDataManager.Instance.Q5SelectedOption = evt.newValue;
+                MeasurementDataManager.Instance.Q5SelectedOption = evt.newValue;
             });
         }
+
         if (Q8DropdownField != null)
         {
             Q8DropdownField.choices = choices1to5;
             Q8DropdownField.value = "0";
             Q8DropdownField.RegisterValueChangedCallback(evt =>
             {
-                ScreeningQuestionUserDataManager.Instance.Q8SelectedOption = evt.newValue;
+                MeasurementDataManager.Instance.Q8SelectedOption = evt.newValue;
             });
         }
-
-
-
 
         var choicesYear = new List<string>();
         // get the current year
@@ -128,7 +110,7 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             Q6DropdownField.value = "Year";
             Q6DropdownField.RegisterValueChangedCallback(evt =>
             {
-                ScreeningQuestionUserDataManager.Instance.Q6SelectedOption = evt.newValue;
+                MeasurementDataManager.Instance.Q6SelectedOption= evt.newValue;
             });
         }
         if (Q9DropdownField != null)
@@ -138,12 +120,8 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
 
             Q9DropdownField.RegisterValueChangedCallback(evt =>
             {
-
-                ScreeningQuestionUserDataManager.Instance.Q9SelectedOption = evt.newValue;
+                MeasurementDataManager.Instance.Q9SelectedOption= evt.newValue;
             });
         }
-
-
     }
-
 }

@@ -19,6 +19,12 @@ public class OnEnabledTrigger : MonoBehaviour
         //Ignore more than one event call
         if (triggerIsOneShot == true && _hasBeenTriggered == true) return;
 
+        //Mark triggered in one shot is true
+        if (triggerIsOneShot == true)
+        {
+            _hasBeenTriggered = true;
+        }
+
         //As long as this object is enabled, trigger any callbacks
         onTriggerEvent.Invoke();
     }

@@ -10,14 +10,30 @@ public class OverlayManager : MonoBehaviour
 
     private bool dialogListenerFlag = true;
 
-    private void Start()
+    private void OnEnable()
     {
-        //Get a reference to the Dialog System Singleton's Dialogue Runner component
-        DialogueRunner dialogueRunner = DialogSystem.Instance.GetComponent<DialogueRunner>();
-
         //Subscribe to dialogue start and complete events
-        dialogueRunner.onDialogueStart.AddListener(DisableUIOnDialogStart);
-        dialogueRunner.onDialogueComplete.AddListener(EnableUIOnDialogEnd);
+        if (DialogueSystem.Instance.DialogueRunner != null)
+        {
+            DialogueSystem.Instance.DialogueRunner.onDialogueStart.AddListener(DisableUIOnDialogStart);
+            DialogueSystem.Instance.DialogueRunner.onDialogueComplete.AddListener(EnableUIOnDialogEnd);
+        }
+    }
+
+    private void OnDisable()
+    {
+        //Unsubscribe to dialogue start and complete events
+        //Check to see if the Dialogue System is still active
+        if (DialogueSystem.HasInstance)
+        {
+            if (DialogueSystem.Instance.DialogueRunner != null)
+            {
+                DialogueSystem.Instance.DialogueRunner.onDialogueStart.RemoveListener(DisableUIOnDialogStart);
+                DialogueSystem.Instance.DialogueRunner.onDialogueComplete.RemoveListener(EnableUIOnDialogEnd);
+            }
+
+        }
+
     }
 
     public void DisableUIOnDialogStart ()

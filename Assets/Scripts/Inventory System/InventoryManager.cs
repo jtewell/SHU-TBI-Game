@@ -8,6 +8,9 @@ public class InventoryManager : PersistentMonoSingleton<InventoryManager>
 {
     //Class fields
     [SerializeField] private const int INVENTORY_SIZE = 8;
+
+    //[SerializeField] private float moneyBalance = 10.0f;
+
     private List<Item> inventoryList = new List<Item>();
 
     //Accessors

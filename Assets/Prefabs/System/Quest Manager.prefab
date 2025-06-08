@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 982019637031011804}
   - component: {fileID: 4670649839288408823}
+  - component: {fileID: 5045404888803857308}
   m_Layer: 0
   m_Name: Quest Manager
   m_TagString: Untagged
@@ -45,10 +46,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a10a369dbbf5b49adb689f4bf47943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentQuest: {fileID: 11400000, guid: d1724bff19e52f44fb95727d6b1053f3, type: 2}
-  onFinishStep:
-    m_PersistentCalls:
-      m_Calls: []
+  questList:
+  - {fileID: 11400000, guid: d1724bff19e52f44fb95727d6b1053f3, type: 2}
+--- !u!114 &5045404888803857308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497995169826855125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d0fe62f602ba742b50231801b50e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6234047768290109827
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7398daf4a7f8e4ccdaa8798a48647859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questController: {fileID: 4670649839288408823}
   uiDocument: {fileID: 5451116418456407729}
   stepUITemplate: {fileID: 9197481963319205126, guid: 77a5680a57be3474d98033449bbfab25, type: 3}
 --- !u!114 &5451116418456407729

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using System;
 
 public class SceneController : PersistentMonoSingleton<SceneController>
 {
@@ -31,7 +32,7 @@ public class SceneController : PersistentMonoSingleton<SceneController>
         onSceneLoad.Invoke();
 
         //Spawn the player on scene load
-        SpawnPlayer();
+        StartCoroutine(SpawnPlayer());
 
         //Enable only common and quest-specific Gameplay objects
         EnableQuestSceneObjects();
@@ -44,8 +45,11 @@ public class SceneController : PersistentMonoSingleton<SceneController>
         SceneManager.LoadScene(nextScene);
     }
 
-    private void SpawnPlayer ()
+    IEnumerator SpawnPlayer ()
     {
+        //Wait until the Spawn Points object has been loaded in the scene
+        yield return StartCoroutine(WaitForSpawnPointsToLoad());
+
         //Get a list of all spawn points in the loaded scene
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
 
@@ -96,7 +100,7 @@ public class SceneController : PersistentMonoSingleton<SceneController>
     private void EnableQuestSceneObjects()
     {
         //Get the current quest loaded in the Quest Manager
-        Quest currentQuest = QuestManager.Instance.currentQuest;
+        Quest currentQuest = QuestManager.Instance.CurrentQuest;
 
         //Get the questID of the current quest
         string currentQuestID = currentQuest.questId;
@@ -115,6 +119,15 @@ public class SceneController : PersistentMonoSingleton<SceneController>
             else if (childTransform.name == currentQuestID) childTransform.gameObject.SetActive(true);
             else childTransform.gameObject.SetActive(false);
 
+        }
+    }
+    IEnumerator WaitForSpawnPointsToLoad ()
+    {
+        GameObject spawnPoints = null;
+        while (spawnPoints == null)
+        {
+            spawnPoints = GameObject.Find("Spawn Points");
+            yield return null;
         }
     }
 }

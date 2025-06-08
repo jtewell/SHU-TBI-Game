@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
-
+// Define events to communicate UI open close events to the menu data tracker
+[System.Serializable] public class OnMapOpenedEvent : UnityEvent { }
+[System.Serializable] public class OnMapClosedEvent : UnityEvent { }
 
 public class MapUIManager : MonoBehaviour
 {
     public GameObject MapUI;
     public Button CloseButton, CompassButton;
     public GameObject playerMarker;
+    public static OnMapOpenedEvent onMapOpenedEvent = new OnMapOpenedEvent ();
+    public static OnMapClosedEvent onMapClosedEvent = new OnMapClosedEvent ();
+
     private Vector3 groundDimensions = new Vector3(200, 0, 200);
 
     private void Start()
@@ -25,11 +31,13 @@ public class MapUIManager : MonoBehaviour
     {
         MapUI.SetActive(true);
         UpdateMapState(playerMarker);
+        onMapOpenedEvent?.Invoke();
     }
 
     public void OnCloseButtonClicked()
     {
         MapUI.SetActive(false);
+        onMapClosedEvent?.Invoke();
     }
 
     public void GroundSetup ()
@@ -56,7 +64,8 @@ public class MapUIManager : MonoBehaviour
         Vector3 playerPos = playerTransform.position;
 
         // Get map object child
-        GameObject MapObject = MapUI.transform.Find("Map").gameObject;
+        GameObject MaskObject = MapUI.transform.Find("Mask").gameObject;
+        GameObject MapObject = MaskObject.transform.Find("Map").gameObject;
 
         //Get the map object's rect component
         RectTransform mapDimensions = MapObject.GetComponent<RectTransform>();
@@ -73,7 +82,7 @@ public class MapUIManager : MonoBehaviour
         playerMarker.GetComponent<RectTransform>().anchoredPosition = new Vector2(playerX, playerY);
 
         //Lastly, update the player marker's rotation- first get the player's rotation
-        float playerRotationY = playerTransform.rotation.eulerAngles.y;
+        float playerRotationY = 180 - playerTransform.localRotation.eulerAngles.y;
 
         //Then apply it to the marker
         playerMarker.transform.rotation = Quaternion.Euler(0, 0, playerRotationY);

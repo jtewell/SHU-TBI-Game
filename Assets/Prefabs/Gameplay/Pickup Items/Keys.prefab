@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3662658379633309530}
   - component: {fileID: 6607572842189284933}
   - component: {fileID: 5148577165919983732}
-  - component: {fileID: 4369933213282058501}
   m_Layer: 0
   m_Name: Ring
   m_TagString: Untagged
@@ -53915,28 +53914,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761028532361776104}
   m_Mesh: {fileID: 0}
---- !u!64 &4369933213282058501
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 761028532361776104}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &4554900639325748766
 GameObject:
   m_ObjectHideFlags: 0
@@ -102954,6 +102931,7 @@ GameObject:
   - component: {fileID: 5087368003314188622}
   - component: {fileID: 1316030782535767905}
   - component: {fileID: 7818677794770685067}
+  - component: {fileID: 6649396764456907379}
   m_Layer: 0
   m_Name: Keys
   m_TagString: Untagged
@@ -102989,13 +102967,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450d3bdbb8f7f654aa0cf92f224b2bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayText: Press E to Use
   hoverGlowShaderMaterial: {fileID: 0}
   inRangeThickness: 2
   outOfRangeThickness: 1.1
   glowOutOfRange: 1
   inRangeOutline: {r: 0.082858644, g: 0.39081076, b: 0.9245283, a: 1}
   outOfRangeOutline: {r: 0.9716981, g: 0.4767983, b: 0, a: 1}
+  canInteractAnywhere: 0
   m_InteractAction:
     m_PersistentCalls:
       m_Calls:
@@ -103129,3 +103107,24 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6649396764456907379
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8439387707942809525}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.2, z: 0.3}
+  m_Center: {x: 0.15, y: 0, z: -0.05}

@@ -3431,7 +3431,7 @@ GameObject:
   - component: {fileID: 248698026}
   m_Layer: 0
   m_Name: Office Second Floor Elevator
-  m_TagString: Untagged
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3654,7 +3654,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1727216487}
   - {fileID: 1776694893}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5800,7 +5799,7 @@ GameObject:
   - component: {fileID: 1727216485}
   - component: {fileID: 1727216484}
   m_Layer: 0
-  m_Name: Ground/Map
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5891,7 +5890,7 @@ Transform:
   m_LocalScale: {x: 1.35, y: 1, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 557780884}
+  m_Father: {fileID: 1746571113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1738694327
 GameObject:
@@ -5980,6 +5979,7 @@ Transform:
   - {fileID: 1838258921}
   - {fileID: 230595913}
   - {fileID: 556432043}
+  - {fileID: 1727216487}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1762682258

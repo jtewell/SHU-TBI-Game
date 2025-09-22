@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3372168171086456878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9196816153078808291}
+  - component: {fileID: 3467424944345724776}
+  m_Layer: 0
+  m_Name: Measurement Data Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9196816153078808291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3372168171086456878}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3467424944345724776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3372168171086456878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8682ba148ddfe2e4ab912da8c66985ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sessionData: {fileID: 11400000, guid: bc1ea76381f1b2845af12c251623574a, type: 2}
+  url: https://docs.google.com/forms/u/0/d/e/1FAIpQLSe1CpGcYz-zV-OV8xfAl0BP4K8g2WQtLwgLaMbge6YOgMrrfw/formResponse
+  sendToGoogleForm: 1
+  userID: 
+  birthMonth: 
+  birthDay: 
+  birthYear: 
+  gender: 
+  Q3SelectedOption: 
+  Q4SelectedOption: 
+  Q5SelectedOption: 
+  Q6SelectedOption: 
+  Q7SelectedOption: 
+  Q8SelectedOption: 
+  Q9SelectedOption: 
+  Q11SelectedOption: 
+  Q12SelectedOption: 
+  Q13SelectedOption: 
+  Q14SelectedOption: 
+  Q15SelectedOption: 
+  Q16SelectedOption: 
+  Q17SelectedOption: 
+  Q18SelectedOption: 
+  Q19SelectedOption: 
+  Q20SelectedOption: 
+  Q21SelectedOption: 
+  Q22SelectedOption: 
+  Q23SelectedOption: 
+  Q24SelectedOption: 
+  Q25SelectedOption: 
+  Q26SelectedOption: 
+  Q27SelectedOption: 
+  Q28SelectedOption: 
+  Q29SelectedOption: 
+  distanceTraveled: 0
+  timeTaken: 0
+  numberTimesStopped: 0
+  numberTimesMapOpened: 0
+  numberTimesInventoryOpened: 0
+  numberTimesToDoListOpened: 0
+  timeMapOpened: 0
+  timeInventoryOpened: 0
+  timeToDoListOpened: 0
+  locationsVisited: 
+  itemsInteracted: 
+  peopleInteracted: 

@@ -1,0 +1,37 @@
+name: Build WebGL & Update Itch
+on: [workflow_dispatch]
+jobs:
+  activation:
+    name: Build the Game
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-SHUTBI-WebGL
+          restore-keys: |
+            Library-SHUTBI-
+            Library-
+      - uses: game-ci/unity-builder@v4.3.0
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: WebGL
+      - uses: actions/upload-artifact@v4.6.2
+        with:
+          name: Build
+          path: build
+      # Upload to Itch
+      - uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.ITCH_TOKEN }}
+          CHANNEL: html5
+          ITCH_GAME: caed
+          ITCH_USER: shu-gdd
+          PACKAGE: build/WebGL

@@ -96,6 +96,18 @@ public class OnDialogueNodeEvent : MonoBehaviour
         //Ignore if the node title doesn't match
         if (dialogueNodeTitle.Equals(nodeTitle) == false) return;
 
+        //If a callback is a new dialogue node, Unity will crash so wait a bit
+        StartCoroutine(StartCallbacksWhenReady());
+    }
+
+    IEnumerator StartCallbacksWhenReady()
+    {
+        // Wait until Yarn reports no dialogue running
+        while (_dialogueRunner.IsDialogueRunning)
+        {
+            yield return null;
+        }
+
         //Invoke Unity Event callbacks
         onDialogueNodeCompleteEvent.Invoke();
 

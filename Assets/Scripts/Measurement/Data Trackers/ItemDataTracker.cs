@@ -1,20 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemDataTracker : MonoBehaviour
 {
-    private void OnEnable()
+    private InteractablePickupItem _owner;
+
+    private void Awake()
     {
-        InteractablePickupItem.onPickupItemEvent.AddListener(UpdateDataPickupItem);
+        _owner = GetComponent<InteractablePickupItem>();
+        _owner.onPickupItemEvent.AddListener(UpdateDataPickupItem);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        InteractablePickupItem.onPickupItemEvent.RemoveListener(UpdateDataPickupItem);
+        if (_owner != null)
+            _owner.onPickupItemEvent.RemoveListener(UpdateDataPickupItem);
     }
 
-    public void UpdateDataPickupItem(string location)
+    private void UpdateDataPickupItem(string location)
     {
         MeasurementDataManager.Instance.itemsInteracted += location + " , ";
     }

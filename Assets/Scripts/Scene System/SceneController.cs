@@ -13,21 +13,36 @@ public class SceneController : PersistentMonoSingleton<SceneController>
 
     public string spawnPoint = "Bed";
 
+    private ScreenFader screenFader;
+
+    protected override void Awake()
+    {
+        GameObject fadeScreen = transform.Find("Canvas/FadeScreen").gameObject;
+        screenFader = fadeScreen.GetComponent<ScreenFader>();
+
+        base.Awake();
+    }
+
     private void OnEnable()
     {
         //Subscribe to Scene Loaded Events
         SceneManager.sceneLoaded += OnSceneLoad;
+        QuestManager.onFinishAllQuests.AddListener(SwitchToEndScene);
     }
 
     private void OnDisable()
     {
         //Unsubscribe to Scene Loaded Events
         SceneManager.sceneLoaded -= OnSceneLoad;
+
+        QuestManager.onFinishAllQuests.RemoveListener(SwitchToEndScene);
     }
 
     //Callback once scene has finished loading
     void OnSceneLoad (Scene scene, LoadSceneMode mode)
     {
+        StartCoroutine(screenFader.FadeOut());
+
         //Run all Unity Event callbacks when scene has finished loading
         onSceneLoad.Invoke();
 
@@ -42,7 +57,23 @@ public class SceneController : PersistentMonoSingleton<SceneController>
     public void LoadScene (string nextScene, string spawnPoint)
     {
         this.spawnPoint = spawnPoint;
-        SceneManager.LoadScene(nextScene);
+        StartCoroutine(LoadSceneAndFade(nextScene));
+    }
+
+    private IEnumerator LoadSceneAndFade (string nextScene)
+    {
+        //Fade to black first and wait until its done
+        if (screenFader != null)
+        {
+            yield return StartCoroutine(screenFader.FadeIn());
+        }
+
+        //Then load the next scene with async so the UI keeps updating
+        var op = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Single);
+        while (!op.isDone)
+        {
+            yield return null;
+        }
     }
 
     IEnumerator SpawnPlayer ()
@@ -99,14 +130,17 @@ public class SceneController : PersistentMonoSingleton<SceneController>
 
     private void EnableQuestSceneObjects()
     {
+        //Find the Gameplay object in the scene
+        GameObject gamePlayObject = GameObject.Find("----- Gameplay -----");
+
+        //If the object cannot be found (such as in the avatar selection screen), then abort
+        if (gamePlayObject == null) return;
+
         //Get the current quest loaded in the Quest Manager
         Quest currentQuest = QuestManager.Instance.CurrentQuest;
 
         //Get the questID of the current quest
         string currentQuestID = currentQuest.questId;
-
-        //Find the Gameplay object in the scene
-        GameObject gamePlayObject = GameObject.Find("----- Gameplay -----");
         
         //Iterate through children gameplay objects
         for (int i = 0; i < gamePlayObject.transform.childCount; i++)
@@ -121,7 +155,7 @@ public class SceneController : PersistentMonoSingleton<SceneController>
 
         }
     }
-    IEnumerator WaitForSpawnPointsToLoad ()
+    IEnumerator WaitForSpawnPointsToLoad()
     {
         GameObject spawnPoints = null;
         while (spawnPoints == null)
@@ -129,5 +163,10 @@ public class SceneController : PersistentMonoSingleton<SceneController>
             spawnPoints = GameObject.Find("Spawn Points");
             yield return null;
         }
+    }
+
+    void SwitchToEndScene ()
+    {
+        this.LoadScene("End Screen", "None");
     }
 }

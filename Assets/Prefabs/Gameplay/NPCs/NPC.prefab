@@ -533,69 +533,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450d3bdbb8f7f654aa0cf92f224b2bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayText: Press E to Use
-  hoverGlowShaderMaterial: {fileID: 0}
-  inRangeThickness: 1.1
-  outOfRangeThickness: 1.1
-  glowOutOfRange: 1
-  inRangeOutline: {r: 0, g: 1, b: 1, a: 1}
-  outOfRangeOutline: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineEnabled: 0
+  canInteractAnywhere: 0
+  dontDisableDuringDialog: 0
   _canInteract: 1
   m_InteractAction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Yarn.Unity.DialogueRunner, YarnSpinner.Unity
-        m_MethodName: StartDialogue
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Quest0_NPC_Ricky
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Quest0_NPC_Ricky
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Quest0_NPC_Ricky
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-        m_MethodName: ActivateNPCCamera
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 7011565533989843784}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Quest0_NPC_Ricky
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 791057619310927385}
+        m_TargetAssemblyTypeName: InteractableNPC, Assembly-CSharp
+        m_MethodName: PlayDialogue
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -616,8 +564,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e86c729626c3a49b9d1682b9c97dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conversationStartNode: Start
-  nameOfNPC: 
+  conversationStartNode: Quest0_NPC_Ricky
+  nameOfNPC: Ricky
 --- !u!114 &8463125874479074526
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -44,7 +44,7 @@ public class CameraController : MonoBehaviour
         //Turn off main camera, turn on NPC camera
         //MainCamera.SetActive(false);
         //NPCCamera.SetActive(true);
-        NPC_Camera.transform.position = playerCamera.transform.position;
+
         NPC_Camera.Priority = 20;
 
         //Make NPC camera look at the target
@@ -59,6 +59,11 @@ public class CameraController : MonoBehaviour
         //rotation.x = 0;
         //rotation.z = 0;
         //transform.eulerAngles = rotation;
+    }
+
+    public void NPCCameraMove (Transform target)
+    {
+        NPC_Camera.transform.position = target.position;
     }
 
     public void DeactivateNPCCamera()

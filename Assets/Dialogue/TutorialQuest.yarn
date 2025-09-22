@@ -7,27 +7,42 @@ Try using it now to walk to explore the house.
 
 title: Quest0_Instructions_Item
 ---
-You can pick up items that are close to you by pressing the E key on your keyboard.
-Try picking up your keys from the table.
+You can interact with objects that are close to you by tapping on them when they are glowing.
+Try walking up to the table until it glows and then tap on it.
+===
+
+title: Quest0_Instructions_Table
+---
+Tap on items to pick them up. Make sure to pick up your keys and wallet before you go. When finished, click the Continue button.
+Are you sure you grabbed everything you need?
+-> Yes
+	<<jump Quest0_Instructions_TableFinished>>
+-> No
+	<<jump Quest0_Instructions_Table>>
+===
+
+title: Quest0_Instructions_TableFinished
+---
+Alright, you are ready to go then.
 ===
 
 title: Quest0_Instructions_Backpack
 ---
 Items that you pick up are added to your backpack.
 You can store up to eight items.
-Try clicking on your backpack to see the keys you picked up.
+Try tapping on your backpack to see the keys you picked up.
 ===
 
 title: Quest0_Instructions_Door
 ---
-You can open doors that are close to you by pressing the E key on your keyboard.
+You can open doors that are close to you by tapping on it when it is glowing.
 Try opening the door in the top left corner of the kitchen to go outside into town.
 ===
 
 title: Quest0_Instructions_NPC
 ---
 Oh it's your friend Ricky over there!
-You can talk to people that are close to you by pressing the E key on the keyboard.
+ You can talk to people that are close to you by tapping on them when they are glowing.
 Try talking to Ricky and see what he wants.
 ===
 
@@ -35,7 +50,10 @@ title: Quest0_NPC_Ricky
 ---
 <<if $talkedToRicky == false>>
 	Hey can you help me find my skateboard? I think I left it in the park somewhere.
-	If you find it, can you pick it up and bring it to me? 
+	If you find it, can you pick it up and bring it to me?
+	You can check the map to search for locations in the town.
+	You can also see your location with the red marker.
+	Try opening the map to search for the park.
 	<<set $talkedToRicky = true>>
 <<else>>
 	Have you found my skateboard yet?
@@ -46,19 +64,12 @@ title: Quest0_NPC_Ricky
 <<endif>>
 ===
 
-title: Quest0_Instructions_Map
----
-You can check the map to search for locations in the town.
-You can also see your location with the red marker.
-Try opening the map to search for the park.
-===
-
 title: Quest0_Instructions_TodoList
 ---
 The todo list at the top of the screen keeps track of your tasks.
 Completed tasks will be shown with a checkbox next to them.
 You objective is to complete all tasks shown in the todo list.
-Try accessing the list by clicking on it now.
+Try accessing the list by tapping on it now.
 ===
 
 title: Quest0_Instructions_HelpButton

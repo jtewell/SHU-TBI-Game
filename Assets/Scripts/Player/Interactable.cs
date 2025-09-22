@@ -15,23 +15,18 @@ using System.Linq;
 public class Interactable : MonoBehaviour
 {
     //Public or serialized variables
-
-    [Header( "Outline Effect" )]
-    public Material hoverGlowShaderMaterial;
-    public float inRangeThickness = 1.1f;
-    [FormerlySerializedAs("hoverThickness")] public float outOfRangeThickness = 1.1f;
-    public bool glowOutOfRange = true;
-    [ColorUsage(true, true)] public Color inRangeOutline = Color.cyan;
-    [FormerlySerializedAs("colorOutline")] [ColorUsage(true, true)] public Color outOfRangeOutline = Color.yellow;
+    [Header("Outline Effect")]
+    public bool outlineEnabled = false;
 
     [Header("Interaction Settings")]
+    [Tooltip("true ignores proximity to player for interaction (like table items)")]
     [SerializeField] private bool canInteractAnywhere = false;
+    [Tooltip("true prevents item from getting disabled during dialog (like the table interaction).")]
+    [SerializeField] private bool dontDisableDuringDialog = false;
 
     //Private variables
-    private GameObject hoverParent;
-    private List<Renderer> hoverRenderers = new List<Renderer>();
     private bool near = false;
-    private bool _canInteract = true;
+    public bool _canInteract = true;
 
     [Serializable]
     /// <summary>
@@ -47,20 +42,13 @@ public class Interactable : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        if(!hoverGlowShaderMaterial) hoverGlowShaderMaterial = Resources.Load<Material>("Materials/GlowShader");
+        //if(!hoverGlowShaderMaterial) hoverGlowShaderMaterial = Resources.Load<Material>("Materials/GlowShader");
         var collider = GetComponent<SphereCollider>();
         if (!collider.isTrigger)
         {
             Debug.LogWarning("Interactable must have a sphere collider with isTrigger set to true. Fixing it for you.");
             collider.isTrigger = true;
         }
-        //hoverParent = Instantiate(new GameObject("HoverParent"), transform.position, transform.rotation);
-        AddRenderersFromObject(gameObject);
-        foreach (var children in gameObject.GetComponentsInChildren<Renderer>())
-        {
-            AddRenderersFromObject(children.gameObject);
-        }
-        outOfRange();
 
         //Listen for dialogue events
         DialogueSystem.Instance.DialogueRunner.onDialogueStart.AddListener(DisableInteraction);
@@ -112,88 +100,46 @@ public class Interactable : MonoBehaviour
         InventoryUIManager.onInventoryClosedEvent.RemoveListener(EnableInteraction);
     }
 
-    private void DisableInteraction ()
+    public void DisableInteraction ()
     {
-        _canInteract = false;
+        if (!dontDisableDuringDialog) _canInteract = false;
     }
 
-    private void EnableInteraction ()
+    public void EnableInteraction ()
+    {
+        if (!dontDisableDuringDialog) _canInteract = true;
+    }
+
+    public void ForceEnableInteraction ()
     {
         _canInteract = true;
+    }
+
+    public void ForceDisableInteraction ()
+    {
+        _canInteract = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(!other.gameObject.CompareTag("Player")) return;
 
-        near = true;
+        outlineEnabled = true;
 
-        foreach (var hoverRenderer in hoverRenderers)
-        {
-            hoverRenderer.enabled = true;
-            hoverRenderer.material.SetFloat("_Thickness", inRangeThickness);
-            hoverRenderer.material.SetColor("_OutlineColor", inRangeOutline);
-        }
+        near = true;
     }
     
 
     private void OnTriggerExit(Collider other)
     {
         if(!other.gameObject.CompareTag("Player")) return;
+        outlineEnabled = false;
         near = false;
-        outOfRange();
     }
-
-    private void outOfRange()
-    {
-        if (glowOutOfRange)
-        {
-            foreach (var hoverRenderer in hoverRenderers)
-            {
-                hoverRenderer.enabled = true;
-                hoverRenderer.material.SetFloat("_Thickness", outOfRangeThickness);
-                hoverRenderer.material.SetColor("_OutlineColor", outOfRangeOutline);
-            }
-        }
-        else
-        {
-            foreach (var hoverRenderer in hoverRenderers)
-            {
-                hoverRenderer.enabled = false;
-            }
-        }
-    }
-
-
-    private void AddRenderersFromObject(GameObject obj)
-    {
-        if (!obj.TryGetComponent<Renderer>(out Renderer originalRenderer)) return;
-
-        // Create a child GameObject to hold the outline mesh
-        GameObject outlineObject = new GameObject($"{obj.name}_Outline");
-        outlineObject.transform.SetParent(obj.transform, false); // Keeps local position/rotation/scale
-
-        // Copy mesh and position from the original
-        MeshFilter originalMesh = obj.GetComponent<MeshFilter>();
-        MeshRenderer originalMeshRenderer = obj.GetComponent<MeshRenderer>();
-
-        if (originalMesh != null && originalMeshRenderer != null)
-        {
-            outlineObject.AddComponent<MeshFilter>().sharedMesh = originalMesh.sharedMesh;
-            var rend = outlineObject.AddComponent<MeshRenderer>();
-            rend.material = hoverGlowShaderMaterial;
-            rend.material.SetFloat("_Thickness", inRangeThickness);
-            rend.material.SetColor("_OutlineColor", inRangeOutline);
-            rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            rend.enabled = false;
-
-            this.hoverRenderers.Add(rend);
-        }
-    }
-
 
     private void OnMouseDown()
     {
+        Debug.Log(name);
         //If the player isn't near the object then don't interact with it (unless canInteractAnywhere is true).
         if (near == false && canInteractAnywhere == false) return;
 
@@ -228,16 +174,13 @@ public class Interactable : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         //Get the list of all objects the ray cast hit
-        RaycastHit[] hitObjects = Physics.RaycastAll(ray);
+        RaycastHit[] hitObjects = Physics.RaycastAll(ray, Mathf.Infinity, ~0, QueryTriggerInteraction.Ignore);
 
         //Check to see if the ray cast hit the main collider
         bool hitSuccessful = hitObjects.Any(hitObject => hitObject.collider == mainCollider);
 
-        //If it did not, then return false
-        if (hitSuccessful == false) return false;
-
-        //If it did, return true
-        return true;
+        //If it did not, then return false. If it did, return true
+        return hitSuccessful;
     }
 
     private bool IsObjectUnderUI ()
@@ -245,7 +188,22 @@ public class Interactable : MonoBehaviour
         if (EventSystem.current == null)
             return false;
 
-        return EventSystem.current.IsPointerOverGameObject();
+        // Mouse check
+        if (Input.mousePresent && EventSystem.current.IsPointerOverGameObject())
+            return true;
+
+        // Touch check
+        if (Input.touchCount > 0)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                Touch touch = Input.GetTouch(i);
+                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                    return true;
+            }
+        }
+
+        return false;
     }
 
     // Called by the controller. Should call the defined effect. Flow control is handled by the controller/caller

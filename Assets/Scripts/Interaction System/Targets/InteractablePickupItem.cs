@@ -1,22 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine;
 
 [System.Serializable] public class OnPickupItemEvent : UnityEvent<string> { }
 
 public class InteractablePickupItem : MonoBehaviour
 {
     public Item itemScriptableObject;
+    public OnPickupItemEvent onPickupItemEvent = new OnPickupItemEvent();
 
-    public static OnPickupItemEvent onPickupItemEvent = new OnPickupItemEvent();
-
-    public void onPickup()
+    public void OnPickup()
     {
-        onPickupItemEvent?.Invoke(itemScriptableObject.displayName);
+        onPickupItemEvent.Invoke(itemScriptableObject.displayName);
         InventoryManager.Instance.AddItemToInventory(itemScriptableObject);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
-
-
 }

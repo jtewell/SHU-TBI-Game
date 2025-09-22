@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using Yarn.Unity;
 
 [RequireComponent(typeof(Collider))]
 public class OnTriggerBoxEvent : MonoBehaviour

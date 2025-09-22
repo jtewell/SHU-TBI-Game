@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 3065265449498618290}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7166821, w: 0.6974001}
-  m_LocalPosition: {x: 0.2620556, y: 0.005019605, z: 0.12601274}
-  m_LocalScale: {x: 0.7601, y: 1.2225, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.22803, y: 0.36675, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8781080438603044404}
@@ -3713,7 +3713,7 @@ MonoBehaviour:
   - {x: -0.32801518, y: -0.5291923}
   - {x: 0.41350135, y: -0.52919227}
   - {x: -0.32801518, y: -1.2048453}
-  - {x: 0.41350135, y: -1.2048452}
+  - {x: 0.41350135, y: -1.2048453}
   - {x: 0.31343654, y: -1.2061065}
   - {x: -0.42639032, y: -1.2061064}
   - {x: 0.31343654, y: -0.53045356}
@@ -4282,9 +4282,9 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -1, w: -1}
   - {x: 0, y: 0, z: -1, w: -1}
   - {x: 0.025356134, y: 0.9996785, z: 0.00000005544739, w: -1}
-  - {x: 0.025356134, y: 0.9996785, z: -8.146755e-10, w: -1}
-  - {x: 0.025356134, y: 0.9996785, z: -8.146755e-10, w: -1}
-  - {x: 0.025356134, y: 0.9996785, z: -0.000000057076736, w: -1}
+  - {x: 0.025356134, y: 0.9996785, z: 0.00000011170944, w: -1}
+  - {x: 0.025356134, y: 0.9996785, z: 0.00000011170944, w: -1}
+  - {x: 0.025356134, y: 0.9996785, z: 0.00000016797149, w: -1}
   - {x: 0.043827772, y: -0.9990391, z: 0.00000014113785, w: -1}
   - {x: 0.043827772, y: -0.9990391, z: 0.00000014113785, w: -1}
   - {x: 0.043827772, y: -0.9990391, z: 0.00000014113785, w: -1}
@@ -4298,7 +4298,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2453
+  m_VersionIndex: 2492
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4356,7 +4356,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
+  - {fileID: 2100000, guid: b086558f0c3f12940a4d10422a5a4723, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4417,6 +4417,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8781080438603044404}
+  - component: {fileID: 6967094388560931934}
+  - component: {fileID: 339226316633669794}
+  - component: {fileID: 1511876985234958579}
+  - component: {fileID: 8019275791968582271}
+  - component: {fileID: 448236793885038585}
+  - component: {fileID: 3194387305970236705}
   m_Layer: 0
   m_Name: Wallet
   m_TagString: Untagged
@@ -4434,9 +4440,146 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4330409504186014033}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6967094388560931934
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4361692991505307842}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &339226316633669794
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4361692991505307842}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2, y: 0.1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1511876985234958579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4361692991505307842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450d3bdbb8f7f654aa0cf92f224b2bee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineEnabled: 0
+  canInteractAnywhere: 1
+  dontDisableDuringDialog: 1
+  _canInteract: 1
+  m_InteractAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8019275791968582271}
+        m_TargetAssemblyTypeName: InteractablePickupItem, Assembly-CSharp
+        m_MethodName: OnPickup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 448236793885038585}
+        m_TargetAssemblyTypeName: DisappearOnceSeenAndNeverComeBack, Assembly-CSharp
+        m_MethodName: MarkAsSeen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
+        m_MethodName: FinishStep
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: pickupWallet
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8019275791968582271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4361692991505307842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b760af65e250a8499f469cc248a110f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemScriptableObject: {fileID: 11400000, guid: eede6fcde01482844ba4ee66fea1e5f5, type: 2}
+  onPickupItemEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &448236793885038585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4361692991505307842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7967b014a0efb874784979cf27b1e0f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3194387305970236705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4361692991505307842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e29489ee40d6c94c9a06233d3749237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

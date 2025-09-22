@@ -221,8 +221,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9034290013125311465}
-  - component: {fileID: 2947131886845343356}
   - component: {fileID: 4221090627460352876}
+  - component: {fileID: 2947131886845343356}
   - component: {fileID: -6176126258677282278}
   - component: {fileID: 7174598137799562990}
   m_Layer: 0
@@ -258,27 +258,6 @@ Transform:
   - {fileID: 242639689961167190}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2947131886845343356
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766325571996433294}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &4221090627460352876
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -298,8 +277,29 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 2
+  m_Center: {x: 0, y: -1.5, z: 0}
+--- !u!65 &2947131886845343356
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766325571996433294}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: -1.5, z: 0}
 --- !u!114 &-6176126258677282278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,13 +312,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450d3bdbb8f7f654aa0cf92f224b2bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisplayText: Press E to Use
   hoverGlowShaderMaterial: {fileID: 0}
   inRangeThickness: 1.1
   outOfRangeThickness: 1.1
   glowOutOfRange: 1
   inRangeOutline: {r: 0, g: 1, b: 1, a: 1}
   outOfRangeOutline: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  canInteractAnywhere: 0
   m_InteractAction:
     m_PersistentCalls:
       m_Calls:

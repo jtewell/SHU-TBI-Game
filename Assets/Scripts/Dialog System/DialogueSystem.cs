@@ -4,24 +4,56 @@ using UnityEngine;
 using UnityEngine.Events;
 using Yarn.Unity;
 
-public class OnDialogueSystemInitialized : UnityEvent { }
-
+[DefaultExecutionOrder(-100)]
 public class DialogueSystem : MonoSingleton <DialogueSystem>
 {
 
-   // public static OnDialogueSystemInitialized onDialogSystemInitialized = new OnDialogSystemInitialized ();
-
     public DialogueRunner DialogueRunner
     {
-        get { return dialogueRunner; }
+        get { return _dialogueRunner; }
+        private set { _dialogueRunner = value; }
     }
 
-    private DialogueRunner dialogueRunner;
+    [SerializeField] private DialogueRunner _dialogueRunner;
 
     protected override void Awake()
     {
         base.Awake();
-        dialogueRunner = GetComponent<DialogueRunner>();
-        //onDialogSystemInitialized?.Invoke();
+
+        //If this is a duplicate then bail immediately
+        if (Instance != this) return;
+
+        //First try to use the serialized reference
+        if (_dialogueRunner == null)
+        {
+            TryGetComponent (out _dialogueRunner);
+        }
+
+        if (_dialogueRunner == null)
+        {
+            _dialogueRunner = GetComponentInChildren<DialogueRunner>(true);
+        }
+
+        if (_dialogueRunner == null && transform.parent != null)
+        {
+            _dialogueRunner = transform.parent.GetComponentInChildren<DialogueRunner>(true);
+        }
+
+        if (_dialogueRunner == null)
+        {
+            _dialogueRunner = FindObjectOfType<DialogueRunner>(true);
+        }
+
+        if (_dialogueRunner == null)
+        {
+            Debug.LogError("DialogueSystem: DialogueRunner not found. " +
+                           "Ensure exactly one DialogueRunner exists in the scene " +
+                           "or assign it in the inspector.", this);
+        }
+        else
+        {
+            Debug.Log("DialogueSystem: Found DialogueRunner");
+        }
+
     }
 }

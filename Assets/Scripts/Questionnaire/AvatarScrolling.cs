@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 public class AvatarScrolling : MonoBehaviour
@@ -12,16 +13,38 @@ public class AvatarScrolling : MonoBehaviour
     //Tutorial Quest Scriptable Object
     public Quest tutorialQuest;
 
+    public List<Sprite> avatarMessageSprites;
+
     // UI elements references
-    public VisualElement avatarContainer, avatarSelectionContainer, scrollingButtonsContainer, selectAvatarConfirmationContainer, 
-        avatarGenderSelectionContainer, thankYouMessageContainer, charMessageContainer, previousButtonContainer;
+    private VisualElement
+        avatarContainer,
+        avatarSelectionContainer,
+        scrollingButtonsContainer,
+        selectAvatarConfirmationContainer,
+        avatarGenderSelectionContainer,
+        thankYouMessageContainer,
+        charMessageContainer,
+        previousButtonContainer,
+        maleContainer,
+        femaleContainer,
+        NonBinaryContainer;
 
-    public ScrollView avatarSelectionScrollingView;
+    private ScrollView avatarSelectionScrollingView;
 
-    public Button scrollLeft, scrollRight, yesButton, noButton, maleButton, femaleButton, nonBinaryButton, 
-        continueGamePlayButton, previousButton;
+    private Button
+        scrollLeft,
+        scrollRight,
+        yesButton,
+        noButton,
+        maleButton,
+        femaleButton,
+        nonBinaryButton,
+        continueGamePlayButton,
+        previousButton;
 
-    public Label titleAvatarSelection, thankYouLabel;
+    private Label
+        titleAvatarSelection,
+        thankYouLabel;
 
     private string selectedGender;
 
@@ -33,7 +56,6 @@ public class AvatarScrolling : MonoBehaviour
 
     void Start()
     {
-        
         // Get the root UI document
         var root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -47,6 +69,9 @@ public class AvatarScrolling : MonoBehaviour
         thankYouMessageContainer = root.Q<VisualElement>("thankYouMessageContainer");
         charMessageContainer = root.Q<VisualElement>("charMessageContainer");
         previousButtonContainer = root.Q<VisualElement>("previousButtonContainer");
+        maleContainer = root.Q<VisualElement>("contentContainerMale");
+        femaleContainer = root.Q<VisualElement>("contentContainerFemale");
+        NonBinaryContainer = root.Q<VisualElement>("contentContainerNonBinary");
 
         // Initialize buttons and labels
         yesButton = root.Q<Button>("yesButton");
@@ -81,7 +106,6 @@ public class AvatarScrolling : MonoBehaviour
         // Get all avatar elements in the scroll view and register click events
         var avatarContainerstore = avatarSelectionScrollingView.Query<VisualElement>(className: "avatar").ToList();
         avatarContainerstore.ForEach(avatar => avatar.RegisterCallback<ClickEvent>(ev => OnAvatarClicked(avatar)));
-        avatarSelectionScrollingView.RegisterCallback<GeometryChangedEvent>(OnLayoutChanged);
 
         //Show the avatar gender buttons first
         avatarGenderSelectionContainer.style.display = DisplayStyle.Flex;
@@ -90,35 +114,69 @@ public class AvatarScrolling : MonoBehaviour
     //create a function to handle previous button click event 
     private void OnPreviousButtonClicked()
     {
-        // Hide the current UI elements
-        avatarContainer.style.display = DisplayStyle.Flex;
-        thankYouMessageContainer.style.display = DisplayStyle.None;
-        charMessageContainer.style.backgroundImage = null; // Clear the background image
-        previousButtonContainer.style.display = DisplayStyle.Flex;
-        
+        //If on the ok button screen
+        if (thankYouMessageContainer.style.display == DisplayStyle.Flex)
+        {
+            // Hide the current UI elements
+            avatarContainer.style.display = DisplayStyle.Flex;
+            thankYouMessageContainer.style.display = DisplayStyle.None;
+            charMessageContainer.style.backgroundImage = null;
+            DeselectAvatar();
+        }
+
+        //If on the avatar selection screen
+        else
+        {
+            //Turn off the back button
+            previousButtonContainer.style.display = DisplayStyle.None;
+            //Turn on the gender selection screen
+            avatarGenderSelectionContainer.style.display = DisplayStyle.Flex;
+            //Turn off the avatar selection screen
+            avatarContainer.style.display = DisplayStyle.None;
+            //Turn off all avatar gender selections
+            maleContainer.style.display = DisplayStyle.None;
+            femaleContainer.style.display = DisplayStyle.None;
+            NonBinaryContainer.style.display = DisplayStyle.None;
+            DeselectAvatar();
+        }
+
     }
     //on gender selected method
     private void OnGenderSelected(string gender)
     {
+        //Turn off the gender selection screen
+        avatarGenderSelectionContainer.style.display = DisplayStyle.None;
+        //Turn on the avatar selection screen
+        avatarContainer.style.display = DisplayStyle.Flex;
+
         selectedGender = gender;
         Debug.Log("Selected Gender: " + gender);
 
-        // Store the selected gender in the scriptable object
+        // Store the selected gender in the scriptable object and show the correct container
         switch (gender)
         {
             case "Male":
                 avatarData.gender = AvatarData.Gender.Male;
+                maleContainer.style.display = DisplayStyle.Flex;
+                femaleContainer.style.display = DisplayStyle.None;
+                NonBinaryContainer.style.display = DisplayStyle.None;
                 break;
             case "Female":
                 avatarData.gender = AvatarData.Gender.Female;
+                maleContainer.style.display = DisplayStyle.None;
+                femaleContainer.style.display = DisplayStyle.Flex;
+                NonBinaryContainer.style.display = DisplayStyle.None;
                 break;
             case "Non-Binary":
                 avatarData.gender = AvatarData.Gender.NonBinary;
+                maleContainer.style.display= DisplayStyle.None;
+                femaleContainer.style.display = DisplayStyle.None;
+                NonBinaryContainer.style.display = DisplayStyle.Flex;
                 break;
         }
 
-        avatarGenderSelectionContainer.style.display = DisplayStyle.None;
-        avatarContainer.style.display = DisplayStyle.Flex;
+        //Show the back button
+        previousButtonContainer.style.display = DisplayStyle.Flex;
     }
 
     // Handle avatar click event
@@ -126,13 +184,12 @@ public class AvatarScrolling : MonoBehaviour
     {
         Debug.Log("Avatar clicked: " + avatar.name);
 
-        // If the clicked avatar is already selected, deselect it
+        // If the clicked avatar is already selected, ignore the selection
         if (selectedAvatar == avatar)
         {
-            DeselectAvatar();  // Deselect current avatar
-            selectAvatarConfirmationContainer.style.display = DisplayStyle.None;  // Hide confirmation if deselected
             return;
         }
+
         // Deselect previously selected avatar, if any
         DeselectAvatar();
         // Set the clicked avatar as the new selected avatar
@@ -140,23 +197,25 @@ public class AvatarScrolling : MonoBehaviour
         HighlightAvatar(avatar);  // Highlight the newly selected avatar
 
         // Store the selected race in the scriptable object
-        switch (avatar.name)
+
+        //Get the container number (1,2,3,or 4)
+        char avatarNumber = avatar.name.FirstOrDefault(char.IsDigit);
+
+        switch (avatarNumber)
         {
-            case "avatar1Container":
+            case '1':
                 avatarData.skinColor = AvatarData.SkinColor.White;
                 break;
-            case "avatar2Container":
+            case '2':
                 avatarData.skinColor = AvatarData.SkinColor.Pale;
                 break;
-            case "avatar3Container":
+            case '3':
                 avatarData.skinColor = AvatarData.SkinColor.LightBrown;
                 break;
-            case "avatar4Container":
+            case '4':
                 avatarData.skinColor = AvatarData.SkinColor.DarkBrown;
                 break;
-
-            //Need to eliminate this option, for now default to white
-            case "avatar5Container":
+            default:
                 avatarData.skinColor = AvatarData.SkinColor.White;
                 break;
         }
@@ -167,46 +226,20 @@ public class AvatarScrolling : MonoBehaviour
     //change image of charMessageContainer based on selected avatar
     private void ChangeAvatarBackground(string avatarName)
     {
-        // Mapping of avatar containers to character names
-        var avatarMapping = new Dictionary<string, string>
-    {
-        { "avatar1Container", "char1" },
-        { "avatar2Container", "char2" },
-        { "avatar3Container", "char3" },
-        { "avatar4Container", "char4" },
-        { "avatar5Container", "char5" }
-    };
 
         // Check if the avatarName exists in the mapping
-        if (avatarMapping.TryGetValue(avatarName, out string characterName))
-        {
-            string imagePath = $"Assets/Art/Textures/Questionnaire/{characterName}_message.png"; // Construct the image path
+        string spriteName = $"{avatarName}_Question"; // Construct the image name
 
-            // Check if the file exists before trying to load it
-            if (System.IO.File.Exists(imagePath))
-            {
-                byte[] fileData = System.IO.File.ReadAllBytes(imagePath);
-                Texture2D texture = new Texture2D(2, 2);
-                texture.LoadImage(fileData); // Load the image into the texture
-                charMessageContainer.style.backgroundImage = new StyleBackground(texture); // Apply the background
-            }
-            else
-            {
-                Debug.LogError($"Failed to load background image for avatar: {characterName}. File not found at {imagePath}");
-            }
+        // Check if the file exists before trying to load it
+        Sprite avatarMessageSprite = avatarMessageSprites.Find(t => t != null && t.name == spriteName);
+        
+        if (avatarMessageSprite != null)
+        {
+            charMessageContainer.style.backgroundImage = new StyleBackground(avatarMessageSprite); // Apply the background
         }
         else
         {
-            Debug.LogError($"Failed to load background image for avatar: {avatarName}. Avatar name not recognized.");
-        }
-    }
-
-    // Handle layout change event
-    private void OnLayoutChanged(GeometryChangedEvent evt)
-    {
-        if (selectedAvatar != null)
-        {
-            DisplayConfirmationNearAvatar(selectedAvatar);
+            Debug.LogError($"Failed to load background image for avatar: {spriteName}.");
         }
     }
 
@@ -267,7 +300,7 @@ public class AvatarScrolling : MonoBehaviour
 
         // Calculate the position above the avatar
         float confirmationLeft = avatarWorldBound.x + (avatarWorldBound.width - selectAvatarConfirmationContainer.resolvedStyle.width) / 2; // Center horizontally
-        float confirmationTop = avatarWorldBound.y - selectAvatarConfirmationContainer.resolvedStyle.height - 15; // Position above the avatar
+        float confirmationTop = avatarWorldBound.y - selectAvatarConfirmationContainer.resolvedStyle.height - 200; // Position above the avatar
 
 
         // Set the position

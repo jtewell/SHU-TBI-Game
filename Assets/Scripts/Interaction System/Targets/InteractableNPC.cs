@@ -16,14 +16,15 @@ public class InteractableNPC : MonoBehaviour
     private GameObject mainCamera;
     public static OnNPCInteractEvent onNPCInteractEvent = new OnNPCInteractEvent();
 
-    public void Start()
+    public virtual void Start()
     {
         dialogueRunner = FindObjectOfType<Yarn.Unity.DialogueRunner>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         cameraController = mainCamera.GetComponent<CameraController>();
     }
-    public void PlayDialogue()
+    public virtual void PlayDialogue()
     {
+        dialogueRunner = FindObjectOfType<Yarn.Unity.DialogueRunner>();
         onNPCInteractEvent?.Invoke(nameOfNPC);
         dialogueRunner.StartDialogue(conversationStartNode);
     }

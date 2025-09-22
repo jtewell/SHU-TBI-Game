@@ -176,6 +176,21 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
             }
         }
         
+        //If the user answers no to the third question screen (no repeated concussions or TBI history)
+        if (questionIndex == 3)
+        {
+            //If they answered No
+            if (MeasurementDataManager.Instance.Q3SelectedOption.Equals("No"))
+            {
+                //Change to the last screen
+                questions[questionIndex - 1].style.display = DisplayStyle.None; // Hide the current question
+                questionIndex = 29;
+                questions[questionIndex].style.display = DisplayStyle.Flex; // Show the last screen
+                continueButtonNum.SetEnabled(true);
+                return;
+            }
+        }
+
         if (questionIndex >= 2 && questionIndex <= 29)
         {
             if (questionIndex == 10)
@@ -208,6 +223,10 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
 
             if (questionIndex < questions.Length && questions[questionIndex] != null)
                 questions[questionIndex].style.display = DisplayStyle.Flex; // Show the next question
+
+            // If we just navigated from Q9 -> Q10, force-enable Q10's Continue
+            if (questionIndex == 9 && continueButtons.Length > 9 && continueButtons[9] != null)
+                continueButtons[9].SetEnabled(true);
         }
     }
 

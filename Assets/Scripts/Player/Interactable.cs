@@ -39,6 +39,8 @@ public class Interactable : MonoBehaviour
     [SerializeField]
     private Interactable.InteractionEvent m_InteractAction = new Interactable.InteractionEvent();
 
+    private static readonly List<RaycastResult> _raycastHits = new();
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -183,28 +185,35 @@ public class Interactable : MonoBehaviour
         return hitSuccessful;
     }
 
-    private bool IsObjectUnderUI ()
+    private bool IsObjectUnderUI()
     {
-        if (EventSystem.current == null)
-            return false;
+        if (EventSystem.current == null) return false;
 
-        // Mouse check
+        // Mouse
         if (Input.mousePresent && EventSystem.current.IsPointerOverGameObject())
             return true;
 
-        // Touch check
-        if (Input.touchCount > 0)
+        // Touch
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            for (int i = 0; i < Input.touchCount; i++)
-            {
-                Touch touch = Input.GetTouch(i);
-                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-                    return true;
-            }
+            var t = Input.GetTouch(i);
+            if (t.phase == UnityEngine.TouchPhase.Ended || t.phase == UnityEngine.TouchPhase.Canceled) continue;
+
+            if (IsScreenPointOverUI(t.position))
+                return true;
         }
 
         return false;
     }
+
+    private bool IsScreenPointOverUI(Vector2 screenPos)
+    {
+        _raycastHits.Clear();
+        var data = new PointerEventData(EventSystem.current) { position = screenPos };
+        EventSystem.current.RaycastAll(data, _raycastHits);
+        return _raycastHits.Count > 0;
+    }
+
 
     // Called by the controller. Should call the defined effect. Flow control is handled by the controller/caller
     void Interact()

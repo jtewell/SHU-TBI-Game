@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [System.Serializable]
 public class GenderMeshTextures
@@ -18,11 +19,17 @@ public class AvatarTextures : MonoBehaviour
 
     public Texture[] faceTextures; // Index: [0]=White, [1]=Pale, [2]=LightBrown, [3]=DarkBrown
 
+    public GameObject[] hairStyles;
+    public Material[] hairMaterials;
+
     public SkinnedMeshRenderer avatarSkinnedMesh;
     public Material faceMaterial;
     public Material bodyMaterial;
 
     public AvatarData avatarData;
+    public GameObject hairPrefab;
+
+    
 
     private void Start()
     {
@@ -35,14 +42,45 @@ public class AvatarTextures : MonoBehaviour
         int genderIndex = GetGenderIndex(avatarData.gender);
         int colorIndex = GetSkinColorIndex(avatarData.skinColor);
 
+        //Create new material instances
+        Material bodyMaterialInstance = new Material(bodyMaterial);
+        Material faceMaterialInstance = new Material(faceMaterial);
+        Material hairMaterialInstance = new Material(hairMaterials[colorIndex]);
+
+        //Assign the material instances to the renderer
+        Material[] skinnedMeshMaterials = avatarSkinnedMesh.materials;
+        skinnedMeshMaterials[0] = bodyMaterialInstance;
+        skinnedMeshMaterials[1] = faceMaterialInstance;
+        avatarSkinnedMesh.materials = skinnedMeshMaterials;
+
+
         // Assign the correct mesh based on gender
         avatarSkinnedMesh.sharedMesh = genderOptions[genderIndex].bodyMesh;
 
         // Assign body texture based on gender + color
-        bodyMaterial.mainTexture = genderOptions[genderIndex].skinTextures[colorIndex];
+        bodyMaterialInstance.mainTexture = genderOptions[genderIndex].skinTextures[colorIndex];
 
         // Assign face texture based on color
-        faceMaterial.mainTexture = faceTextures[colorIndex];
+        faceMaterialInstance.mainTexture = faceTextures[colorIndex];
+
+        //Assign hairstyle based on gender
+        hairPrefab = hairStyles[genderIndex];
+
+        //Attach the hair to the body
+        Transform bone = avatarSkinnedMesh.bones.FirstOrDefault(b => b != null && b.name == "DEF-Hair");
+        if (bone != null)
+        {
+            GameObject hair = Instantiate(hairPrefab);
+            hair.transform.SetParent(bone, false);
+            hair.transform.localPosition = Vector3.zero;
+            hair.transform.localScale = Vector3.one;
+            hair.transform.localRotation = Quaternion.identity;
+
+            Material[] hairMeshMaterials = hair.GetComponent<MeshRenderer>().sharedMaterials;
+            hairMeshMaterials[0] = hairMaterialInstance;
+            hair.GetComponent<MeshRenderer>().sharedMaterials = hairMeshMaterials;
+
+        }
     }
 
     private int GetGenderIndex(AvatarData.Gender gender)

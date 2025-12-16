@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2
+  MoveSpeed: 4
   SprintSpeed: 10
   SpeedChangeRate: 10
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
@@ -1340,10 +1340,20 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 0c26fe6f1de45c3488a258f35a7dbaa3, type: 3}
   - {fileID: 2800000, guid: 3e29f8e3952e02f41928527f38f352d6, type: 3}
   - {fileID: 2800000, guid: a18d34b0fb42c0f47b2c47c21190b71f, type: 3}
+  hairStyles:
+  - {fileID: 7279803995629281089, guid: ea6793671fb298b4c8514a24babe5500, type: 3}
+  - {fileID: 9151340697510833923, guid: eba2f3d8a4917a348a060aaa85df9556, type: 3}
+  - {fileID: 6373152676615221553, guid: 53d9d2aa1f9cc154a81d5bd23136af2f, type: 3}
+  hairMaterials:
+  - {fileID: 2100000, guid: 969cd91eb8a71284c8465cb68f423527, type: 2}
+  - {fileID: 2100000, guid: 2247bf95a2036cf4091ed6aecfd2f49a, type: 2}
+  - {fileID: 2100000, guid: b086558f0c3f12940a4d10422a5a4723, type: 2}
+  - {fileID: 2100000, guid: f1a933385f46a8f4fa6ae8ab950e558f, type: 2}
   avatarSkinnedMesh: {fileID: 2931276858289305478}
   faceMaterial: {fileID: 2100000, guid: c1631e4175accd643913ed948c5587f3, type: 2}
   bodyMaterial: {fileID: 2100000, guid: 5a8571d3433777d4f815b1546cf3df34, type: 2}
   avatarData: {fileID: 11400000, guid: bf7f21d77e712cf409fff62005f8d706, type: 2}
+  hairPrefab: {fileID: 2544983294173617322, guid: ad44965f007c01d4887a947f1f059b88, type: 3}
 --- !u!114 &5738620052505463857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2447,7 +2457,7 @@ Transform:
   m_GameObject: {fileID: 8338988566280778634}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

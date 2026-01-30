@@ -18,6 +18,7 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
     private Button[] continueButtons = new Button[30];
     private VisualElement ErrorMessageContainer;
     private Button continueButtonNum;
+    private ProgressBar progressBar;
 
     //keeps track of what question
     private int questionNumber = 1;
@@ -26,10 +27,14 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
     {
         // Get the UIDocument component attached to the same GameObject
         var uiDocument = GetComponent<UIDocument>();
-       
+
         // Get the root VisualElement of the UI document
         var root = uiDocument.rootVisualElement;
-       
+
+        // Get the ProgressBar element from the UI document
+        progressBar = root.Q<ProgressBar>("ProgressBar");
+        progressBar.value = 0;
+
         // Initialize the question VisualElements by finding them in the UI hierarchy
         for (int i = 0; i < questions.Length; i++)
         {
@@ -132,7 +137,8 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
     {
         if (questions[questionIndex - 2] != null && questions[questionIndex - 1] != null)
         {
-            
+            progressBar.value -= 4;
+            progressBar.title = progressBar.value.ToString() + "%";
             // Hide the current question and show the previous question
             questions[questionIndex - 2].style.display = DisplayStyle.Flex;
             questions[questionIndex - 1].style.display = DisplayStyle.None;
@@ -142,7 +148,8 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
     {
         //Update this each time the continue button is selected
         questionNumber = questionIndex + 1;
-
+        progressBar.value += 4;
+        progressBar.title = progressBar.value.ToString() + "%";
         bool hasErrors = false;
         //marge three values to form a date
 
@@ -182,6 +189,8 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
             //If they answered No
             if (MeasurementDataManager.Instance.Q3SelectedOption.Equals("No"))
             {
+                progressBar.value = 100;
+                progressBar.title = 100 + "%";
                 //Change to the last screen
                 questions[questionIndex - 1].style.display = DisplayStyle.None; // Hide the current question
                 questionIndex = 29;

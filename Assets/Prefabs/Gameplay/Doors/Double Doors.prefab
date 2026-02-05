@@ -223,8 +223,10 @@ GameObject:
   - component: {fileID: 9034290013125311465}
   - component: {fileID: 4221090627460352876}
   - component: {fileID: 2947131886845343356}
-  - component: {fileID: -6176126258677282278}
   - component: {fileID: 7174598137799562990}
+  - component: {fileID: -4684313543554732563}
+  - component: {fileID: 2819819496512797561}
+  - component: {fileID: 5707423322781295078}
   m_Layer: 0
   m_Name: Double Doors
   m_TagString: Untagged
@@ -278,7 +280,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 2
-  m_Center: {x: 0, y: -1.5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &2947131886845343356
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -294,13 +296,27 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: -1.5, z: 0}
---- !u!114 &-6176126258677282278
+  m_Size: {x: 1.69, y: 4.84, z: 0.53}
+  m_Center: {x: 0.4, y: 1, z: 0}
+--- !u!114 &7174598137799562990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766325571996433294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b4110f4be4904a4db4c2349e38c323a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextScene: House
+  spawnPoint: House Door
+--- !u!114 &-4684313543554732563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,13 +328,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450d3bdbb8f7f654aa0cf92f224b2bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverGlowShaderMaterial: {fileID: 0}
-  inRangeThickness: 1.1
-  outOfRangeThickness: 1.1
-  glowOutOfRange: 1
-  inRangeOutline: {r: 0, g: 1, b: 1, a: 1}
-  outOfRangeOutline: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineEnabled: 0
   canInteractAnywhere: 0
+  dontDisableDuringDialog: 0
+  _canInteract: 1
   m_InteractAction:
     m_PersistentCalls:
       m_Calls:
@@ -334,7 +347,115 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7174598137799562990
+      - m_Target: {fileID: 7210350234498289138, guid: a71b7c7e50a160b43a6005381415d5c6, type: 3}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!82 &2819819496512797561
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766325571996433294}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: aa0d0ebb843273f419f3557c4ab7b20c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5707423322781295078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,11 +464,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1766325571996433294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4110f4be4904a4db4c2349e38c323a, type: 3}
+  m_Script: {fileID: 11500000, guid: b0b708393f0aecd488c8161f0752d21b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: 
-  spawnPoint: 
 --- !u!1 &2455612279000087948
 GameObject:
   m_ObjectHideFlags: 0

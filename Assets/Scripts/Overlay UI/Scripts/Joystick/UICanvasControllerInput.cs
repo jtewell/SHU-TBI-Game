@@ -1,12 +1,21 @@
+using JetBrains.Annotations;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace StarterAssets
 {
     public class UICanvasControllerInput : MonoBehaviour
     {
+        public bool isSprinting = false;
+        public Button sprintButton;
+        Color buttonUp = new Color(1.0f,1.0f,1.0f,1.0f);
+        Color buttonDown = new Color(.75f,.75f,.75f,1.0f);
 
         [Header("Output")]
         public StarterAssetsInputs starterAssetsInputs;
+
+    
 
         public void VirtualMoveInput(Vector2 virtualMoveDirection)
         {
@@ -20,14 +29,22 @@ namespace StarterAssets
 
         public void VirtualJumpInput(bool virtualJumpState)
         {
+            
             starterAssetsInputs.JumpInput(virtualJumpState);
         }
 
-        public void VirtualSprintInput(bool virtualSprintState)
+        public void VirtualSprintInput()
         {
-            starterAssetsInputs.SprintInput(virtualSprintState);
+            isSprinting = !isSprinting;
+            starterAssetsInputs.SprintInput(isSprinting);
+            sprintButton.image.color = isSprinting ? buttonDown : buttonUp;
         }
-        
+
+
+        void Update()
+        {
+            Debug.Log(isSprinting);
+        }
     }
 
 }

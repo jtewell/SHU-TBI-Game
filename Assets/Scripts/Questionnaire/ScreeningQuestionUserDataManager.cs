@@ -138,7 +138,6 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
         if (questions[questionIndex - 2] != null && questions[questionIndex - 1] != null)
         {
             progressBar.value -= 4;
-            progressBar.title = progressBar.value.ToString() + "%";
             // Hide the current question and show the previous question
             questions[questionIndex - 2].style.display = DisplayStyle.Flex;
             questions[questionIndex - 1].style.display = DisplayStyle.None;
@@ -149,7 +148,6 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
         //Update this each time the continue button is selected
         questionNumber = questionIndex + 1;
         progressBar.value += 4;
-        progressBar.title = progressBar.value.ToString() + "%";
         bool hasErrors = false;
         //marge three values to form a date
 
@@ -190,7 +188,6 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
             if (MeasurementDataManager.Instance.Q3SelectedOption.Equals("No"))
             {
                 progressBar.value = 100;
-                progressBar.title = 100 + "%";
                 //Change to the last screen
                 questions[questionIndex - 1].style.display = DisplayStyle.None; // Hide the current question
                 questionIndex = 29;

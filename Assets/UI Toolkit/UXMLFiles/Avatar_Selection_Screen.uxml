@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/USSFiles/AvatarSelectionScreen.uss?fileID=7433441132597879392&amp;guid=288f273a12d736d439336423c4a3e782&amp;type=3#AvatarSelectionScreen" />
-    <ui:VisualElement name="avatarSelectionContainer" style="flex-grow: 1; background-color: rgb(57, 157, 249);">
+    <ui:VisualElement name="avatarSelectionContainer" style="flex-grow: 1; background-color: rgb(57, 157, 249); display: flex;">
         <ui:Label tabindex="-1" text="Time to choose your character!&#10;Would you like to be..." parse-escape-sequences="true" display-tooltip-when-elided="true" class="Title" style="align-self: center; -unity-text-align: upper-center; display: flex; top: auto;" />
         <ui:VisualElement name="previousButtonContainer" class="previousContainer" style="flex-grow: 0; align-self: flex-start; margin-top: 0; align-items: stretch; flex-direction: column; display: none;">
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="previousButton" class="previousButton" style="justify-content: center; flex-direction: column; align-self: center; background-color: rgba(188, 188, 188, 0); background-image: url(&apos;project://database/Assets/Art/Textures/Questionnaire/left-arrow.png?fileID=2800000&amp;guid=f8ceb62693795da479122e2dcf77a16b&amp;type=3#left-arrow&apos;);" />
@@ -52,6 +52,14 @@
                     <ui:Button text="PLAY" parse-escape-sequences="true" display-tooltip-when-elided="true" name="continueGamePlayButton" class="button optionButtons" style="align-self: center; align-items: center; flex-direction: row; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
                 </ui:VisualElement>
             </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="handSelectionContainer" style="flex-grow: 1; flex-direction: column; background-color: rgb(57, 157, 249); display: none;">
+        <ui:Label tabindex="-1" text="Are you left or right handed?" parse-escape-sequences="true" display-tooltip-when-elided="true" class="Title" style="align-self: center; -unity-text-align: upper-center; display: flex; top: auto;" />
+        <ui:Button text="Left" display-tooltip-when-elided="true" name="leftHandButton" style="height: 109px; width: 150px; -unity-text-align: middle-center; white-space: nowrap; translate: 200px 210px; scale: 1 1;" />
+        <ui:Button text="Right" display-tooltip-when-elided="true" name="rightHandButton" style="height: 109px; width: 150px; -unity-text-align: middle-center; white-space: nowrap; translate: 800px 100px;" />
+        <ui:VisualElement name="previousButtonContainer" class="previousContainer" style="flex-grow: 0; align-self: flex-start; margin-top: 0; align-items: stretch; flex-direction: column; display: none;">
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="previousButton" class="previousButton" style="justify-content: center; flex-direction: column; align-self: center; background-color: rgba(188, 188, 188, 0); background-image: url(&apos;project://database/Assets/Art/Textures/Questionnaire/left-arrow.png?fileID=2800000&amp;guid=f8ceb62693795da479122e2dcf77a16b&amp;type=3#left-arrow&apos;);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

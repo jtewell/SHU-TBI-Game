@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Rendering.UI;
 
 
 public class AvatarScrolling : MonoBehaviour
@@ -27,7 +28,8 @@ public class AvatarScrolling : MonoBehaviour
         previousButtonContainer,
         maleContainer,
         femaleContainer,
-        NonBinaryContainer;
+        NonBinaryContainer,
+        HandSelectionContainer;
 
     private ScrollView avatarSelectionScrollingView;
 
@@ -40,7 +42,9 @@ public class AvatarScrolling : MonoBehaviour
         femaleButton,
         nonBinaryButton,
         continueGamePlayButton,
-        previousButton;
+        previousButton,
+        LeftHandButton,
+        RightHandButton;
 
     private Label
         titleAvatarSelection,
@@ -72,6 +76,8 @@ public class AvatarScrolling : MonoBehaviour
         maleContainer = root.Q<VisualElement>("contentContainerMale");
         femaleContainer = root.Q<VisualElement>("contentContainerFemale");
         NonBinaryContainer = root.Q<VisualElement>("contentContainerNonBinary");
+        HandSelectionContainer = root.Q<VisualElement>("handSelectionContainer");
+        
 
         // Initialize buttons and labels
         yesButton = root.Q<Button>("yesButton");
@@ -85,6 +91,8 @@ public class AvatarScrolling : MonoBehaviour
         thankYouLabel = root.Q<Label>("thankYouLabel");
         continueGamePlayButton = root.Q<Button>("continueGamePlayButton");
         previousButton = root.Q<Button>("previousButton");
+        LeftHandButton = root.Q<Button>("leftHandButton");
+        RightHandButton = root.Q<Button>("rightHandButton");
 
         // Register button click events for scrolling and confirmation actions
         scrollLeft.clicked += ScrollLeftButton;
@@ -94,6 +102,8 @@ public class AvatarScrolling : MonoBehaviour
         nonBinaryButton.clicked += () => OnGenderSelected("Non-Binary");
         previousButton.clicked += () => OnPreviousButtonClicked();
         continueGamePlayButton.clicked += () => OnContinueGamePlayButtonClicked();
+        LeftHandButton.clicked += () => onLeftHandButtonClicked();
+        RightHandButton.clicked += () => onRightHandButtonClicked();
 
         // Hide the avatar confirmation and thank you containers initially
         avatarContainer.style.display = DisplayStyle.None;
@@ -107,9 +117,12 @@ public class AvatarScrolling : MonoBehaviour
         var avatarContainerstore = avatarSelectionScrollingView.Query<VisualElement>(className: "avatar").ToList();
         avatarContainerstore.ForEach(avatar => avatar.RegisterCallback<ClickEvent>(ev => OnAvatarClicked(avatar)));
 
-        //Show the avatar gender buttons first
-        avatarGenderSelectionContainer.style.display = DisplayStyle.Flex;
+        //hide avatar screens
+        avatarSelectionContainer.style.display = DisplayStyle.None;
+        avatarGenderSelectionContainer.style.display = DisplayStyle.None;
 
+        //Show the handedness selection screen first
+        HandSelectionContainer.style.display = DisplayStyle.Flex;
     }
     //create a function to handle previous button click event 
     private void OnPreviousButtonClicked()
@@ -124,15 +137,15 @@ public class AvatarScrolling : MonoBehaviour
             DeselectAvatar();
         }
 
-        //If on the avatar selection screen
-        else
+        //if on gender selection screen
+        else if (avatarGenderSelectionContainer.style.display == DisplayStyle.Flex)
         {
             //Turn off the back button
             previousButtonContainer.style.display = DisplayStyle.None;
-            //Turn on the gender selection screen
-            avatarGenderSelectionContainer.style.display = DisplayStyle.Flex;
-            //Turn off the avatar selection screen
-            avatarContainer.style.display = DisplayStyle.None;
+            //turn off the avatar selection screen
+            avatarGenderSelectionContainer.style.display = DisplayStyle.None;
+            //Turn on the handedness selection screen
+            HandSelectionContainer.style.display = DisplayStyle.Flex;
             //Turn off all avatar gender selections
             maleContainer.style.display = DisplayStyle.None;
             femaleContainer.style.display = DisplayStyle.None;
@@ -140,6 +153,21 @@ public class AvatarScrolling : MonoBehaviour
             DeselectAvatar();
         }
 
+        //If on the avatar selection screen
+        else if (avatarContainer.style.display == DisplayStyle.Flex)
+        {
+            //Turn off the avatar selection screen
+            avatarContainer.style.display = DisplayStyle.None;
+            //Turn on the handedness selection screen
+            avatarGenderSelectionContainer.style.display = DisplayStyle.Flex;
+            //Turn off all avatar gender selections
+            maleContainer.style.display = DisplayStyle.None;
+            femaleContainer.style.display = DisplayStyle.None;
+            NonBinaryContainer.style.display = DisplayStyle.None;
+            DeselectAvatar();
+        }
+
+        
     }
     //on gender selected method
     private void OnGenderSelected(string gender)
@@ -355,7 +383,7 @@ public class AvatarScrolling : MonoBehaviour
         // Show the thank you message
         ShowThankYouMessage();
 
-        //Start the game!
+        //Start Game
         StartGame();
     }
     // Scroll left button logic
@@ -382,6 +410,43 @@ public class AvatarScrolling : MonoBehaviour
 
     // Empty update method (in case needed for future use)
     void Update() { }
+
+    private void StartHandQuestion()
+    {
+        //Turn off avatar selection container
+        avatarSelectionContainer.style.display = DisplayStyle.None;
+        previousButtonContainer.style.display = DisplayStyle.Flex;
+
+        //turn on hand selection container
+        HandSelectionContainer.style.display = DisplayStyle.Flex;
+        previousButtonContainer.style.display = DisplayStyle.None;
+
+        //turn on previous button
+        previousButtonContainer.style.display = DisplayStyle.Flex;
+    }
+    
+    private void onLeftHandButtonClicked()
+    {
+        //hide hand selection screen
+        HandSelectionContainer.style.display = DisplayStyle.None;
+
+        //start avatar selection screen
+        avatarGenderSelectionContainer.style.display = DisplayStyle.Flex;
+        avatarSelectionContainer.style.display = DisplayStyle.Flex;
+
+        //turn on previous button
+        previousButtonContainer.style.display = DisplayStyle.Flex;
+    }
+
+    private void onRightHandButtonClicked()
+    {
+        //hide hand selection screen
+        HandSelectionContainer.style.display = DisplayStyle.None;
+
+        //start avatar selection screen
+        avatarGenderSelectionContainer.style.display = DisplayStyle.Flex;
+        avatarSelectionContainer.style.display = DisplayStyle.Flex;
+    }
 
     private void StartGame ()
     {

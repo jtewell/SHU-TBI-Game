@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/USSFiles/ScreeningQuestion.uss?fileID=7433441132597879392&amp;guid=0593b3be774b914409e0bf74ede14a31&amp;type=3#ScreeningQuestion" />
     <ui:ProgressBar value="0" name="ProgressBar" high-value="100" style="height: 26px; width: 1190px; flex-direction: column; position: relative;" />
-    <ui:VisualElement name="Question1" style="flex-grow: 1; background-color: rgba(57, 157, 249, 0.86); display: flex; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-direction: column;">
+    <ui:VisualElement name="Question1" style="flex-grow: 1; background-color: rgba(57, 157, 249, 0.86); display: none; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-direction: column;">
         <ui:VisualElement name="Q1PreviousButtonContainer" class="previousContainer" style="flex-grow: 0; background-image: none; -unity-background-image-tint-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); display: none;">
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q1PreviousButton" class="previousButton" style="background-image: url(&apos;project://database/Assets/Art/Textures/Questionnaire/left-arrow.png?fileID=2800000&amp;guid=f8ceb62693795da479122e2dcf77a16b&amp;type=3#left-arrow&apos;); background-color: rgba(45, 45, 45, 0);" />
         </ui:VisualElement>
@@ -38,7 +38,7 @@
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q3PreviousButton" class="previousButton" style="background-image: url(&apos;project://database/Assets/Art/Textures/Questionnaire/left-arrow.png?fileID=2800000&amp;guid=f8ceb62693795da479122e2dcf77a16b&amp;type=3#left-arrow&apos;); background-color: rgba(45, 45, 45, 0);" />
         </ui:VisualElement>
         <ui:VisualElement name="QuestionContainer" style="flex-grow: 0; align-items: center; align-self: center; flex-direction: row; justify-content: space-around; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; flex-wrap: wrap; display: flex; position: relative; top: 10%; -unity-text-align: upper-center; width: auto; height: auto; margin-right: 20px; margin-left: 20px;">
-            <ui:Label tabindex="-1" text="Do you have a history of repeated concussions or traumatic brain injury?" parse-escape-sequences="true" display-tooltip-when-elided="true" class="titleQuestion30px" style="-unity-font-definition: initial; font-size: 40px; white-space: normal;" />
+            <ui:Label tabindex="-1" text="Have you experienced a concussion or TBI?" parse-escape-sequences="true" display-tooltip-when-elided="true" class="titleQuestion30px" style="-unity-font-definition: initial; font-size: 40px; white-space: normal;" />
         </ui:VisualElement>
         <ui:VisualElement name="OptionContainer" class="optionButtonsContainer" style="flex-grow: 0; flex-direction: row; width: auto; height: auto; justify-content: center; align-self: stretch; align-items: center; top: 15%; position: relative;">
             <ui:Button text="Yes" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q3YesOpinion" class="optionButtons" />
@@ -48,22 +48,35 @@
             <ui:Button text="Continue" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q3Continue" class="buttonContinue" style="align-items: center; align-self: center;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="Question4" style="flex-grow: 1; background-color: rgba(57, 157, 249, 0.86); display: none;">
+    <ui:VisualElement name="Question4" style="flex-grow: 1; background-color: rgba(57, 157, 249, 0.86); display: flex;">
         <ui:VisualElement name="Q4PreviousButtonContainer" class="previousContainer" style="flex-grow: 0;">
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q4PreviousButton" class="previousButton" style="background-image: url(&apos;project://database/Assets/Art/Textures/Questionnaire/left-arrow.png?fileID=2800000&amp;guid=f8ceb62693795da479122e2dcf77a16b&amp;type=3#left-arrow&apos;); background-color: rgba(45, 45, 45, 0);" />
         </ui:VisualElement>
         <ui:VisualElement name="QuestionContainer" style="flex-grow: 0; align-items: center; align-self: center; flex-direction: column; justify-content: space-around; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; flex-wrap: nowrap; display: flex; top: 10%; position: relative; width: auto; height: auto; margin-right: 20px; margin-left: 20px;">
-            <ui:Label tabindex="-1" text="Separate from a TBI, have you experienced 2 mild,mild-moderate or moderate concussions?" parse-escape-sequences="true" display-tooltip-when-elided="true" class="titleQuestion30px" style="color: rgb(0, 0, 0); white-space: normal; margin-bottom: 2px;" />
+            <ui:Label tabindex="-1" text="How severe was your concussion or TBI?" parse-escape-sequences="true" display-tooltip-when-elided="true" class="titleQuestion30px" style="color: rgb(0, 0, 0); white-space: normal; margin-bottom: 2px;" />
         </ui:VisualElement>
         <ui:VisualElement name="Q4Opinion" class="optionButtonsContainer" style="flex-grow: 0; flex-direction: row; width: auto; height: auto; justify-content: center; align-self: stretch; align-items: center; top: 15%;">
-            <ui:Button text="Yes" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q4YesOpinion" class="OptionsButton optionButtons" />
-            <ui:Button text="No" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q4NoOpinion" class="OptionsButton optionButtons" style="margin-left: 10px;" />
+            <ui:Button text="Mild" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q4MildOpinion" class="OptionsButton optionButtons" style="color: rgb(27, 27, 27);" />
+            <ui:Button text="Moderate" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q4ModerateOpinion" class="OptionsButton optionButtons" style="margin-left: 10px;" />
+            <ui:Button text="Severe" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q4SevereOpinion" class="OptionsButton optionButtons" style="margin-left: 10px;" />
+            <ui:Button text="Not sure" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q4IDKOpinion" class="OptionsButton optionButtons" style="margin-left: 10px;" />
         </ui:VisualElement>
         <ui:VisualElement name="Q4NextButton" class="continueButtonContainer" style="flex-grow: 0; width: auto; height: auto;">
             <ui:Button text="Continue" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q4Continue" class="buttonContinue" style="align-items: center; align-self: center;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="Question5" style="flex-grow: 1; background-color: rgba(57, 157, 249, 0.86); display: none;">
+    <ui:VisualElement name="Question5" style="flex-grow: 1; background-color: rgb(57, 157, 249); display: none; width: auto; height: auto;">
+        <ui:VisualElement name="Q30PreviousButtonContainer" class="previousContainer" style="flex-grow: 0; display: none;">
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q30PreviousButton" class="previousButton" style="background-image: url(&apos;project://database/Assets/Art/Textures/Questionnaire/left-arrow.png?fileID=2800000&amp;guid=f8ceb62693795da479122e2dcf77a16b&amp;type=3#left-arrow&apos;); background-color: rgba(45, 45, 45, 0); display: flex;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="QuestionContainer" class="titleBackground" style="flex-grow: 0; align-items: center; align-self: center; flex-direction: column; justify-content: space-around; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; flex-wrap: nowrap; display: flex; margin-right: 20px; margin-left: 20px; top: 30%;">
+            <ui:Label tabindex="-1" text="Thank you for answering the questions! You may start playing the game!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="titleQuestion30px" style="color: rgb(0, 0, 0); white-space: normal; display: flex;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Q30NextButton" class="continueButtonafter10" style="flex-grow: 0; width: auto; height: auto; display: flex;">
+            <ui:Button text="Continue" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q30Continue" class="OptionsButton buttonContinue" style="align-items: center; align-self: center;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="OldQuestion5" style="flex-grow: 1; background-color: rgba(57, 157, 249, 0.86); display: none;">
         <ui:VisualElement name="Q5PreviousButtonContainer" class="previousContainer" style="flex-grow: 0; background-image: none; -unity-background-image-tint-color: rgb(255, 255, 255); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255);">
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q5PreviousButton" class="previousButton" style="background-image: url(&apos;project://database/Assets/Art/Textures/Questionnaire/left-arrow.png?fileID=2800000&amp;guid=f8ceb62693795da479122e2dcf77a16b&amp;type=3#left-arrow&apos;); background-color: rgba(45, 45, 45, 0);" />
         </ui:VisualElement>
@@ -505,17 +518,6 @@
         <ui:Label tabindex="-1" text="1 (Not true at all), 2 (Mostly untrue), 3 (Sometimes),&#10; 4 (Mostly true), 5 (Absolutely true)" parse-escape-sequences="true" display-tooltip-when-elided="true" name="note" class="note30px" />
         <ui:VisualElement name="Q29NextButton" class="continueButtonafter10" style="flex-grow: 0; width: auto; height: auto;">
             <ui:Button text="Continue" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q29Continue" class="OptionsButton buttonContinue" style="align-items: center; align-self: center;" />
-        </ui:VisualElement>
-    </ui:VisualElement>
-    <ui:VisualElement name="Question30" style="flex-grow: 1; background-color: rgb(57, 157, 249); display: none; width: auto; height: auto;">
-        <ui:VisualElement name="Q30PreviousButtonContainer" class="previousContainer" style="flex-grow: 0; display: none;">
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q30PreviousButton" class="previousButton" style="background-image: url(&apos;project://database/Assets/Art/Textures/Questionnaire/left-arrow.png?fileID=2800000&amp;guid=f8ceb62693795da479122e2dcf77a16b&amp;type=3#left-arrow&apos;); background-color: rgba(45, 45, 45, 0); display: flex;" />
-        </ui:VisualElement>
-        <ui:VisualElement name="QuestionContainer" class="titleBackground" style="flex-grow: 0; align-items: center; align-self: center; flex-direction: column; justify-content: space-around; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; flex-wrap: nowrap; display: flex; margin-right: 20px; margin-left: 20px; top: 30%;">
-            <ui:Label tabindex="-1" text="Thank you for answering the questions! You may start playing the game!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="titleQuestion30px" style="color: rgb(0, 0, 0); white-space: normal; display: flex;" />
-        </ui:VisualElement>
-        <ui:VisualElement name="Q30NextButton" class="continueButtonafter10" style="flex-grow: 0; width: auto; height: auto; display: flex;">
-            <ui:Button text="Continue" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Q30Continue" class="OptionsButton buttonContinue" style="align-items: center; align-self: center;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -28,6 +28,10 @@ public class MeasurementDataManager : PersistentMonoSingleton<MeasurementDataMan
     public string birthDay;
     public string birthYear;
     public string gender;
+    public string mild;
+    public string moderate;
+    public string severe;
+    public string notSure;
     public string Q3SelectedOption; // hasTBIHistory;
     public string Q4SelectedOption; // hadConcussions;
     public string Q5SelectedOption; // numberOfConcussions;

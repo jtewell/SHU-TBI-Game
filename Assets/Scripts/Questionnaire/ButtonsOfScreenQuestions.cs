@@ -11,7 +11,7 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
 
     private Button[] genderButtons = new Button[3];
     private Button[] q3Buttons = new Button[2];
-    private Button[] q4Buttons = new Button[2];
+    private Button[] q4Buttons = new Button[4];
     private Button[] q7Buttons = new Button[2];
 
     // Individual selected buttons for each question
@@ -46,7 +46,7 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
                 Debug.LogError($"{q3ButtonNames[i]} not found.");
         }
         // Initialize Q4 buttons
-        string[] q4ButtonNames = { "Q4YesOpinion", "Q4NoOpinion" };
+        string[] q4ButtonNames = { "Q4MildOpinion", "Q4ModerateOpinion", "Q4SevereOpinion", "Q4IDKOpinion"};
         for (int i = 0; i < q4Buttons.Length; i++)
         {
             q4Buttons[i] = root.Q<Button>(q4ButtonNames[i]);
@@ -74,8 +74,10 @@ public class ButtonsOfScreenQuestions : MonoBehaviour
         if (q3Buttons[1] != null) q3Buttons[1].clicked += () => OnQ3ButtonClick(q3Buttons[1],"No");
 
         // Assuming Q4 buttons have some specific methods
-        if (q4Buttons[0] != null) q4Buttons[0].clicked += () => OnQ4ButtonClick(q4Buttons[0],"Yes");
-        if (q4Buttons[1] != null) q4Buttons[1].clicked += () => OnQ4ButtonClick(q4Buttons[1], "No");
+        if (q4Buttons[0] != null) q4Buttons[0].clicked += () => OnQ4ButtonClick(q4Buttons[0],"Mild");
+        if (q4Buttons[1] != null) q4Buttons[1].clicked += () => OnQ4ButtonClick(q4Buttons[1], "Moderate");
+        if (q4Buttons[2] != null) q4Buttons[2].clicked += () => OnQ4ButtonClick(q4Buttons[2], "Severe");
+        if (q4Buttons[3] != null) q4Buttons[3].clicked += () => OnQ4ButtonClick(q4Buttons[3], "Not sure");
 
         //Assuming Q7 buttons have some specific methods
         if (q7Buttons[0] != null) q7Buttons[0].clicked += () => OnQ7ButtonClick(q7Buttons[0], "Yes");

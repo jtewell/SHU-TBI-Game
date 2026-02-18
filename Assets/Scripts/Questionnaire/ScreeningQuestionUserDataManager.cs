@@ -13,12 +13,16 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
 {
 
     // Arrays to hold references to VisualElement and Button components for each question
-    private VisualElement[] questions = new VisualElement[30];
-    private Button[] previousButtons = new Button[30];
-    private Button[] continueButtons = new Button[30];
+    private VisualElement[] questions = new VisualElement[5];
+    private Button[] previousButtons = new Button[4];
+    private Button[] continueButtons = new Button[5];
     private VisualElement ErrorMessageContainer;
     private Button continueButtonNum;
     private ProgressBar progressBar;
+    private Button mildButton;
+    private Button moderateButton;
+    private Button severeButton;
+    private Button notSureButton;
 
     //keeps track of what question
     private int questionNumber = 1;
@@ -35,6 +39,12 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
         progressBar = root.Q<ProgressBar>("ProgressBar");
         progressBar.value = 0;
 
+        //turn off the other questions and turn on the first question
+        root.Q<VisualElement>("Question1").style.display = DisplayStyle.Flex;
+        root.Q<VisualElement>("Question2").style.display = DisplayStyle.None;
+        root.Q<VisualElement>("Question3").style.display = DisplayStyle.None;
+        root.Q<VisualElement>("Question4").style.display = DisplayStyle.None;
+        root.Q<VisualElement>("Question5").style.display = DisplayStyle.None;
         // Initialize the question VisualElements by finding them in the UI hierarchy
         for (int i = 0; i < questions.Length; i++)
         {
@@ -46,7 +56,10 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
         {
             previousButtons[i] = root.Q<Button>($"Q{i + 1}PreviousButton");
             continueButtons[i] = root.Q<Button>($"Q{i + 1}Continue");
-
+            mildButton = root.Q<Button>("Q4MildOpinion");
+            moderateButton = root.Q<Button>("Q4ModerateOpinion");
+            severeButton = root.Q<Button>("Q4SevereOpinion");
+            notSureButton = root.Q<Button>("Q4IDKOpinion");
         }
 
         // Add click event listeners to the previous and continue buttons
@@ -107,28 +120,33 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
             continueButtons[1].SetEnabled(true);
         }
 
-        if (questionNumber > 2 && questionNumber < 30)
+        if (questionNumber == 3)
         {
             string[] selectedOptions = { null, null,
-            MeasurementDataManager.Instance.Q3SelectedOption, MeasurementDataManager.Instance.Q4SelectedOption, 
-            MeasurementDataManager.Instance.Q5SelectedOption, MeasurementDataManager.Instance.Q6SelectedOption, 
-            MeasurementDataManager.Instance.Q7SelectedOption, MeasurementDataManager.Instance.Q8SelectedOption, 
-            MeasurementDataManager.Instance.Q9SelectedOption, "yes", 
-            MeasurementDataManager.Instance.Q11SelectedOption, MeasurementDataManager.Instance.Q12SelectedOption, 
-            MeasurementDataManager.Instance.Q13SelectedOption, MeasurementDataManager.Instance.Q14SelectedOption, 
-            MeasurementDataManager.Instance.Q15SelectedOption, MeasurementDataManager.Instance.Q16SelectedOption, 
-            MeasurementDataManager.Instance.Q17SelectedOption, MeasurementDataManager.Instance.Q18SelectedOption,
-            MeasurementDataManager.Instance.Q19SelectedOption, MeasurementDataManager.Instance.Q20SelectedOption, 
-            MeasurementDataManager.Instance.Q21SelectedOption, MeasurementDataManager.Instance.Q22SelectedOption, 
-            MeasurementDataManager.Instance.Q23SelectedOption, MeasurementDataManager.Instance.Q24SelectedOption, 
-            MeasurementDataManager.Instance.Q25SelectedOption, MeasurementDataManager.Instance.Q26SelectedOption, 
-            MeasurementDataManager.Instance.Q27SelectedOption, MeasurementDataManager.Instance.Q28SelectedOption, 
-            MeasurementDataManager.Instance.Q29SelectedOption };
+            MeasurementDataManager.Instance.Q3SelectedOption};
 
             if (!string.IsNullOrEmpty(selectedOptions[questionNumber - 1]))
             {
                 continueButtons[questionNumber - 1].SetEnabled(true);
             }
+        }
+
+        if (questionNumber == 4 && !(string.IsNullOrEmpty(MeasurementDataManager.Instance.mild) ||
+            string.IsNullOrEmpty(MeasurementDataManager.Instance.moderate) ||
+            string.IsNullOrEmpty(MeasurementDataManager.Instance.severe) || string.IsNullOrEmpty(MeasurementDataManager.Instance.notSure)))
+        {
+            string[] selectedOptions = { null, null,
+            MeasurementDataManager.Instance.Q4SelectedOption};
+
+            if (!string.IsNullOrEmpty(selectedOptions[questionNumber - 1]))
+            {
+                continueButtons[questionNumber - 1].SetEnabled(true);
+            }
+        }
+
+        if (questionNumber == 5)
+        {
+            continueButtons[1].SetEnabled(true);
         }
     }
 
@@ -137,7 +155,7 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
     {
         if (questions[questionIndex - 2] != null && questions[questionIndex - 1] != null)
         {
-            progressBar.value -= 4;
+            progressBar.value -= 25;
             // Hide the current question and show the previous question
             questions[questionIndex - 2].style.display = DisplayStyle.Flex;
             questions[questionIndex - 1].style.display = DisplayStyle.None;
@@ -147,7 +165,7 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
     {
         //Update this each time the continue button is selected
         questionNumber = questionIndex + 1;
-        progressBar.value += 4;
+        progressBar.value += 25;
         bool hasErrors = false;
         //marge three values to form a date
 
@@ -155,20 +173,8 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
         string Q2SelectedOption = MeasurementDataManager.Instance.gender;
         string[] selectedOptions = { Q1SelectedOption, Q2SelectedOption,
             MeasurementDataManager.Instance.Q3SelectedOption, MeasurementDataManager.Instance.Q4SelectedOption,
-            MeasurementDataManager.Instance.Q5SelectedOption, MeasurementDataManager.Instance.Q6SelectedOption,
-            MeasurementDataManager.Instance.Q7SelectedOption, MeasurementDataManager.Instance.Q8SelectedOption, 
-            MeasurementDataManager.Instance.Q9SelectedOption, "yes", 
-            MeasurementDataManager.Instance.Q11SelectedOption, MeasurementDataManager.Instance.Q12SelectedOption, 
-            MeasurementDataManager.Instance.Q13SelectedOption, MeasurementDataManager.Instance.Q14SelectedOption, 
-            MeasurementDataManager.Instance.Q15SelectedOption, MeasurementDataManager.Instance.Q16SelectedOption, 
-            MeasurementDataManager.Instance.Q17SelectedOption, MeasurementDataManager.Instance.Q18SelectedOption,
-            MeasurementDataManager.Instance.Q19SelectedOption, MeasurementDataManager.Instance.Q20SelectedOption, 
-            MeasurementDataManager.Instance.Q21SelectedOption, MeasurementDataManager.Instance.Q22SelectedOption, 
-            MeasurementDataManager.Instance.Q23SelectedOption, MeasurementDataManager.Instance.Q24SelectedOption, 
-            MeasurementDataManager.Instance.Q25SelectedOption, MeasurementDataManager.Instance.Q26SelectedOption, 
-            MeasurementDataManager.Instance.Q27SelectedOption, MeasurementDataManager.Instance.Q28SelectedOption, 
-            MeasurementDataManager.Instance.Q29SelectedOption };
-
+            MeasurementDataManager.Instance.Q5SelectedOption};
+        
         //check if the selected option is empty
         if (questionIndex == 1)
         {
@@ -190,30 +196,24 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
                 progressBar.value = 100;
                 //Change to the last screen
                 questions[questionIndex - 1].style.display = DisplayStyle.None; // Hide the current question
-                questionIndex = 29;
+                questionIndex = 5;
                 questions[questionIndex].style.display = DisplayStyle.Flex; // Show the last screen
                 continueButtonNum.SetEnabled(true);
                 return;
             }
         }
 
-        if (questionIndex >= 2 && questionIndex <= 29)
+        if (questionIndex >= 2 && questionIndex <= 3)
         {
-            if (questionIndex == 10)
+            
+            if (string.IsNullOrEmpty(selectedOptions[questionIndex - 1]))
             {
-                continueButtonNum.SetEnabled(true);
-            }
-            else
-            {        
-                if (string.IsNullOrEmpty(selectedOptions[questionIndex - 1]))
-                {
                     
                     hasErrors = true;
-                }
             }
         }
 
-        else if (questionIndex == 30)
+        if (questionIndex == 4)
         {
             SubmitDataToSheet();
             SceneManager.LoadScene("Avatar_Selection");

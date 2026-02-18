@@ -144,6 +144,7 @@ public class AvatarScrolling : MonoBehaviour
             previousButtonContainer.style.display = DisplayStyle.None;
             //turn off the avatar selection screen
             avatarGenderSelectionContainer.style.display = DisplayStyle.None;
+            avatarSelectionContainer.style.display = DisplayStyle.None;
             //Turn on the handedness selection screen
             HandSelectionContainer.style.display = DisplayStyle.Flex;
             //Turn off all avatar gender selections
@@ -154,7 +155,7 @@ public class AvatarScrolling : MonoBehaviour
         }
 
         //If on the avatar selection screen
-        else if (avatarContainer.style.display == DisplayStyle.Flex)
+        else 
         {
             //Turn off the avatar selection screen
             avatarContainer.style.display = DisplayStyle.None;

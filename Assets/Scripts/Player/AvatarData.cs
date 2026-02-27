@@ -9,6 +9,7 @@ public class AvatarData : ScriptableObject
 {
     public Gender gender;
     public SkinColor skinColor;
+    public Handedness handedness;
 
     public enum Gender
     {
@@ -23,5 +24,11 @@ public class AvatarData : ScriptableObject
         Pale,
         LightBrown,
         DarkBrown
+    }
+
+    public enum Handedness
+    {
+        Left,
+        Right
     }
 }

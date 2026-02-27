@@ -102,8 +102,8 @@ public class AvatarScrolling : MonoBehaviour
         nonBinaryButton.clicked += () => OnGenderSelected("Non-Binary");
         previousButton.clicked += () => OnPreviousButtonClicked();
         continueGamePlayButton.clicked += () => OnContinueGamePlayButtonClicked();
-        LeftHandButton.clicked += () => onLeftHandButtonClicked();
-        RightHandButton.clicked += () => onRightHandButtonClicked();
+        LeftHandButton.clicked += () => OnHandednessButtonClicked("Left");
+        RightHandButton.clicked += () => OnHandednessButtonClicked("Right");
 
         // Hide the avatar confirmation and thank you containers initially
         avatarContainer.style.display = DisplayStyle.None;
@@ -251,6 +251,28 @@ public class AvatarScrolling : MonoBehaviour
 
         // Show and position the confirmation container near the selected avatar
         DisplayConfirmationNearAvatar(avatar);
+    }
+
+    //handle handedness button click event
+    private void OnHandednessButtonClicked(string handedness)
+    {
+        // Store the selected handedness in the scriptable object
+        switch (handedness)
+        {
+            case "Left":
+                avatarData.handedness = AvatarData.Handedness.Left;
+                break;
+            case "Right":
+                avatarData.handedness = AvatarData.Handedness.Right;
+                break;
+        }
+
+        //hide hand selection screen
+        HandSelectionContainer.style.display = DisplayStyle.None;
+
+        //start avatar selection screen
+        avatarGenderSelectionContainer.style.display = DisplayStyle.Flex;
+        avatarSelectionContainer.style.display = DisplayStyle.Flex;
     }
     //change image of charMessageContainer based on selected avatar
     private void ChangeAvatarBackground(string avatarName)
@@ -426,28 +448,6 @@ public class AvatarScrolling : MonoBehaviour
         previousButtonContainer.style.display = DisplayStyle.Flex;
     }
     
-    private void onLeftHandButtonClicked()
-    {
-        //hide hand selection screen
-        HandSelectionContainer.style.display = DisplayStyle.None;
-
-        //start avatar selection screen
-        avatarGenderSelectionContainer.style.display = DisplayStyle.Flex;
-        avatarSelectionContainer.style.display = DisplayStyle.Flex;
-
-        //turn on previous button
-        previousButtonContainer.style.display = DisplayStyle.Flex;
-    }
-
-    private void onRightHandButtonClicked()
-    {
-        //hide hand selection screen
-        HandSelectionContainer.style.display = DisplayStyle.None;
-
-        //start avatar selection screen
-        avatarGenderSelectionContainer.style.display = DisplayStyle.Flex;
-        avatarSelectionContainer.style.display = DisplayStyle.Flex;
-    }
 
     private void StartGame ()
     {

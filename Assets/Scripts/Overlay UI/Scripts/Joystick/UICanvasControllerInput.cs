@@ -40,11 +40,6 @@ namespace StarterAssets
             sprintButton.image.color = isSprinting ? buttonDown : buttonUp;
         }
 
-
-        void Update()
-        {
-            Debug.Log(isSprinting);
-        }
     }
 
 }

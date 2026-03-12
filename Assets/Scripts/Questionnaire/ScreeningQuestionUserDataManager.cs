@@ -13,20 +13,15 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
 {
 
     // Arrays to hold references to VisualElement and Button components for each question
-    private VisualElement[] questions = new VisualElement[5];
-    private Button[] previousButtons = new Button[4];
-    private Button[] continueButtons = new Button[5];
+    private VisualElement[] questions = new VisualElement[6];
+    private Button[] previousButtons = new Button[6];
+    private Button[] continueButtons = new Button[6];
     private VisualElement ErrorMessageContainer;
     private Button continueButtonNum;
     private ProgressBar progressBar;
-    private Button mildButton;
-    private Button moderateButton;
-    private Button severeButton;
-    private Button notSureButton;
 
     //keeps track of what question
     private int questionNumber = 1;
-
     private void OnEnable()
     {
         // Get the UIDocument component attached to the same GameObject
@@ -45,6 +40,7 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
         root.Q<VisualElement>("Question3").style.display = DisplayStyle.None;
         root.Q<VisualElement>("Question4").style.display = DisplayStyle.None;
         root.Q<VisualElement>("Question5").style.display = DisplayStyle.None;
+        root.Q<VisualElement>("Question6").style.display = DisplayStyle.None;
         // Initialize the question VisualElements by finding them in the UI hierarchy
         for (int i = 0; i < questions.Length; i++)
         {
@@ -55,13 +51,11 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
         for (int i = 0; i < previousButtons.Length; i++)
         {
             previousButtons[i] = root.Q<Button>($"Q{i + 1}PreviousButton");
-            continueButtons[i] = root.Q<Button>($"Q{i + 1}Continue");
-            mildButton = root.Q<Button>("Q4MildOpinion");
-            moderateButton = root.Q<Button>("Q4ModerateOpinion");
-            severeButton = root.Q<Button>("Q4SevereOpinion");
-            notSureButton = root.Q<Button>("Q4IDKOpinion");
         }
-
+        for (int i = 0; i < continueButtons.Length; i++)
+        {
+            continueButtons[i] = root.Q<Button>($"Q{i + 1}Continue");
+        }
         // Add click event listeners to the previous and continue buttons
         for (int i = 0; i < previousButtons.Length; i++)
         {
@@ -76,7 +70,9 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
             }
             // Disable the continue buttons on load (they will be enabled when the user selects an option)
             if (continueButtons[i] != null)
+            {
                 continueButtons[i].SetEnabled(false); // Disable on load
+            }
         }
 
         //Run after 100 ms (running sooner will accidentally trigger the callback due to the form getting filled)
@@ -131,22 +127,17 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
             }
         }
 
-        if (questionNumber == 4 && !(string.IsNullOrEmpty(MeasurementDataManager.Instance.mild) ||
-            string.IsNullOrEmpty(MeasurementDataManager.Instance.moderate) ||
-            string.IsNullOrEmpty(MeasurementDataManager.Instance.severe) || string.IsNullOrEmpty(MeasurementDataManager.Instance.notSure)))
+        if (questionNumber == 4 && !(string.IsNullOrEmpty(MeasurementDataManager.Instance.Q4SelectedOption)))
         {
-            string[] selectedOptions = { null, null,
-            MeasurementDataManager.Instance.Q4SelectedOption};
-
-            if (!string.IsNullOrEmpty(selectedOptions[questionNumber - 1]))
-            {
-                continueButtons[questionNumber - 1].SetEnabled(true);
-            }
+            continueButtons[3].SetEnabled(true);
         }
 
-        if (questionNumber == 5)
+        if (questionNumber == 5 && !(string.IsNullOrEmpty(MeasurementDataManager.Instance.TBIMonth) ||
+            string.IsNullOrEmpty(MeasurementDataManager.Instance.TBIDay) ||
+            string.IsNullOrEmpty(MeasurementDataManager.Instance.TBIYear)))
         {
-            continueButtons[1].SetEnabled(true);
+
+            continueButtons[4].SetEnabled(true);
         }
     }
 
@@ -155,7 +146,7 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
     {
         if (questions[questionIndex - 2] != null && questions[questionIndex - 1] != null)
         {
-            progressBar.value -= 25;
+            progressBar.value -= 20;
             // Hide the current question and show the previous question
             questions[questionIndex - 2].style.display = DisplayStyle.Flex;
             questions[questionIndex - 1].style.display = DisplayStyle.None;
@@ -165,15 +156,15 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
     {
         //Update this each time the continue button is selected
         questionNumber = questionIndex + 1;
-        progressBar.value += 25;
+        progressBar.value += 20;
         bool hasErrors = false;
         //marge three values to form a date
 
         string Q1SelectedOption = MeasurementDataManager.Instance.birthMonth + "/" + MeasurementDataManager.Instance.birthDay + "/" + MeasurementDataManager.Instance.birthYear;
         string Q2SelectedOption = MeasurementDataManager.Instance.gender;
+        string Q5SelectedOption = MeasurementDataManager.Instance.TBIMonth + "/" + MeasurementDataManager.Instance.TBIDay + "/" + MeasurementDataManager.Instance.TBIYear;
         string[] selectedOptions = { Q1SelectedOption, Q2SelectedOption,
-            MeasurementDataManager.Instance.Q3SelectedOption, MeasurementDataManager.Instance.Q4SelectedOption,
-            MeasurementDataManager.Instance.Q5SelectedOption};
+            MeasurementDataManager.Instance.Q3SelectedOption, MeasurementDataManager.Instance.Q4SelectedOption, Q5SelectedOption};
         
         //check if the selected option is empty
         if (questionIndex == 1)
@@ -196,14 +187,14 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
                 progressBar.value = 100;
                 //Change to the last screen
                 questions[questionIndex - 1].style.display = DisplayStyle.None; // Hide the current question
-                questionIndex = 5;
-                questions[questionIndex].style.display = DisplayStyle.Flex; // Show the last screen
-                continueButtonNum.SetEnabled(true);
+                questionIndex = 6;
+                questions[questionIndex - 1].style.display = DisplayStyle.Flex; // Show the last screen
+                continueButtons[5].SetEnabled(true);
                 return;
             }
         }
 
-        if (questionIndex >= 2 && questionIndex <= 3)
+        if (questionIndex >= 2 && questionIndex <= 4)
         {
             
             if (string.IsNullOrEmpty(selectedOptions[questionIndex - 1]))
@@ -212,8 +203,16 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
                     hasErrors = true;
             }
         }
-
-        if (questionIndex == 4)
+        if (questionIndex == 5)
+        {
+            if (string.IsNullOrEmpty(MeasurementDataManager.Instance.TBIMonth) ||
+                string.IsNullOrEmpty(MeasurementDataManager.Instance.TBIDay) ||
+                string.IsNullOrEmpty(MeasurementDataManager.Instance.TBIYear))
+            {
+                hasErrors = true;
+            }
+        }
+        if (questionIndex == 6)
         {
             SubmitDataToSheet();
             SceneManager.LoadScene("Avatar_Selection");
@@ -229,10 +228,6 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
 
             if (questionIndex < questions.Length && questions[questionIndex] != null)
                 questions[questionIndex].style.display = DisplayStyle.Flex; // Show the next question
-
-            // If we just navigated from Q9 -> Q10, force-enable Q10's Continue
-            if (questionIndex == 9 && continueButtons.Length > 9 && continueButtons[9] != null)
-                continueButtons[9].SetEnabled(true);
         }
     }
 

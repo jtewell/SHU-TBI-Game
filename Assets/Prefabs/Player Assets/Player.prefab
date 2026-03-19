@@ -1068,7 +1068,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6982812146204527121
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1082,6 +1082,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -1232,7 +1233,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 6bc1aaf4-b110-4ff7-891e-5b9fe6f32c4d
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows/leftStick]
+    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows/leftStick]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4416926081852918490}
@@ -1248,7 +1249,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 2690c379-f54d-45be-a724-414123833eb4
-    m_ActionName: Player/Look[/Mouse/delta,/XInputControllerWindows/rightStick]
+    m_ActionName: 'Player/Look[/Mouse/delta,/XInputControllerWindows/rightStick]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4416926081852918490}
@@ -1264,7 +1265,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 8c4abdf8-4099-493a-aa1a-129acec7c3df
-    m_ActionName: Player/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]
+    m_ActionName: 'Player/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4416926081852918490}
@@ -1280,7 +1281,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 980e881e-182c-404c-8cbf-3d09fdb48fef
-    m_ActionName: Player/Sprint[/Keyboard/leftShift,/XInputControllerWindows/leftTrigger]
+    m_ActionName: 'Player/Sprint[/Keyboard/leftShift,/XInputControllerWindows/leftTrigger]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: e4ce1614-c754-48c1-9103-33130441661f
@@ -1323,18 +1324,18 @@ MonoBehaviour:
     - {fileID: 2800000, guid: 39d65ddd12374194a91bb03f03229a09, type: 3}
     - {fileID: 2800000, guid: 1e13e898c82a93e4092cc41d00b7f67d, type: 3}
     - {fileID: 2800000, guid: dd84494bf4410e64eb5b8fd9f0f7d0b4, type: 3}
+  - bodyMesh: {fileID: 6928105871205243047, guid: c30cc7f14116aad4f8ecabe119bdc26b, type: 3}
+    skinTextures:
+    - {fileID: 2800000, guid: 5ffcb84d1104eff418ca2d1bf7b9840b, type: 3}
+    - {fileID: 2800000, guid: 4fd1b94a97592a94998f060fd392eba8, type: 3}
+    - {fileID: 2800000, guid: 0866734960a318847ba2ba2f54896769, type: 3}
+    - {fileID: 2800000, guid: 91e4b420d0e6a44458121f92a9ca1a1f, type: 3}
   - bodyMesh: {fileID: 3896371383025835918, guid: 23d8f7294e46c074ca8999acdaaeb280, type: 3}
     skinTextures:
-    - {fileID: 2800000, guid: 8ad00895f06ea2a4abbadac93acb55da, type: 3}
-    - {fileID: 2800000, guid: 39d65ddd12374194a91bb03f03229a09, type: 3}
-    - {fileID: 2800000, guid: 1e13e898c82a93e4092cc41d00b7f67d, type: 3}
-    - {fileID: 2800000, guid: dd84494bf4410e64eb5b8fd9f0f7d0b4, type: 3}
-  - bodyMesh: {fileID: 3896371383025835918, guid: 23d8f7294e46c074ca8999acdaaeb280, type: 3}
-    skinTextures:
-    - {fileID: 2800000, guid: 8ad00895f06ea2a4abbadac93acb55da, type: 3}
-    - {fileID: 2800000, guid: 39d65ddd12374194a91bb03f03229a09, type: 3}
-    - {fileID: 2800000, guid: 1e13e898c82a93e4092cc41d00b7f67d, type: 3}
-    - {fileID: 2800000, guid: dd84494bf4410e64eb5b8fd9f0f7d0b4, type: 3}
+    - {fileID: 2800000, guid: 5ffcb84d1104eff418ca2d1bf7b9840b, type: 3}
+    - {fileID: 2800000, guid: 4fd1b94a97592a94998f060fd392eba8, type: 3}
+    - {fileID: 2800000, guid: 0866734960a318847ba2ba2f54896769, type: 3}
+    - {fileID: 2800000, guid: 91e4b420d0e6a44458121f92a9ca1a1f, type: 3}
   faceTextures:
   - {fileID: 2800000, guid: 2fcd87e2b492fb947ab968707006db5b, type: 3}
   - {fileID: 2800000, guid: 0c26fe6f1de45c3488a258f35a7dbaa3, type: 3}

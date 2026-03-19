@@ -151,6 +151,14 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
             questions[questionIndex - 2].style.display = DisplayStyle.Flex;
             questions[questionIndex - 1].style.display = DisplayStyle.None;
         }
+        if (questionIndex == 6 && MeasurementDataManager.Instance.Q3SelectedOption.Equals("No"))
+        {
+            progressBar.value -= 40;
+            // Hide the current question and show the previous question
+            questions[5].style.display = DisplayStyle.None;
+            questions[4].style.display = DisplayStyle.None;
+            questions[2].style.display = DisplayStyle.Flex;
+        }
     }
     private void OnContinueButtonClick(int questionIndex)
     {

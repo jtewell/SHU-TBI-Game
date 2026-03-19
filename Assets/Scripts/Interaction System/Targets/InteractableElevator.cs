@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public enum FloorLevel
 {
+    Lobby,          
     FirstFloor,
     SecondFloor,
     ThirdFloor
@@ -20,7 +21,7 @@ public class InteractableElevator : MonoBehaviour
     [System.Serializable]
     public struct Floor
     {
-        public FloorLevel floorLevel;   // First / Second / Third
+        public FloorLevel floorLevel;
         public string sceneName;
         public string spawnPoint;
         public Button floorButton;
@@ -30,7 +31,7 @@ public class InteractableElevator : MonoBehaviour
     public List<Floor> floors = new List<Floor>();
 
     [Header("Current Floor")]
-    public FloorLevel currentFloor;
+    public FloorLevel currentFloor = FloorLevel.Lobby; // ✅ STARTS IN LOBBY
 
     public static OnElevatorOpenEvent onDoorOpenEvent = new OnElevatorOpenEvent();
 

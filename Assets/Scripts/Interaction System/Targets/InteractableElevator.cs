@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public enum FloorLevel
 {
-    Lobby,          
-    FirstFloor,
-    SecondFloor,
-    ThirdFloor
+    Lobby = 0,
+    FirstFloor = 1,
+    SecondFloor = 2,
+    ThirdFloor = 3
 }
 
 [System.Serializable]
@@ -31,7 +31,7 @@ public class InteractableElevator : MonoBehaviour
     public List<Floor> floors = new List<Floor>();
 
     [Header("Current Floor")]
-    public FloorLevel currentFloor = FloorLevel.Lobby; // ✅ STARTS IN LOBBY
+    public FloorLevel currentFloor = FloorLevel.Lobby;
 
     public static OnElevatorOpenEvent onDoorOpenEvent = new OnElevatorOpenEvent();
 
@@ -41,15 +41,7 @@ public class InteractableElevator : MonoBehaviour
     // =============================
     // INTERACT
     // =============================
-    public void Interact()
-    {
-        OpenElevatorUI();
-    }
-
-    private void OnMouseDown()
-    {
-        OpenElevatorUI();
-    }
+   
 
     // =============================
     // OPEN UI
@@ -60,30 +52,68 @@ public class InteractableElevator : MonoBehaviour
         {
             elevatorUIPanel.SetActive(true);
 
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+           
 
-            UpdateButtonStates();
+            SetupButtons();
         }
     }
 
     // =============================
-    // FLOOR SELECT
+    // DYNAMIC BUTTON SETUP
     // =============================
-    public void GoToFloor(int floorIndex)
+    void SetupButtons()
     {
-        if (floorIndex < 0 || floorIndex >= floors.Count)
+        foreach (var floor in floors)
         {
-            Debug.LogWarning("Invalid floor index!");
-            return;
+            if (floor.floorButton == null)
+                continue;
+
+            Button btn = floor.floorButton;
+            btn.onClick.RemoveAllListeners();
+
+            if (floor.floorLevel == currentFloor)
+            {
+                Floor lobbyFloor = floors.Find(f => f.floorLevel == FloorLevel.Lobby);
+
+                if (lobbyFloor.floorButton != null)
+                {
+                    SetButton(btn, lobbyFloor);
+                }
+            }
+            else
+            {
+                SetButton(btn, floor);
+            }
+        }
+    }
+
+    // =============================
+    // BUTTON ASSIGN HELPER
+    // =============================
+    void SetButton(Button btn, Floor targetFloor)
+    {
+        Text txt = btn.GetComponentInChildren<Text>();
+        if (txt != null)
+        {
+            txt.text = FormatFloorName(targetFloor.floorLevel);
         }
 
-        Floor selectedFloor = floors[floorIndex];
+        btn.onClick.AddListener(() =>
+        {
+            GoToFloorByLevel(targetFloor.floorLevel);
+        });
+    }
 
-        // 🚫 Prevent selecting same floor
+    // =============================
+    // FIND FLOOR BY ENUM
+    // =============================
+    void GoToFloorByLevel(FloorLevel level)
+    {
+        Floor selectedFloor = floors.Find(f => f.floorLevel == level);
+
         if (selectedFloor.floorLevel == currentFloor)
         {
-            Debug.Log("You are already on this floor.");
+            Debug.Log("Already on this floor.");
             return;
         }
 
@@ -100,18 +130,29 @@ public class InteractableElevator : MonoBehaviour
     }
 
     // =============================
-    // DISABLE CURRENT FLOOR BUTTON
+    // FORMAT NAME
     // =============================
-    void UpdateButtonStates()
+    string FormatFloorName(FloorLevel level)
     {
-        for (int i = 0; i < floors.Count; i++)
+        switch (level)
         {
-            if (floors[i].floorButton != null)
-            {
-                floors[i].floorButton.interactable =
-                    floors[i].floorLevel != currentFloor;
-            }
+            case FloorLevel.Lobby: return "Lobby";
+            case FloorLevel.FirstFloor: return "First Floor";
+            case FloorLevel.SecondFloor: return "Second Floor";
+            case FloorLevel.ThirdFloor: return "Third Floor";
         }
+        return level.ToString();
+    }
+
+    // =============================
+    // KEEP (unused but safe)
+    // =============================
+    public void GoToFloor(int floorIndex)
+    {
+        if (floorIndex < 0 || floorIndex >= floors.Count)
+            return;
+
+        GoToFloorByLevel(floors[floorIndex].floorLevel);
     }
 
     // =============================
@@ -122,9 +163,6 @@ public class InteractableElevator : MonoBehaviour
         if (elevatorUIPanel != null)
         {
             elevatorUIPanel.SetActive(false);
-
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
     }
 }

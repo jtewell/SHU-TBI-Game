@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,10 @@ namespace StarterAssets
         public Button sprintButton;
         Color buttonUp = new Color(1.0f,1.0f,1.0f,1.0f);
         Color buttonDown = new Color(.75f,.75f,.75f,1.0f);
+        
+        public Image sprintButtonImage;
+        public Sprite walkingImage;
+        public Sprite sprintingImage;
 
         [Header("Output")]
         public StarterAssetsInputs starterAssetsInputs;
@@ -38,6 +43,7 @@ namespace StarterAssets
             isSprinting = !isSprinting;
             starterAssetsInputs.SprintInput(isSprinting);
             sprintButton.image.color = isSprinting ? buttonDown : buttonUp;
+            sprintButtonImage.sprite = isSprinting ? walkingImage : sprintingImage;
         }
 
     }

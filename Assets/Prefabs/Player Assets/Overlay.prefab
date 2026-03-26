@@ -1432,7 +1432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000045776367}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: -12.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &905445590054697286
@@ -1588,6 +1588,7 @@ MonoBehaviour:
   joystickMove: {fileID: 2812834884623833106}
   sprintButton: {fileID: 6693055288808590508}
   leftSideJoystick: 0
+  avatarData: {fileID: 11400000, guid: bf7f21d77e712cf409fff62005f8d706, type: 2}
 --- !u!114 &769871614942905590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4094,8 +4095,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4172094937954203174}
   m_HandleRect: {fileID: 2081033659115387573}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5123,7 +5124,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 687.9375, y: -13.5}
-  m_SizeDelta: {x: 20, y: 20}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6096257124680861508
 CanvasRenderer:
@@ -5219,10 +5220,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: OnEnabledTrigger, Assembly-CSharp
-        m_MethodName: onTrigger
-        m_Mode: 1
+      - m_Target: {fileID: 4308611852531311439}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5878,6 +5879,18 @@ PrefabInstance:
       propertyPath: sprintButton
       value: 
       objectReference: {fileID: 7634000160812408856}
+    - target: {fileID: 1663187150, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
+      propertyPath: walkingImage
+      value: 
+      objectReference: {fileID: 21300000, guid: ff7bfa7addf40784d86f62b8e4a034a6, type: 3}
+    - target: {fileID: 1663187150, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
+      propertyPath: sprintingImage
+      value: 
+      objectReference: {fileID: 21300000, guid: b0fa70abd2a79904cb00b175dfd8ec7e, type: 3}
+    - target: {fileID: 1663187150, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
+      propertyPath: sprintButtonImage
+      value: 
+      objectReference: {fileID: 4579064184242386506}
     - target: {fileID: 166868854162214642, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -5998,6 +6011,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4635207389212637381, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6483554099135143963, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
@@ -6009,6 +6026,10 @@ PrefabInstance:
     - target: {fileID: 6751388636123340836, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734538516869120350, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 159
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6025,6 +6046,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6751388636123340836, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
   m_PrefabInstance: {fileID: 7384359225026610027}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4579064184242386506 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6482536982091937057, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
+  m_PrefabInstance: {fileID: 7384359225026610027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6693055288808590508 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4222126599281790919, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}

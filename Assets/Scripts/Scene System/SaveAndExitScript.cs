@@ -18,4 +18,9 @@ public class SaveAndExitScript : MonoBehaviour
     {
         
     }
+
+    public void SaveAndExit()
+    {
+        SceneManager.LoadScene("ScreeningQuestions");
+    }
 }

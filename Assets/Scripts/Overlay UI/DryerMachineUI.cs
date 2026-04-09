@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WashingMachineUI : MonoBehaviour
+public class DryerMachineUI : MonoBehaviour
 {
     public Button runButton;
     public Button twentyButton;
@@ -18,11 +17,11 @@ public class WashingMachineUI : MonoBehaviour
     public GameObject[] cycleIndicators; // 0 = 20 min, 1 = 40 min, 2 = 60 min
 
     [SerializeField]
-    private InteractableWasherMachine washerMachine;
+    private InteractableDryerMachine dryerMachine;
 
-    public GameObject WashingMachineUIPanel;
+    public GameObject DryerMachineUIPanel;
 
-    [Header("Washer Cycling")]
+    [Header("Dryer Cycling")]
     public Sprite[] Sprites;
     public Sprite MachineOpen;
     public Sprite MachineOpenDone;
@@ -35,7 +34,7 @@ public class WashingMachineUI : MonoBehaviour
     [Header("Completion")]
     public Sprite FinishedSprite;
 
-    private WashingMachineUI washingMachineUI;
+    private DryerMachineUI dryerMachineUI;
 
     [Header("Targets")]
     public Image TargetImage;
@@ -125,10 +124,10 @@ public class WashingMachineUI : MonoBehaviour
     private void Start()
     {
 
-        // If washerMachine not assigned in Inspector, try to find one on this GameObject or its parents.
-        if (washerMachine == null)
+        // If dryerMachine not assigned in Inspector, try to find one on this GameObject or its parents.
+        if (dryerMachine == null)
         {
-            washerMachine = GetComponentInParent<InteractableWasherMachine>();
+            dryerMachine = GetComponentInParent<InteractableDryerMachine>();
         }
 
         if (runButton == null)
@@ -136,19 +135,19 @@ public class WashingMachineUI : MonoBehaviour
             Debug.LogWarning($"Run Button is not assigned on {name}. Please assign the UI Button in the Inspector.", this);
         }
 
-        if (washerMachine == null)
+        if (dryerMachine == null)
         {
-            Debug.LogWarning($"InteractableWasherMachine reference is not assigned and couldn't be found in parents of {name}. Run action will not work until assigned.", this);
+            Debug.LogWarning($"InteractableDryerMachine reference is not assigned and couldn't be found in parents of {name}. Run action will not work until assigned.", this);
         }
 
-        if (WashingMachineUIPanel != null)
+        if (DryerMachineUIPanel != null)
         {
-            WashingMachineUIPanel.SetActive(false);
+            DryerMachineUIPanel.SetActive(false);
 
-            // Auto-assign washingMachineUI if not set in inspector
-            if (washingMachineUI == null)
+
+            if (dryerMachineUI == null)
             {
-                washingMachineUI = WashingMachineUIPanel.GetComponentInChildren<WashingMachineUI>();
+                dryerMachineUI = DryerMachineUIPanel.GetComponentInChildren<DryerMachineUI>();
             }
         }
 
@@ -157,11 +156,11 @@ public class WashingMachineUI : MonoBehaviour
         CycleDuration = Mathf.Max(0.02f, CycleDuration);
     }
 
-    public void OpenWashingMachineUI()
+    public void OpenDryerMachineUI()
     {
-        if (WashingMachineUIPanel != null)
+        if (DryerMachineUIPanel != null)
         {
-            WashingMachineUIPanel.SetActive(true);
+            DryerMachineUIPanel.SetActive(true);
             TargetImage.sprite = FinishedSprite;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -203,12 +202,7 @@ public class WashingMachineUI : MonoBehaviour
                 StopCoroutine(_cycleCoroutine);
                 _cycleCoroutine = null;
             }
-
-            if (Sprites == null || Sprites.Length == 0)
-            {
-                Debug.LogWarning("InteractableWasherMachine: No sprites assigned to cycle.");
-                return;
-            }
+            
 
             if (CycleDuration != 0f)
             {
@@ -246,7 +240,7 @@ public class WashingMachineUI : MonoBehaviour
         float endTime = Time.time + CycleDuration;
 
         // Loop until time runs out, UI is closed, or a stop is requested
-        while (!_stopRequested && (WashingMachineUIPanel == null || WashingMachineUIPanel.activeSelf) && Time.time < endTime)
+        while (!_stopRequested && (DryerMachineUIPanel == null || DryerMachineUIPanel.activeSelf) && Time.time < endTime)
         {
             // Clamp index just in case
             if (_currentIndex < 0 || _currentIndex >= Sprites.Length)
@@ -352,53 +346,12 @@ public class WashingMachineUI : MonoBehaviour
         else if (cycle == 2)
         {
             CycleDuration = 15f;
-        }   
+        }
     }
 
     private void OnExitButtonPressed()
     {
-        WashingMachineUIPanel.SetActive(false);
+        DryerMachineUIPanel.SetActive(false);
 
-    }
-    // Search the scene for an InteractableWasherMachine that references this UI panel (or contains it in the hierarchy).
-    private InteractableWasherMachine FindAssociatedWasherMachine()
-    {
-        var all = FindObjectsOfType<InteractableWasherMachine>();
-        foreach (var wm in all)
-        {
-            if (wm == null)
-            {
-                continue;
-            }
-
-            //var panel = wm.;
-            //if (panel == null)
-            {
-                //continue;
-            }
-
-            // Direct match
-            //if (panel == gameObject)
-            {
-                return wm;
-            }
-
-            // Panel is a parent of this UI component
-            //if (transform.IsChildOf(panel.transform))
-            {
-                //return wm;
-            }
-
-            // This UI component is the parent (or ancestor) of the panel
-            //if (panel.transform.IsChildOf(transform))
-            {
-                //return wm;
-            }
-        }
-
-        return null;
     }
 }
-
-
-

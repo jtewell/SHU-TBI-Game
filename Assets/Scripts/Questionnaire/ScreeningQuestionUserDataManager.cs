@@ -1,9 +1,10 @@
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
+using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 
 
@@ -33,6 +34,10 @@ public class ScreeningQuestionUserDataManager : MonoBehaviour
         // Get the ProgressBar element from the UI document
         progressBar = root.Q<ProgressBar>("ProgressBar");
         progressBar.value = 0;
+
+        //change fill color for progress bar to green
+        var fill = progressBar.Q(className: "unity-progress-bar__progress");
+        fill.style.backgroundColor = UnityEngine.Color.green; 
 
         //turn off the other questions and turn on the first question
         root.Q<VisualElement>("Question1").style.display = DisplayStyle.Flex;

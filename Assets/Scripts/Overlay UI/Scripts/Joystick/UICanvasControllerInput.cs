@@ -10,9 +10,9 @@ namespace StarterAssets
     {
         public bool isSprinting = false;
         public Button sprintButton;
-        Color buttonUp = new Color(1.0f,1.0f,1.0f,1.0f);
-        Color buttonDown = new Color(.75f,.75f,.75f,1.0f);
-        
+        Color buttonUp = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        Color buttonDown = new Color(.75f, .75f, .75f, 1.0f);
+
         public Image sprintButtonImage;
         public Sprite walkingImage;
         public Sprite sprintingImage;
@@ -20,32 +20,63 @@ namespace StarterAssets
         [Header("Output")]
         public StarterAssetsInputs starterAssetsInputs;
 
-    
+        private void Awake()
+        {
+            if (starterAssetsInputs == null)
+            {
+                starterAssetsInputs = FindObjectOfType<StarterAssetsInputs>();
+            }
+
+            if (starterAssetsInputs == null)
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                if (player != null)
+                {
+                    starterAssetsInputs = player.GetComponent<StarterAssetsInputs>();
+                }
+            }
+
+            if (starterAssetsInputs == null)
+            {
+                Debug.LogWarning("UICanvasControllerInput could not find a StarterAssetsInputs component in the scene.");
+            }
+        }
 
         public void VirtualMoveInput(Vector2 virtualMoveDirection)
         {
-            starterAssetsInputs.MoveInput(virtualMoveDirection);
+            if (starterAssetsInputs != null)
+            {
+                starterAssetsInputs.MoveInput(virtualMoveDirection);
+            }
         }
 
         public void VirtualLookInput(Vector2 virtualLookDirection)
         {
-            starterAssetsInputs.LookInput(virtualLookDirection);
+            if (starterAssetsInputs != null)
+            {
+                starterAssetsInputs.LookInput(virtualLookDirection);
+            }
         }
 
         public void VirtualJumpInput(bool virtualJumpState)
         {
-            
-            starterAssetsInputs.JumpInput(virtualJumpState);
+            if (starterAssetsInputs != null)
+            {
+                starterAssetsInputs.JumpInput(virtualJumpState);
+            }
         }
 
         public void VirtualSprintInput()
         {
             isSprinting = !isSprinting;
-            starterAssetsInputs.SprintInput(isSprinting);
+
+            if (starterAssetsInputs != null)
+            {
+                starterAssetsInputs.SprintInput(isSprinting);
+            }
+
             sprintButton.image.color = isSprinting ? buttonDown : buttonUp;
             sprintButtonImage.sprite = isSprinting ? walkingImage : sprintingImage;
         }
-
     }
-
 }

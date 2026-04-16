@@ -3513,6 +3513,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5116851852787526986, guid: 222afb855df71c444928ebcf71d9c391, type: 3}
   m_PrefabInstance: {fileID: 620264302}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &630430616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6751388636123340836, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
+  m_PrefabInstance: {fileID: 1979352518}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &686796804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8480,13 +8485,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401648767}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 7.462044, y: 5.5541787, z: -12.972778}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 556875428}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &1402827283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8737,6 +8742,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2081033659115387573, guid: d7734440e3623a945a60cfae29842db4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2809830924659739311, guid: d7734440e3623a945a60cfae29842db4, type: 3}
       propertyPath: m_Name
       value: Overlay
@@ -8751,6 +8760,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3856191877831111084, guid: d7734440e3623a945a60cfae29842db4, type: 3}
       propertyPath: joystick
+      value: 
+      objectReference: {fileID: 630430616}
+    - target: {fileID: 3856191877831111084, guid: d7734440e3623a945a60cfae29842db4, type: 3}
+      propertyPath: joystickMove
+      value: 
+      objectReference: {fileID: 630430616}
+    - target: {fileID: 3856191877831111084, guid: d7734440e3623a945a60cfae29842db4, type: 3}
+      propertyPath: sprintButton
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3989453756885380551, guid: d7734440e3623a945a60cfae29842db4, type: 3}
@@ -8863,7 +8880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7231794618908935805, guid: d7734440e3623a945a60cfae29842db4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000076293945
+      value: -0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 7384359224508496805, guid: d7734440e3623a945a60cfae29842db4, type: 3}
       propertyPath: starterAssetsInputs

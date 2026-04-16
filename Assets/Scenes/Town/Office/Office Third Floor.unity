@@ -5198,6 +5198,14 @@ PrefabInstance:
     - target: {fileID: 3856191877831111084, guid: d7734440e3623a945a60cfae29842db4, type: 3}
       propertyPath: joystick
       value: 
+      objectReference: {fileID: 1979352520}
+    - target: {fileID: 3856191877831111084, guid: d7734440e3623a945a60cfae29842db4, type: 3}
+      propertyPath: joystickMove
+      value: 
+      objectReference: {fileID: 1979352520}
+    - target: {fileID: 3856191877831111084, guid: d7734440e3623a945a60cfae29842db4, type: 3}
+      propertyPath: sprintButton
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3989453756885380551, guid: d7734440e3623a945a60cfae29842db4, type: 3}
       propertyPath: m_SizeDelta.y
@@ -5309,7 +5317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7231794618908935805, guid: d7734440e3623a945a60cfae29842db4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000015258789
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7384359224508496805, guid: d7734440e3623a945a60cfae29842db4, type: 3}
       propertyPath: starterAssetsInputs
@@ -13010,6 +13018,11 @@ PrefabInstance:
 --- !u!224 &1979352519 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 597308369130767402, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
+  m_PrefabInstance: {fileID: 1979352518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1979352520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6751388636123340836, guid: 2f7f3dde7ae722a4aafffe20691ad702, type: 3}
   m_PrefabInstance: {fileID: 1979352518}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2014516285

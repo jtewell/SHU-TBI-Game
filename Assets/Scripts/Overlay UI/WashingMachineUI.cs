@@ -1,21 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 using UnityEngine.UI;
 
 public class WashingMachineUI : MonoBehaviour
 {
     public Button runButton;
-    public Button twentyButton;
-    public Button fortyButton;
-    public Button sixtyButton;
     public Button exitButton;
     public Button openButton;
     public Button closeButton;
     public Button[] tempButtons; // 0 = cold, 1 = warm, 2 = hot
-    public GameObject[] tempIndicators; // 0 = cold, 1 = warm, 2 = hot
-    public GameObject[] cycleIndicators; // 0 = 20 min, 1 = 40 min, 2 = 60 min
+    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI StatusText;
 
     [SerializeField]
     private InteractableWasherMachine washerMachine;
@@ -30,7 +29,7 @@ public class WashingMachineUI : MonoBehaviour
     public float FrameInterval = 0.2f;
 
     [Header("Cycle Duration")]
-    public float CycleDuration = 0f;
+    public float CycleDuration = 10f;
 
     [Header("Completion")]
     public Sprite FinishedSprite;
@@ -45,22 +44,20 @@ public class WashingMachineUI : MonoBehaviour
     private Coroutine _cycleCoroutine;
     private bool _stopRequested;
 
-    private bool tempButtonPressed = false;
-    private bool cycleButtonPressed = false;
+    // Countdown state
+    private Coroutine _countdownCoroutine;
+    private float _timeRemaining;
+
+    private bool[] tempSelected = new bool[3];
+    private bool closeButtonPressed = false;
+
+    private bool machineOpen = false;
 
     private void OnEnable()
     {
-        if (twentyButton != null)
+        if (runButton != null)
         {
-            twentyButton.onClick.AddListener(() => OnCycleButtonPressed(0));
-        }
-        if (fortyButton != null)
-        {
-            fortyButton.onClick.AddListener(() => OnCycleButtonPressed(1));
-        }
-        if (sixtyButton != null)
-        {
-            sixtyButton.onClick.AddListener(() => OnCycleButtonPressed(2));
+            runButton.onClick.AddListener(OnRunButtonPressed);
         }
         if (openButton != null)
         {
@@ -72,43 +69,28 @@ public class WashingMachineUI : MonoBehaviour
         }
         if (tempButtons != null && tempButtons.Length >= 3)
         {
-            // Remove existing listeners first in case OnEnable was called multiple times
-            tempButtons[0].onClick.RemoveAllListeners();
-            tempButtons[1].onClick.RemoveAllListeners();
-            tempButtons[2].onClick.RemoveAllListeners();
-
-            tempButtons[0].onClick.AddListener(() => OnTempButtonPressed(0)); // Cold
-            tempButtons[1].onClick.AddListener(() => OnTempButtonPressed(1)); // Warm
-            tempButtons[2].onClick.AddListener(() => OnTempButtonPressed(2)); // Hot
-        }
-        if (tempIndicators != null && tempIndicators.Length >= 3)
-        {
-            // Initialize all indicators to inactive
-            foreach (var indicator in tempIndicators)
+            if (closeButtonPressed = false)
             {
-                if (indicator != null)
-                {
-                    indicator.SetActive(false);
-                }
+                tempButtons[0].onClick.AddListener(() => { tempSelected[0] = true; });
+                tempButtons[1].onClick.AddListener(() => { tempSelected[1] = true; });
+                tempButtons[2].onClick.AddListener(() => { tempSelected[2] = true; });
+            }
+            if (closeButtonPressed = true)
+            {
+                tempButtons[0].onClick.AddListener(() => { StatusText.text = "Hit Run"; });
+                tempButtons[1].onClick.AddListener(() => { StatusText.text = "Hit Run"; });
+                tempButtons[2].onClick.AddListener(() => { StatusText.text = "Hit Run"; });
             }
         }
 
-
-        if (cycleIndicators != null && cycleIndicators.Length >= 3)
-        {
-            // Initialize all indicators to inactive
-            foreach (var indicator in cycleIndicators)
-            {
-                if (indicator != null)
-                {
-                    indicator.SetActive(false);
-                }
-            }
-        }
     }
 
     private void OnDisable()
     {
+        if (runButton != null)
+        {
+            runButton.onClick.RemoveListener(OnRunButtonPressed);
+        }
         if (openButton != null)
         {
             openButton.onClick.RemoveListener(OnOpenButtonPressed);
@@ -155,6 +137,17 @@ public class WashingMachineUI : MonoBehaviour
         // Ensure sane defaults
         FrameInterval = Mathf.Max(0.02f, FrameInterval);
         CycleDuration = Mathf.Max(0.02f, CycleDuration);
+
+        // Initialize time text if present
+        if (timeText != null)
+        {
+            timeText.text = "0s";
+        }
+
+        if (StatusText != null)
+        {
+            StatusText.text = "Idle";
+        }
     }
 
     public void OpenWashingMachineUI()
@@ -162,7 +155,9 @@ public class WashingMachineUI : MonoBehaviour
         if (WashingMachineUIPanel != null)
         {
             WashingMachineUIPanel.SetActive(true);
-            TargetImage.sprite = FinishedSprite;
+            // Ensure buttons are enabled when opening UI
+            EnableButtonsExceptExit();
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
@@ -170,65 +165,95 @@ public class WashingMachineUI : MonoBehaviour
 
     public void InitializeRunButton()
     {
-        runButton.onClick.AddListener(OnRunButtonPressed);
+        if (runButton != null)
+        {
+            runButton.onClick.AddListener(OnRunButtonPressed);
+        }
     }
 
     public void InitializeCloseButton()
     {
-        closeButton.onClick.AddListener(OnCloseButtonPressed);
-    }
-
-    public void InitializeTempButtons()
-    {
-        if (tempButtons != null && tempButtons.Length >= 3)
+        if (closeButton != null)
         {
-            tempButtons[0].onClick.AddListener(() => OnTempButtonPressed(0)); // Cold
-            tempButtons[1].onClick.AddListener(() => OnTempButtonPressed(1)); // Warm
-            tempButtons[2].onClick.AddListener(() => OnTempButtonPressed(2)); // Hot
-        }
-        else
-        {
-            Debug.LogWarning($"Temp buttons are not properly assigned on {name}. Please assign 3 buttons for cold, warm, and hot in the Inspector.", this);
+            closeButton.onClick.AddListener(OnCloseButtonPressed);
         }
     }
 
     private void OnRunButtonPressed()
     {
-        if (tempButtonPressed)
+        // Stop any existing countdown
+        StopCountdown();
+
+        // Stop any existing cycle
+        if (_cycleCoroutine != null)
         {
-            // Request stop of any existing run and ensure coroutine is stopped
             _stopRequested = true;
-            if (_cycleCoroutine != null)
-            {
-                StopCoroutine(_cycleCoroutine);
-                _cycleCoroutine = null;
-            }
+            StopCoroutine(_cycleCoroutine);
+            _cycleCoroutine = null;
+        }
 
-            if (Sprites == null || Sprites.Length == 0)
-            {
-                Debug.LogWarning("InteractableWasherMachine: No sprites assigned to cycle.");
-                return;
-            }
+        // Set countdown to 10 seconds and show it
+        _timeRemaining = 10f;
+        if (timeText != null)
+        {
+            timeText.text = $"{Mathf.CeilToInt(_timeRemaining)}s";
+        }
 
-            if (CycleDuration != 0f)
-            {
-                //If any time button was pressed, reset cancellation flag and start new cycle
-                _stopRequested = false;
-                _currentIndex = 0;
-                _cycleCoroutine = StartCoroutine(CycleSprites());
-            }
+        // Use the countdown value as the cycle duration so both run for the same time
+        CycleDuration = _timeRemaining;
+
+        // Start countdown
+        _countdownCoroutine = StartCoroutine(CountdownCoroutine());
+
+        // Validate sprites
+        if (Sprites == null || Sprites.Length == 0)
+        {
+            Debug.LogWarning("WashingMachineUI: No sprites assigned to cycle.");
+            return;
+        }
+
+        // Start sprite cycle
+        _stopRequested = false;
+        _currentIndex = 0;
+        _cycleCoroutine = StartCoroutine(CycleSprites());
+
+        if (StatusText != null)
+        {
+            StatusText.text = "Running";
         }
     }
 
     private void OnOpenButtonPressed()
     {
-        TargetImage.sprite = MachineOpen;
-        InitializeCloseButton();
+        
+        if (!machineOpen)
+        {
+            TargetImage.sprite = MachineOpen;
+            machineOpen = true;
+        }
+        else
+        {
+            TargetImage.sprite = MachineOpenDone;
+            InitializeCloseButton();
+        }
     }
     private void OnCloseButtonPressed()
     {
-        TargetImage.sprite = Sprites[0];
+        if (TargetImage != null && Sprites != null && Sprites.Length > 0)
+        {
+            TargetImage.sprite = Sprites[0];
+        }
         InitializeRunButton();
+        StopCountdown();
+        if (StatusText != null && (tempSelected[0] == false || tempSelected[1] == false || tempSelected[2] == false))
+        {
+            StatusText.text = "Pick Temp";
+        }
+        if (StatusText != null && (tempSelected[0] == true || tempSelected[1] == true || tempSelected[2] == true))
+        {
+            closeButtonPressed = true;
+        }
+
     }
 
     private IEnumerator CycleSprites()
@@ -285,119 +310,94 @@ public class WashingMachineUI : MonoBehaviour
             {
                 TargetRenderer.sprite = finished;
             }
+
+
+            // Disable all buttons except exit when the machine is done
+            DisableButtonsExceptExit();
+        }
+        else
+        {
+            if (StatusText != null)
+            {
+                StatusText.text = "Stopped";
+            }
         }
 
         // Mark coroutine as finished
         _cycleCoroutine = null;
     }
 
-    // Helper to update UI indicators safely
-    private void UpdateTempIndicators(int temp)
+    // Countdown coroutine for the timeText
+    private IEnumerator CountdownCoroutine()
     {
-        if (tempIndicators == null || tempIndicators.Length < 3)
+        while (_timeRemaining > 0f && (WashingMachineUIPanel == null || WashingMachineUIPanel.activeSelf))
         {
-            return;
-        }
-
-        for (int i = 0; i < tempIndicators.Length; i++)
-        {
-            var indicator = tempIndicators[i];
-            if (indicator == null)
+            yield return new WaitForSeconds(1f);
+            _timeRemaining -= 1f;
+            if (timeText != null)
             {
-                continue;
+                timeText.text = $"{Mathf.CeilToInt(Mathf.Max(0f, _timeRemaining))}s";
             }
-
-            indicator.SetActive(i == temp);
         }
+
+        // Ensure final text shows 0s when finished
+        if (timeText != null)
+        {
+            timeText.text = "0s";
+        }
+
+        _countdownCoroutine = null;
     }
 
-    private void UpdateCycleIndicators(int cycle)
+    private void StopCountdown()
     {
-        if (cycleIndicators == null || cycleIndicators.Length < 3)
+        if (_countdownCoroutine != null)
         {
-            return;
+            StopCoroutine(_countdownCoroutine);
+            _countdownCoroutine = null;
         }
-
-        for (int i = 0; i < cycleIndicators.Length; i++)
-        {
-            var indicator = cycleIndicators[i];
-            if (indicator == null)
-            {
-                continue;
-            }
-
-            indicator.SetActive(i == cycle);
-        }
-    }
-
-    public void OnTempButtonPressed(int temp)
-    {
-        // Always update the UI indicators so user sees immediate feedback
-        UpdateTempIndicators(temp);
-        tempButtonPressed = true;
-
-    }
-
-    public void OnCycleButtonPressed(int cycle)
-    {
-        UpdateCycleIndicators(cycle);
-        if (cycle == 0)
-        {
-            CycleDuration = 5f;
-        }
-        else if (cycle == 1)
-        {
-            CycleDuration = 10f;
-        }
-        else if (cycle == 2)
-        {
-            CycleDuration = 15f;
-        }   
     }
 
     private void OnExitButtonPressed()
     {
-        WashingMachineUIPanel.SetActive(false);
-
-    }
-    // Search the scene for an InteractableWasherMachine that references this UI panel (or contains it in the hierarchy).
-    private InteractableWasherMachine FindAssociatedWasherMachine()
-    {
-        var all = FindObjectsOfType<InteractableWasherMachine>();
-        foreach (var wm in all)
+        if (WashingMachineUIPanel != null)
         {
-            if (wm == null)
-            {
-                continue;
-            }
+            WashingMachineUIPanel.SetActive(false);
+        }
+        StopCountdown();
+    }
 
-            //var panel = wm.;
-            //if (panel == null)
+    // Disable all interactive buttons except the exit button
+    private void DisableButtonsExceptExit()
+    {
+        if (runButton != null) runButton.gameObject.SetActive(false);
+        if (openButton != null) openButton.gameObject.SetActive(false);
+        if (closeButton != null) closeButton.gameObject.SetActive(false);
+        if (tempButtons != null)
+        {
+            foreach (var b in tempButtons)
             {
-                //continue;
-            }
-
-            // Direct match
-            //if (panel == gameObject)
-            {
-                return wm;
-            }
-
-            // Panel is a parent of this UI component
-            //if (transform.IsChildOf(panel.transform))
-            {
-                //return wm;
-            }
-
-            // This UI component is the parent (or ancestor) of the panel
-            //if (panel.transform.IsChildOf(transform))
-            {
-                //return wm;
+                if (b != null) b.gameObject.SetActive(false);
             }
         }
-
-        return null;
+        // leave exitButton alone
     }
+
+    // Re-enable buttons (except exit) when opening/closing UI
+    private void EnableButtonsExceptExit()
+    {
+        if (runButton != null) runButton.gameObject.SetActive(true);
+        if (openButton != null) openButton.gameObject.SetActive(true);
+        if (closeButton != null) closeButton.gameObject.SetActive(true);
+        if (tempButtons != null)
+        {
+            foreach (var b in tempButtons)
+            {
+                if (b != null) b.gameObject.SetActive(true);
+            }
+        }
+    }
+
 }
 
 

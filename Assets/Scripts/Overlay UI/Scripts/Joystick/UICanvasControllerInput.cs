@@ -18,7 +18,7 @@ namespace StarterAssets
         public Sprite sprintingImage;
 
         [Header("Output")]
-        public StarterAssetsInputs starterAssetsInputs;
+        private StarterAssetsInputs starterAssetsInputs;
 
         private void Awake()
         {

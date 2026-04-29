@@ -1728,7 +1728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008c6bb8ea56bcb4d9c925f516cd02a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dryerMachineUI: {fileID: 2146531777253842512}
+  dryerMachineUI: {fileID: 6588512475585913472}
 --- !u!65 &932826017317311895
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1882,7 +1882,7 @@ GameObject:
   - component: {fileID: 6806062332392927376}
   - component: {fileID: 8639351692197048732}
   - component: {fileID: 9136780180947227795}
-  - component: {fileID: 2146531777253842512}
+  - component: {fileID: 6588512475585913472}
   m_Layer: 0
   m_Name: Drying Machine UI
   m_TagString: Untagged
@@ -2014,7 +2014,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2146531777253842512
+--- !u!114 &6588512475585913472
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2051,7 +2051,7 @@ MonoBehaviour:
   MachineOpen: {fileID: 21300000, guid: 583f4b4b9db1ac740bb7eca25028e36c, type: 3}
   MachineOpenDone: {fileID: 21300000, guid: 8ccfb5552bf558c4680a1e951719bfd9, type: 3}
   FrameInterval: 0.2
-  CycleDuration: 0
+  CycleDuration: 10
   FinishedSprite: {fileID: 21300000, guid: c921bbebfe2bc534aba61c9e1227535d, type: 3}
   TargetImage: {fileID: 8639351692197048732}
   TargetRenderer: {fileID: 9136780180947227795}

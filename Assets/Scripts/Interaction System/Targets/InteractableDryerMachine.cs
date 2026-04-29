@@ -10,7 +10,7 @@ public class InteractableDryerMachine : MonoBehaviour
 {
     public static UseDryerMachine useDryerMachine = new UseDryerMachine();
 
-    public DryerMachineUI dryerMachineUI;
+    public DryerMachineUIScript dryerMachineUI;
 
 
 

@@ -1,0 +1,41 @@
+﻿title: Quest2_FredSandwitch 
+---
+Hi!! are you going to the Sandwitch Shop. Could you get me a Wheat bread , ham , cheddar cheese , tomato and mustard sandwitch
+-> sure
+              <<Jump Quest2_agree>>
+-> No
+              <<Jump Quest2_exit>>
+===
+
+title: Quest2_agree
+---
+Thank you for accepting the quest
+===
+
+title: Quest2_Back
+---
+Hey You are back . Did you Get my sandwitch?
+<<if $GotSandwitch == true>>
+	<<jump Quest2_Got_Sandwitch>>
+<<endif>>
+
+<<if $GotSandwitch == False>>
+	<<jump Quest2_No_Sandwitch>>
+<<endif>>
+===
+
+
+title: Quest2_Got_Sandwitch
+---
+Thanks you so much
+===
+
+title: Quest2_No_Sandwitch
+---
+You still don't have my sandwitch come back when you get it
+===
+
+title: Quest2_Wrong_Sandwitch
+---
+
+===

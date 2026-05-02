@@ -1,0 +1,92 @@
+﻿title: Quest3_Shopping_Start
+---
+Welcome to the grocery store. 
+===
+
+title: Quest3_Shopping_List
+---
+Your list is :"wine(vintage), steak, chocolate cake, and fresh grapes" find those around the grocery store and bring them to the cashier.
+===
+
+title: Quest3_Shopping_Wine
+---
+You're looking for a older aged wine instead of new age try to find something pre 2000
+      <<if $Wineunder2000 == False>>
+	<<jump Quest3_Wrong_wine>>
+<<endif>>
+
+<<if $Wineunder2000 == True>>
+	<<jump Quest3_Shopping_Chocolate>>
+<<endif>>
+
+===
+
+title: Quest3_Wrong_Wine
+---
+You selected a wine over the year 2000
+===
+
+title: Quest3_Shopping_Chocolate
+---
+You are now looking for a chocolate cake
+<<if $ChocolateCake == False>>
+	<<jump Quest3_Wrong_Cake>>
+<<endif>>
+<<if $ChocolateCake == True>>
+	<<jump Quest3_Shopping_Fruit>>
+<<endif>>
+
+===
+
+title: Quest3_Wrong_Cake
+---
+This is not a chocolate cake
+===
+
+title: Quest3_Shopping_Fruit
+---
+You are now looking for fresh green grapes
+<<if $GreenGrapes == False>>
+	<<jump Quest3_Wrong_Grape>>
+<<endif>>
+
+<<if $GreenGrapes == True>>
+	<<jump Quest3_Shopping_Steak>>
+<<endif>>
+===
+
+title: Quest3_Wrong_Grape
+---
+This is not a Green grape
+===
+
+
+title: Quest3_Shopping_Steak
+---
+You are now looking for NY strip steak
+<<if $Steak == False>>
+	<<jump Quest3_Wrong_Steak>>
+<<endif>>
+
+<<if $SteakWrong == True>>
+	<<jump Quest3_Shopping_Checkout >>
+<<endif>>
+===
+
+title: Quest3_Wrong_Steak
+---
+This is not a NY strip Steak 
+===
+
+title: Quest3_Shopping_Checkout
+---
+Time for you to checkout . Talk to the cashier to check out . make sure you have everything correct
+===
+
+
+
+
+
+
+
+

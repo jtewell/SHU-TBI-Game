@@ -45,7 +45,37 @@ public class AvatarTextures : MonoBehaviour
         //Create new material instances
         Material bodyMaterialInstance = new Material(bodyMaterial);
         Material faceMaterialInstance = new Material(faceMaterial);
-        Material hairMaterialInstance = new Material(hairMaterials[colorIndex]);
+        Material hairMaterialInstance = null;
+        if (avatarData.gender == AvatarData.Gender.Male)
+        {
+            hairMaterialInstance = new Material(hairMaterials[colorIndex]);
+        }
+        if (avatarData.gender == AvatarData.Gender.Female || avatarData.gender == AvatarData.Gender.NonBinary)
+        {
+            if (avatarData.skinColor == AvatarData.SkinColor.White)
+            {
+                colorIndex = 0;
+            }
+            if (avatarData.skinColor == AvatarData.SkinColor.Pale)
+            {
+                colorIndex = 2;
+            }
+            if (avatarData.skinColor == AvatarData.SkinColor.LightBrown)
+            {
+                colorIndex = 1;
+            }
+            if (avatarData.skinColor == AvatarData.SkinColor.DarkBrown)
+            {
+                colorIndex = 3;
+            }
+
+            hairMaterialInstance = new Material(hairMaterials[colorIndex]);
+        }
+        if (avatarData.gender == AvatarData.Gender.NonBinary)
+        {
+            hairMaterialInstance = new Material(hairMaterials[colorIndex]);
+        }
+
 
         //Assign the material instances to the renderer
         Material[] skinnedMeshMaterials = avatarSkinnedMesh.materials;
@@ -63,11 +93,13 @@ public class AvatarTextures : MonoBehaviour
         // Assign face texture based on color
         faceMaterialInstance.mainTexture = faceTextures[colorIndex];
 
-        //Assign hairstyle based on gender
+        //Pick hairstyle based on gender
         hairPrefab = hairStyles[genderIndex];
+
 
         //Attach the hair to the body
         Transform bone = avatarSkinnedMesh.bones.FirstOrDefault(b => b != null && b.name == "DEF-Hair");
+
         if (bone != null)
         {
             GameObject hair = Instantiate(hairPrefab);

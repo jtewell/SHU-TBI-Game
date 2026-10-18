@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class DropDownOfScreeningQuestions : MonoBehaviour
 {
-    private DropdownField monthDropDown, dayDropDown, yearDropDown, Q5DropdownField, Q6DropdownField, Q8DropdownField, Q9DropdownField;
+    private DropdownField monthDropDown, dayDropDown, yearDropDown, TBIMonth, TBIDay, TBIYear;
 
     // Start is called before the first frame update
     void Start()
@@ -17,14 +17,13 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
         monthDropDown = root.Q<DropdownField>("monthDropDown");
         dayDropDown = root.Q<DropdownField>("dayDropDown");
         yearDropDown = root.Q<DropdownField>("yearDropDown");
-        Q5DropdownField = root.Q<DropdownField>("Q5DropdownField");
-        Q6DropdownField = root.Q<DropdownField>("Q6DropdownField");
-        Q8DropdownField = root.Q<DropdownField>("Q8DropdownField");
-        Q9DropdownField = root.Q<DropdownField>("Q9DropdownField");
+        TBIMonth = root.Q<DropdownField>("TBIMonth");
+        TBIDay = root.Q<DropdownField>("TBIDay");
+        TBIYear = root.Q<DropdownField>("TBIYear");
+
 
         // Define the choices for the dropdown
         var choicesMonth = new List<string> { "Month", "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" };
-
         // get the current year
         int currentYear = System.DateTime.Now.Year;
         var choices1to5 = new List<string> { "1", "2", "3", "4", "5+" };
@@ -77,49 +76,50 @@ public class DropDownOfScreeningQuestions : MonoBehaviour
             });
         }
 
-        if (Q5DropdownField != null)
+        if (TBIMonth != null)
         {
-            Q5DropdownField.choices = choices1to5;
-            Q5DropdownField.value = "0";
-            Q5DropdownField.RegisterValueChangedCallback(evt =>
+            TBIMonth.choices = choicesMonth;
+            TBIMonth.value = "Month";
+            TBIMonth.RegisterValueChangedCallback(evt =>
             {
-                MeasurementDataManager.Instance.Q5SelectedOption = evt.newValue;
+                MeasurementDataManager.Instance.TBIMonth = evt.newValue;
             });
         }
 
-        if (Q8DropdownField != null)
+        if (TBIDay != null)
         {
-            Q8DropdownField.choices = choices1to5;
-            Q8DropdownField.value = "0";
-            Q8DropdownField.RegisterValueChangedCallback(evt =>
+            // Define the choices for the dropdown
+            var choicesDay = new List<string>();
+            for (int i = 1; i <= 31; i++)
             {
-                MeasurementDataManager.Instance.Q8SelectedOption = evt.newValue;
+                choicesDay.Add(i.ToString());
+            }
+
+            // Set the choices
+            TBIDay.choices = choicesDay;
+
+            // Optionally, set a default value
+            TBIDay.value = "0";
+            TBIDay.RegisterValueChangedCallback(evt =>
+            {
+                MeasurementDataManager.Instance.TBIDay = evt.newValue;
             });
         }
 
-        var choicesYear = new List<string>();
-        // get the current year
-        for (int i = currentYear; i >= 1900; i--)
+        if (TBIYear != null)
         {
-            choicesYear.Add(i.ToString());
-        }
-        if (Q6DropdownField != null)
-        {
-            Q6DropdownField.choices = choicesYear;
-            Q6DropdownField.value = "Year";
-            Q6DropdownField.RegisterValueChangedCallback(evt =>
+            // Define the choices for the dropdown
+            var choicesTBIYear = new List<string>();
+            for (int i = currentYear; i >= 1900; i--)
             {
-                MeasurementDataManager.Instance.Q6SelectedOption= evt.newValue;
-            });
-        }
-        if (Q9DropdownField != null)
-        {
-            Q9DropdownField.choices = choicesYear;
-            Q9DropdownField.value = "Year";
-
-            Q9DropdownField.RegisterValueChangedCallback(evt =>
+                choicesTBIYear.Add(i.ToString());
+            }
+            TBIYear.choices = choicesTBIYear;
+            // set the default value current year
+            TBIYear.value = "Year";
+            TBIYear.RegisterValueChangedCallback(evt =>
             {
-                MeasurementDataManager.Instance.Q9SelectedOption= evt.newValue;
+                MeasurementDataManager.Instance.TBIYear = evt.newValue;
             });
         }
     }

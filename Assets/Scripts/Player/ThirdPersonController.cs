@@ -246,8 +246,8 @@ namespace StarterAssets
                 // Tell animator the player is moving at same normalized speed
                 // Use run threshold so tempo is the run cycle, regardless of actual movement speed
                 const float RUN_THRESHOLD = 1.9f;
-                float animValue = (_input.move != Vector2.zero) ? RUN_THRESHOLD : 0f;
-
+                float animValue = (_input.move != Vector2.zero) ? _speed : 0f;
+                //print(_speed);
                 _animator.SetFloat(_animIDSpeed, animValue, 0.1f, Time.deltaTime);
                 _animator.SetFloat(_animIDMotionSpeed, 1f); // keep playback constant
 

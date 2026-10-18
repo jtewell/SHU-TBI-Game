@@ -96,5 +96,4 @@ public class QuestionaireData : DataBaseScriptableObject
     //Q28 - Always buy things on shopping list
     public DataPair alwaysUseShoppingList = new DataPair("entry.1387695143");
 
-
 }

@@ -1,0 +1,209 @@
+﻿title: Quest1_Sandwitch_Start
+---
+Welcome to Sammy’s. May I take your order?
+===
+
+title: Quest1_Sandwitch_Order
+---
+-> Place order
+                <<Jump Quest1_Sandwitch_Bread>>
+-> Cancel
+                <<Jump Quest1_Sandwitch_Exit>>
+===
+
+title: Quest1_Sandwitch_Exit
+---
+We hope to see you again!
+===
+
+title: Quest1_Sandwitch_Bread
+---
+What type of bread do you want?
+===
+
+
+title: Quest1_Sandwitch_SelectBread
+---
+-> White Bread
+              <<Jump Quest1_Sandwitch_WhiteBread>>
+-> Wheat Bread
+              <<Jump Quest1_Sandwitch_WheatBread>>
+-> Rye Bread 
+              <<Jump Quest1_Sandwitch_RyeBread>>
+===
+
+title: Quest1_Sandwitch_WhiteBread
+---
+You have selected *bread type*. Please select a type of meat.
+                <<Jump Quest1_Sandwitch_Meat>>
+===
+
+title: Quest1_Sandwitch_WheatBread
+---
+You have selected *bread type*. Please select a type of meat.
+                <<Jump Quest1_Sandwitch_Meat>>
+===
+
+title: Quest1_Sandwitch_RyeBread
+---
+You have selected *bread type*. Please select a type of meat.
+                <<Jump Quest1_Sandwitch_Meat>>
+===
+
+title: Quest1_Sandwitch_Meat
+---
+-> Ham
+              <<Jump Quest1_Sandwitch_Ham>>
+-> Turckey
+              <<Jump Quest1_Sandwitch_Turckey>>
+-> Pastrami
+              <<Jump Quest1_Sandwitch_Pastrami>>
+===
+
+title: Quest1_Sandwitch_Ham
+---
+You have selected *meat type*. Please choose a type of cheese.
+                <<Jump Quest1_Sandwitch_Cheese>>
+===
+
+title: Quest1_Sandwitch_Turckey
+---
+You have selected *meat type*. Please choose a type of cheese.
+                <<Jump Quest1_Sandwitch_Cheese>>
+===
+
+title: Quest1_Sandwitch_Pastrami
+---
+You have selected *meat type*. Please choose a type of cheese.
+                <<Jump Quest1_Sandwitch_Cheese>>
+===
+
+title: Quest1_Sandwitch_Cheese
+---
+-> Mozzarella
+              <<Jump Quest1_Sandwitch_Mozzarella>>
+-> Cheddar
+              <<Jump Quest1_Sandwitch_Cheddar>>
+-> Swiss
+              <<Jump Quest1_Sandwitch_Swiss>>
+===
+
+title: Quest1_Sandwitch_Mozzarella
+---
+You have selected *type of cheese*. Please choose a vegetable.
+                <<Jump Quest1_Sandwitch_Vegetable>>
+===
+
+title: Quest1_Sandwitch_Cheddar
+---
+You have selected *type of cheese*. Please choose a vegetable.
+                <<Jump Quest1_Sandwitch_Vegetable>>
+===
+
+title: Quest1_Sandwitch_Swiss
+---
+You have selected *type of cheese*. Please choose a vegetable.
+                <<Jump Quest1_Sandwitch_Vegetable>>
+===
+
+title: Quest1_Sandwitch_Vegetable
+---
+-> Lettuce
+              <<Jump Quest1_Sandwitch_Lettuce>>
+-> Tomato
+              <<Jump Quest1_Sandwitch_Tomato>>
+-> Onion
+              <<Jump Quest1_Sandwitch_Onion>>
+===
+
+title: Quest1_Sandwitch_Lettuce
+---
+You have selected *vegetable type*. Please choose a condiment.
+                <<Jump Quest1_Sandwitch_condiment>>
+===
+
+title: Quest1_Sandwitch_Tomato
+---
+You have selected *vegetable type*. Please choose a condiment.
+                <<Jump Quest1_Sandwitch_condiment>>
+===
+
+title: Quest1_Sandwitch_Onion
+---
+You have selected *vegetable type*. Please choose a condiment.
+                <<Jump Quest1_Sandwitch_condiment>>
+===
+
+title: Quest1_Sandwitch_condiment
+---
+-> Ketchup
+              <<Jump Quest1_Sandwitch_Ketchup>>
+-> Mustard
+              <<Jump Quest1_Sandwitch_Mustard>>
+-> Mayonnaise
+              <<Jump Quest1_Sandwitch_Mayonnaise>>
+===
+
+title: Quest1_Sandwitch_Ketchup
+---
+You have selected *condiment type*. Your sandwich is now ready! Would you like to order another one?
+                <<Jump Quest1_Sandwitch_order>>
+===
+
+title: Quest1_Sandwitch_Mustard
+---
+You have selected *condiment type*. Your sandwich is now ready! Would you like to order another one?
+                <<Jump Quest1_Sandwitch_order>>
+===
+
+title: Quest1_Sandwitch_Mayonnaise
+---
+You have selected *condiment type*. Your sandwich is now ready! Would you like to order another one?
+                <<Jump Quest1_Sandwitch_order>>
+===
+
+title: Quest1_Sandwitch_order
+---
+Your Order is done, you've selected Wheat bread , tuckey , cheddar cheese , tomato and mustard.
+
+-> Correct
+              <<Jump Quest1_Sandwitch_NewSandwitch>>
+-> Incorrect
+              <<Jump Quest1_Sandwitch_FixMeat>>
+===
+
+title: Quest1_Sandwitch_FixMeat
+---
+Sorry i got your meat wrong please tell me which one you wanted
+
+-> Ham
+              <<Jump Quest1_Sandwitch_NewSandwitch>>
+-> Turckey
+              <<Jump Quest1_Sandwitch_NewSandwitch>>
+-> Pastrami
+              <<Jump Quest1_Sandwitch_NewSandwitch>>
+===
+
+
+title: Quest1_Sandwitch_NewSandwitch
+---
+would you like to make a new sandwitch? 
+-> Yes
+              <<Jump Quest1_Sandwitch_Pay>>
+-> No
+              <<Jump Quest1_Sandwitch_Pay>>
+
+title: Quest1_Sandwitch_Pay
+---
+That will be 10.” Would you like to pay with cash or credit?
+<<if $enoughmoney == false>>
+              <<Jump Quest1_Sandwitch_NotEnough>>
+<<else>>
+        Thank you for dining at Sammy's. We hope to see you again.
+<<endif>>
+===
+
+title: Quest1_Sandwitch_NotEnough
+---
+Sorry you don't have enough money come back later once you have enough money.
+===

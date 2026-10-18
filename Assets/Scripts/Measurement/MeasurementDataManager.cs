@@ -30,7 +30,9 @@ public class MeasurementDataManager : PersistentMonoSingleton<MeasurementDataMan
     public string gender;
     public string Q3SelectedOption; // hasTBIHistory;
     public string Q4SelectedOption; // hadConcussions;
-    public string Q5SelectedOption; // numberOfConcussions;
+    public string TBIMonth;
+    public string TBIDay;
+    public string TBIYear;
     public string Q6SelectedOption; // yearLastConcussion;
     public string Q7SelectedOption; // hasTBI;
     public string Q8SelectedOption; // numberOfTBIs;
@@ -111,7 +113,6 @@ public class MeasurementDataManager : PersistentMonoSingleton<MeasurementDataMan
         sessionData.SetValueFieldQuestionaire("gender", gender);
         sessionData.SetValueFieldQuestionaire("hasTBIHistory", Q3SelectedOption);
         sessionData.SetValueFieldQuestionaire("hadConcussions", Q4SelectedOption);
-        sessionData.SetValueFieldQuestionaire("numberOfConcussions", Q5SelectedOption);
         sessionData.SetValueFieldQuestionaire("yearLastConcussion", Q6SelectedOption);
         sessionData.SetValueFieldQuestionaire("hasTBI", Q7SelectedOption);
         sessionData.SetValueFieldQuestionaire("numberOfTBIs", Q8SelectedOption);

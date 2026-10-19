@@ -1,146 +1,136 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.Timeline;
+
+// Per-camera, per-frame data. Never retain a TextureHandle between frames.
+public sealed class OutlineMaskFrameData : ContextItem
+{
+    public TextureHandle texture;
+    public override void Reset() => texture = TextureHandle.nullHandle;
+}
 
 public class OutlineMaskFeature : ScriptableRendererFeature
 {
     [System.Serializable]
     public class Settings
     {
-        // Assign a material that uses the "Hidden/OutlineMask" shader
         public Material maskMaterial;
         public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
-    }
-
-    class MaskPass : ScriptableRenderPass
-    {
-        private readonly Material _material;
-        private RTHandle _maskRT;
-
-        // Renderers we will explicitly draw (only those under OutlineMarker objects)
-        private readonly List<Renderer> _renderers = new List<Renderer>();
-
-        private static readonly int OutlineMaskTexID = Shader.PropertyToID("_OutlineMaskTex");
-
-        public MaskPass(Material mat, RenderPassEvent passEvent)
-        {
-            _material = mat;
-            renderPassEvent = passEvent;
-
-            // Safe default for the first frame
-            Shader.SetGlobalTexture(OutlineMaskTexID, Texture2D.blackTexture);
-        }
-
-        public void SetRenderers(List<Renderer> renderers)
-        {
-            _renderers.Clear();
-            if (renderers != null) _renderers.AddRange(renderers);
-        }
-
-        public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
-        {
-            // Create a single-channel color RT that matches the camera
-            var desc = renderingData.cameraData.cameraTargetDescriptor;
-            desc.depthBufferBits = 0;
-
-            // Unity versions differ on which field to use
-#if UNITY_2021_2_OR_NEWER
-            desc.graphicsFormat = UnityEngine.Experimental.Rendering.GraphicsFormat.R8_UNorm;
-#else
-            desc.colorFormat = RenderTextureFormat.R8;
-#endif
-
-            RenderingUtils.ReAllocateIfNeeded(ref _maskRT, desc, name: "_OutlineMaskRT");
-
-            // Bind color target (mask) and the camera depth target so ZTest works
-            var renderer = renderingData.cameraData.renderer;
-            ConfigureTarget(_maskRT, renderer.cameraDepthTargetHandle);
-
-            // Clear only color; keep the current camera depth
-            ConfigureClear(ClearFlag.Color, Color.black);
-        }
-
-        public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
-        {
-            if (_material == null) return;
-            if (_renderers.Count == 0) return;
-
-            var cmd = CommandBufferPool.Get("Outline Mask");
-
-            // Draw each renderer with the mask material and depth test (material uses ZTest LEqual)
-            for (int r = 0; r < _renderers.Count; r++)
-            {
-                var rend = _renderers[r];
-                if (rend == null || !rend.enabled) continue;
-
-                // Draw all submeshes
-                int submeshCount = 1;
-                var mf = rend as MeshRenderer;
-                if (mf != null && rend.sharedMaterials != null)
-                    submeshCount = rend.sharedMaterials.Length;
-
-                for (int sm = 0; sm < submeshCount; sm++)
-                {
-                    cmd.DrawRenderer(rend, _material, sm, 0);
-                }
-            }
-
-            // Expose the mask texture for the composite pass
-            cmd.SetGlobalTexture(OutlineMaskTexID, _maskRT);
-
-            context.ExecuteCommandBuffer(cmd);
-            CommandBufferPool.Release(cmd);
-        }
-
-        public override void OnCameraCleanup(CommandBuffer cmd) { }
-
-        public void Dispose()
-        {
-            if (_maskRT != null) _maskRT.Release();
-            _maskRT = null;
-        }
     }
 
     public Settings settings = new Settings();
     private MaskPass _pass;
     private readonly List<Renderer> _collector = new List<Renderer>();
+    private readonly HashSet<Renderer> _seen = new HashSet<Renderer>();
 
-    public override void Create()
-    {
-        _pass = new MaskPass(settings.maskMaterial, settings.renderPassEvent);
-    }
+    public override void Create() => _pass = new MaskPass();
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        if (settings.maskMaterial == null) return;
+        if (settings.maskMaterial == null || _pass == null)
+            return;
 
-        // Collect all visible/scene renderers under OutlineMarker objects
         _collector.Clear();
-        var markers = GameObject.FindObjectsOfType<Interactable>(true);
-        for (int i = 0; i < markers.Length; i++)
-        {
-            var m = markers[i];
-            if (m == null) continue;
-            if (!m.isActiveAndEnabled) continue;      // component disabled or object inactive
-            if (!m.outlineEnabled) continue;          // honor the toggle
+        _seen.Clear();
+        var markers = Object.FindObjectsByType<Interactable>(
+            FindObjectsInactive.Exclude, FindObjectsSortMode.None);
 
-            // Gather all child renderers
-            var rends = m.GetComponentsInChildren<Renderer>(true);
-            for (int r = 0; r < rends.Length; r++)
+        foreach (var marker in markers)
+        {
+            if (marker == null || !marker.isActiveAndEnabled || !marker.outlineEnabled)
+                continue;
+
+            foreach (var child in marker.GetComponentsInChildren<Renderer>(true))
             {
-                var rend = rends[r];
-                if (rend != null) _collector.Add(rend);
+                if (child != null && child.enabled && child.gameObject.activeInHierarchy && _seen.Add(child))
+                    _collector.Add(child);
             }
         }
 
-        _pass.SetRenderers(_collector);
+        _pass.Setup(settings.maskMaterial, settings.renderPassEvent, _collector);
         renderer.EnqueuePass(_pass);
     }
 
-    protected override void Dispose(bool disposing)
+    private sealed class MaskPass : ScriptableRenderPass
     {
-        if (_pass != null) _pass.Dispose();
+        private static readonly int MaskId = Shader.PropertyToID("_OutlineMaskTex");
+        private Material _material;
+        private Renderer[] _renderers;
+
+        private sealed class PassData
+        {
+            public Material material;
+            public Renderer[] renderers;
+        }
+
+        public void Setup(Material material, RenderPassEvent passEvent, List<Renderer> renderers)
+        {
+            _material = material;
+            renderPassEvent = passEvent;
+            // Snapshot: recording and execution are separate in Render Graph.
+            _renderers = renderers.ToArray();
+        }
+
+        public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
+        {
+            if (_material == null)
+                return;
+
+            var resources = frameData.Get<UniversalResourceData>();
+            var depth = resources.activeDepthTexture;
+            if (!depth.IsValid())
+                return;
+
+            // Match the actual depth attachment, including dimensions, XR slices
+            // and MSAA count. Color and depth attachments must have matching samples.
+            var descriptor = renderGraph.GetTextureDesc(depth);
+            descriptor.name = "_OutlineMaskRT";
+            descriptor.colorFormat = GraphicsFormat.R8_UNorm;
+            descriptor.depthBufferBits = DepthBits.None;
+            descriptor.bindTextureMS = false;
+            descriptor.memoryless = RenderTextureMemoryless.None;
+            descriptor.isShadowMap = false;
+            descriptor.enableRandomWrite = false;
+            descriptor.clearBuffer = true;
+            descriptor.clearColor = Color.black;
+            descriptor.filterMode = FilterMode.Point;
+            var mask = renderGraph.CreateTexture(descriptor);
+
+            frameData.GetOrCreate<OutlineMaskFrameData>().texture = mask;
+
+            using (var builder = renderGraph.AddRasterRenderPass<PassData>("Outline Mask", out var passData))
+            {
+                passData.material = _material;
+                passData.renderers = _renderers;
+                builder.SetRenderAttachment(mask, 0, AccessFlags.Write);
+                builder.SetRenderAttachmentDepth(depth, AccessFlags.Read);
+                builder.SetGlobalTextureAfterPass(mask, MaskId);
+
+                builder.SetRenderFunc(static (PassData data, RasterGraphContext context) =>
+                {
+                    // An empty selection still clears and publishes a black mask.
+                    foreach (var item in data.renderers)
+                    {
+                        if (item == null || !item.enabled || !item.gameObject.activeInHierarchy)
+                            continue;
+
+                        int submeshCount = 0;
+                        if (item is SkinnedMeshRenderer skinned && skinned.sharedMesh != null)
+                            submeshCount = skinned.sharedMesh.subMeshCount;
+                        else if (item is MeshRenderer && item.TryGetComponent<MeshFilter>(out var filter)
+                                 && filter.sharedMesh != null)
+                            submeshCount = filter.sharedMesh.subMeshCount;
+                        else
+                            submeshCount = item.sharedMaterials.Length;
+
+                        for (int submesh = 0; submesh < submeshCount; submesh++)
+                            context.cmd.DrawRenderer(item, data.material, submesh, 0);
+                    }
+                });
+            }
+        }
     }
 }

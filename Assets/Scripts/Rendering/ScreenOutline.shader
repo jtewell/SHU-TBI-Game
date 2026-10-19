@@ -42,7 +42,7 @@ Shader "Custom/ScreenOutline"
             half4 FragOutline (Varyings i) : SV_Target
             {
                 const float2 uv    = i.texcoord;
-                const float2 texel = _ScreenParams.zw * _EdgeThickness; // 1/width, 1/height
+                const float2 texel = (1.0 / _ScreenParams.xy) * _EdgeThickness;
 
                 // Sample scene color provided by the blit pass
                 const half4 sceneCol = SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, uv);

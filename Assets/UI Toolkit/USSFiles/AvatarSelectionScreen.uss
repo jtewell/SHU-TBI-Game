@@ -51,12 +51,13 @@
 #avatarSelectionScrollingView {
     overflow: auto; /* Allow for scrolling */
     width: 100%; /* Set to full width */
-    height: 200px; /* Set a fixed height to keep the scrolling area consistent */
-    display: flex; /* Ensure it's a flex container */
-    align-items: center; /* Center items vertically */
-    justify-content: flex-start; /* Align items to the start horizontally */
-    margin-top: 20px; /* Optional: space above the scrolling view */
-    padding: 10px; /* Optional: padding inside the scrolling view */
-    /*background-color: rgba(255, 255, 255, 0.5); Optional: semi-transparent background for visibility */
+    /* Equal left/right padding centers the avatar group horizontally when the
+       content is narrower than the viewport, while still allowing the extra
+       avatars to scroll past on each side. (The inline padding in the UXML
+       overrides these values.) */
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 0;
+    padding-bottom: 0;
     border-radius: 10px; /* Optional: rounded corners */
 }

@@ -5,7 +5,6 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.Rendering.BuiltIn.ShaderGraph;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -33,8 +33,8 @@ jobs:
 
       - name: Verify WebGL Output
         run: |
-          test -f build/WebGL/index.html || {
-            echo "::error::Expected build/WebGL/index.html was not found."
+          test -f build/index.html || {
+            echo "::error::Expected build/index.html was not found."
             find build -maxdepth 4 -type f
             exit 1
           }
@@ -53,4 +53,4 @@ jobs:
           CHANNEL: html5
           ITCH_GAME: caed
           ITCH_USER: shu-gdd
-          PACKAGE: build/WebGL
+          PACKAGE: build

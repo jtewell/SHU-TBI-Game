@@ -3713,7 +3713,7 @@ MonoBehaviour:
   - {x: -0.32801518, y: -0.5291923}
   - {x: 0.41350135, y: -0.52919227}
   - {x: -0.32801518, y: -1.2048453}
-  - {x: 0.41350135, y: -1.2048453}
+  - {x: 0.41350135, y: -1.2048452}
   - {x: 0.31343654, y: -1.2061065}
   - {x: -0.42639032, y: -1.2061064}
   - {x: 0.31343654, y: -0.53045356}
@@ -4282,9 +4282,9 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -1, w: -1}
   - {x: 0, y: 0, z: -1, w: -1}
   - {x: 0.025356134, y: 0.9996785, z: 0.00000005544739, w: -1}
-  - {x: 0.025356134, y: 0.9996785, z: 0.00000011170944, w: -1}
-  - {x: 0.025356134, y: 0.9996785, z: 0.00000011170944, w: -1}
-  - {x: 0.025356134, y: 0.9996785, z: 0.00000016797149, w: -1}
+  - {x: 0.025356134, y: 0.9996785, z: -8.146755e-10, w: -1}
+  - {x: 0.025356134, y: 0.9996785, z: -8.146755e-10, w: -1}
+  - {x: 0.025356134, y: 0.9996785, z: -0.000000057076736, w: -1}
   - {x: 0.043827772, y: -0.9990391, z: 0.00000014113785, w: -1}
   - {x: 0.043827772, y: -0.9990391, z: 0.00000014113785, w: -1}
   - {x: 0.043827772, y: -0.9990391, z: 0.00000014113785, w: -1}
@@ -4317,14 +4317,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Shape:
     rid: 1571643647628410971
-  m_Size: {x: -0.230979, y: 0.44142902, z: 0.5077914}
-  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
-  m_PivotLocation: 1
-  m_PivotPosition: {x: 0, y: 0, z: 0}
+  m_ShapeRotation: {x: 0, y: 0, z: 0, w: 1}
   m_UnmodifiedMeshVersion: 1753
-  m_ShapeBox:
-    m_Center: {x: -0.1154895, y: 0.2207145, z: 0.2538957}
-    m_Extent: {x: 0.1154895, y: 0.22071452, z: 0.2538957}
+  m_Size: {x: -0.230979, y: 0.44142902, z: 0.5077914}
+  m_LocalCenter: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
@@ -4353,6 +4349,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4374,9 +4375,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1550208468704260528
 MeshFilter:
@@ -4423,6 +4426,7 @@ GameObject:
   - component: {fileID: 8019275791968582271}
   - component: {fileID: 448236793885038585}
   - component: {fileID: 3194387305970236705}
+  - component: {fileID: 7980830946011472122}
   m_Layer: 0
   m_Name: Wallet
   m_TagString: Untagged
@@ -4531,8 +4535,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
+      - m_Target: {fileID: 7980830946011472122}
+        m_TargetAssemblyTypeName: CompleteStep, Assembly-CSharp
         m_MethodName: FinishStep
         m_Mode: 5
         m_Arguments:
@@ -4583,3 +4587,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e29489ee40d6c94c9a06233d3749237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7980830946011472122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4361692991505307842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f58a09903bd8f64097da1909f369dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CompleteStep

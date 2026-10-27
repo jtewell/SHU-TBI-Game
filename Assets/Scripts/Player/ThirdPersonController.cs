@@ -35,6 +35,13 @@ namespace StarterAssets
         private float JumpTimeout = 0.0f;
         private float FallTimeout = 0.15f;
 
+        // Jump and gravity are disabled, so if the CharacterController ever bumps
+        // the player into the air (thin road colliders, small steps, fast sprint)
+        // nothing would bring them back down. They would float forever and get
+        // stuck in the looping "InAir" animation, since that state can only exit
+        // while grounded. This pulls a bumped player gently back to the ground.
+        private float GroundRecoverSpeed = 5.0f;
+
         [Header("Player Grounded")]
         public bool Grounded = true;
         public float GroundedOffset = -0.14f;
@@ -285,6 +292,11 @@ namespace StarterAssets
                     _animator.SetBool(_animIDFreeFall, true);
 
                 _input.jump = false;
+
+                // Jumping is disabled, so any airborne state is accidental: pull the
+                // player back down to the ground so they can re-ground and the
+                // animator can leave the "InAir" state (see GroundRecoverSpeed).
+                _verticalVelocity = -GroundRecoverSpeed;
             }
 
             if (_verticalVelocity < _terminalVelocity)

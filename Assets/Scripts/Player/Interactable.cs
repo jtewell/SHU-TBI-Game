@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -19,13 +18,14 @@ public class Interactable : MonoBehaviour
     public bool outlineEnabled = false;
 
     [Header("Interaction Settings")]
-    [Tooltip("true ignores proximity to player for interaction (like table items)")]
+    [Tooltip("true ignores proximity to player for interaction (like table items) and highlights them using the cursor")]
     [SerializeField] private bool canInteractAnywhere = false;
     [Tooltip("true prevents item from getting disabled during dialog (like the table interaction).")]
     [SerializeField] private bool dontDisableDuringDialog = false;
 
     //Private variables
     private bool near = false;
+    private bool isHovered = false;
     public bool _canInteract = true;
 
     [Serializable]
@@ -122,11 +122,22 @@ public class Interactable : MonoBehaviour
         _canInteract = false;
     }
 
+    public void EnableOutline ()
+    {
+        outlineEnabled = true;
+    }
+
+    public void DisableOutline ()
+    {
+        outlineEnabled = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(!other.gameObject.CompareTag("Player")) return;
 
-        outlineEnabled = true;
+        //Table items (canInteractAnywhere) highlight by cursor hover instead of proximity.
+        if (!canInteractAnywhere) outlineEnabled = true;
 
         near = true;
     }
@@ -135,8 +146,37 @@ public class Interactable : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if(!other.gameObject.CompareTag("Player")) return;
-        outlineEnabled = false;
+        if (!canInteractAnywhere) outlineEnabled = false;
         near = false;
+    }
+
+    //Called by Unity whenever the cursor is over one of this object's colliders.
+    private void OnMouseOver()
+    {
+        if (!canInteractAnywhere) return;
+
+        bool hovering = false;
+
+        //Same rules as clicking: not over UI, and the cursor ray reaches the
+        //main (box) collider. Reuse the click hit test so hover and click always
+        //agree (it sees through occluders like the player, exactly like clicks do).
+        bool overUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        if (!overUI)
+            hovering = ClickedOnInteractableObject();
+
+        if (hovering == isHovered) return;
+
+        isHovered = hovering;
+        outlineEnabled = hovering;
+    }
+
+    //Called by Unity when the cursor leaves this object's colliders.
+    private void OnMouseExit()
+    {
+        if (!canInteractAnywhere || !isHovered) return;
+
+        isHovered = false;
+        outlineEnabled = false;
     }
 
     private void OnMouseDown()

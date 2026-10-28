@@ -1,0 +1,166 @@
+﻿title: Quest1_Sandwich_Start
+---
+// Player's sandwich selections (set as the order is placed)
+<<declare $bread = "">>
+<<declare $meat = "">>
+<<declare $cheese = "">>
+<<declare $vegetable = "">>
+<<declare $condiment = "">>
+
+Welcome to Sammy’s. May I take your order?
+-> Yes
+          <<jump Quest1_Sandwich_Bread>>
+-> No
+          <<jump Quest1_Sandwich_Exit>>
+===
+
+title: Quest1_Sandwich_Exit
+---
+We hope to see you again!
+===
+
+title: Quest1_Sandwich_Bread
+---
+What type of bread do you want?
+-> White Bread
+          <<set $bread = "white">>
+          <<jump Quest1_Sandwich_BreadSelected>>
+-> Wheat Bread
+          <<set $bread = "wheat">>
+          <<jump Quest1_Sandwich_BreadSelected>>
+-> Rye Bread
+          <<set $bread = "rye">>
+          <<jump Quest1_Sandwich_BreadSelected>>
+===
+
+title: Quest1_Sandwich_BreadSelected
+---
+You have selected {$bread} bread.
+                <<jump Quest1_Sandwich_Meat>>
+===
+
+title: Quest1_Sandwich_Meat
+---
+Please select a type of meat.
+-> Ham
+          <<set $meat = "ham">>
+          <<jump Quest1_Sandwich_MeatSelected>>
+-> Turkey
+          <<set $meat = "turkey">>
+          <<jump Quest1_Sandwich_MeatSelected>>
+-> Pastrami
+          <<set $meat = "pastrami">>
+          <<jump Quest1_Sandwich_MeatSelected>>
+===
+
+title: Quest1_Sandwich_MeatSelected
+---
+You have selected {$meat}.
+                <<jump Quest1_Sandwich_Cheese>>
+===
+
+title: Quest1_Sandwich_Cheese
+---
+Please choose a type of cheese.
+-> Mozzarella
+          <<set $cheese = "mozzarella">>
+          <<jump Quest1_Sandwich_CheeseSelected>>
+-> Cheddar
+          <<set $cheese = "cheddar">>
+          <<jump Quest1_Sandwich_CheeseSelected>>
+-> Swiss
+          <<set $cheese = "swiss">>
+          <<jump Quest1_Sandwich_CheeseSelected>>
+===
+
+title: Quest1_Sandwich_CheeseSelected
+---
+You have selected {$cheese} cheese.
+                <<jump Quest1_Sandwich_Vegetable>>
+===
+
+title: Quest1_Sandwich_Vegetable
+---
+Please choose a vegetable.
+-> Lettuce
+          <<set $vegetable = "lettuce">>
+          <<jump Quest1_Sandwich_VegetableSelected>>
+-> Tomato
+          <<set $vegetable = "tomato">>
+          <<jump Quest1_Sandwich_VegetableSelected>>
+-> Onion
+          <<set $vegetable = "onion">>
+          <<jump Quest1_Sandwich_VegetableSelected>>
+===
+
+title: Quest1_Sandwich_VegetableSelected
+---
+You have selected {$vegetable}.
+                <<jump Quest1_Sandwich_Condiment>>
+===
+
+title: Quest1_Sandwich_Condiment
+---
+Please choose a condiment.
+-> Ketchup
+          <<set $condiment = "ketchup">>
+          <<jump Quest1_Sandwich_CondimentSelected>>
+-> Mustard
+          <<set $condiment = "mustard">>
+          <<jump Quest1_Sandwich_CondimentSelected>>
+-> Mayonnaise
+          <<set $condiment = "mayonnaise">>
+          <<jump Quest1_Sandwich_CondimentSelected>>
+===
+
+title: Quest1_Sandwich_CondimentSelected
+---
+You have selected {$condiment}.
+                <<jump Quest1_Sandwich_ConfirmOrder>>
+===
+
+title: Quest1_Sandwich_ConfirmOrder
+---
+You've selected {$bread} bread, {$meat}, {$cheese} cheese, {$vegetable} and {$condiment}. Is that correct?
+
+-> Yes
+          <<jump Quest1_Sandwich_NewSandwich>>
+-> No
+          <<jump Quest1_Sandwich_FixMeat>>
+===
+
+title: Quest1_Sandwich_FixMeat
+---
+Sorry, I got your meat wrong. Please tell me which one you wanted.
+
+-> Ham
+          <<jump Quest1_Sandwich_NewSandwich>>
+-> Turkey
+          <<jump Quest1_Sandwich_NewSandwich>>
+-> Pastrami
+          <<jump Quest1_Sandwich_NewSandwich>>
+===
+
+title: Quest1_Sandwich_NewSandwich
+---
+Would you like to make a new sandwich?
+-> Yes
+          <<jump Quest1_Sandwich_Pay>>
+-> No
+          <<jump Quest1_Sandwich_Pay>>
+===
+
+title: Quest1_Sandwich_Pay
+---
+That will be $10. Would you like to pay with cash or credit?
+<<if $enoughmoney == false>>
+          <<jump Quest1_Sandwich_NotEnough>>
+<<else>>
+    Thank you for dining at Sammy's. We hope to see you again.
+<<endif>>
+===
+
+title: Quest1_Sandwich_NotEnough
+---
+Sorry, you don't have enough money. Come back later once you have enough money.
+===

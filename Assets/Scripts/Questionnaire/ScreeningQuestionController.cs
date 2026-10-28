@@ -41,7 +41,7 @@ public sealed class ScreeningQuestionController : MonoBehaviour
 
     // ------------------------------------------------------------------ setup
 
-    private void OnEnable()
+    private void Start()
     {
         if (_started)
             return;

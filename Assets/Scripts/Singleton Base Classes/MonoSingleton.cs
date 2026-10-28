@@ -75,10 +75,8 @@ using UnityEngine;
                 // Initialize existing instance
                 InitializeSingleton();
             }
-            else
+            else if (!ReferenceEquals(instance, this))
             {
-
-                // Destory duplicates
                 if (Application.isPlaying)
                 {
                     Destroy(gameObject);

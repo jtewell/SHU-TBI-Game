@@ -106,6 +106,12 @@ public class MeasurementDataManager : PersistentMonoSingleton<MeasurementDataMan
     //Save the questionaire data to the session data
     public void SaveQuestionaireData ()
     {
+        if (sessionData == null)
+        {
+            Debug.LogError("MeasurementDataManager: 'Session Data' is not assigned; questionnaire data could not be saved.");
+            return;
+        }
+
         sessionData.SetValueFieldQuestionaire("userID", userID);
         sessionData.SetValueFieldQuestionaire("birthMonth", birthMonth);
         sessionData.SetValueFieldQuestionaire("birthDay", birthDay);

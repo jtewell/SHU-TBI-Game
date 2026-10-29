@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9196816153078808291}
   - component: {fileID: 3467424944345724776}
-  - component: {fileID: 5847291038475629103}
   m_Layer: 0
   m_Name: Measurement Data Manager
   m_TagString: Untagged
@@ -55,7 +54,9 @@ MonoBehaviour:
   gender: 
   Q3SelectedOption: 
   Q4SelectedOption: 
-  Q5SelectedOption: 
+  TBIMonth: 
+  TBIDay: 
+  TBIYear: 
   Q6SelectedOption: 
   Q7SelectedOption: 
   Q8SelectedOption: 
@@ -91,17 +92,3 @@ MonoBehaviour:
   locationsVisited: 
   itemsInteracted: 
   peopleInteracted: 
---- !u!114 &5847291038475629103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3372168171086456878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e94cabfccbc024e8102652d602168b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceGCSample: 1
-  logHighWater: 1
